@@ -1,0 +1,1730 @@
+"use client"
+
+import { useState, useRef, useEffect } from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Separator } from "@/components/ui/separator"
+import {
+  Mail,
+  MapPin,
+  GraduationCap,
+  Github,
+  Linkedin,
+  Download,
+  Code2,
+  GitBranch,
+  BookOpen,
+  Calendar,
+  ArrowRight,
+  ImageIcon,
+  Tag,
+  X,
+  ExternalLink,
+  Clock,
+  Award,
+  Brain,
+  Code,
+  CheckCircle2,
+} from "lucide-react"
+
+// Componente de fondo animado con redes neuronales
+function NeuralNetworkBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    resizeCanvas()
+    window.addEventListener("resize", resizeCanvas)
+
+    const nodes: { x: number; y: number; vx: number; vy: number }[] = []
+    const nodeCount = 50
+
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+      })
+    }
+
+    function animate() {
+      if (!canvas || !ctx) return
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      nodes.forEach((node, i) => {
+        node.x += node.vx
+        node.y += node.vy
+
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1
+
+        ctx.beginPath()
+        ctx.arc(node.x, node.y, 2.5, 0, Math.PI * 2)
+        ctx.fillStyle = "rgba(251, 146, 60, 0.4)"
+        ctx.fill()
+
+        nodes.forEach((otherNode, j) => {
+          if (i === j) return
+
+          const dx = node.x - otherNode.x
+          const dy = node.y - otherNode.y
+          const distance = Math.sqrt(dx * dx + dy * dy)
+
+          if (distance < 150) {
+            ctx.beginPath()
+            ctx.moveTo(node.x, node.y)
+            ctx.lineTo(otherNode.x, otherNode.y)
+            const opacity = (1 - distance / 150) * 0.2
+            ctx.strokeStyle = `rgba(251, 146, 60, ${opacity})`
+            ctx.lineWidth = 1
+            ctx.stroke()
+          }
+        })
+      })
+
+      requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas)
+    }
+  }, [])
+
+  return (
+    <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" style={{ background: "transparent" }} />
+  )
+}
+
+export default function Portfolio() {
+  const [activeSection, setActiveSection] = useState("about")
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [blogFilter, setBlogFilter] = useState<string>("all")
+  const [selectedProject, setSelectedProject] = useState<number | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<number | null>(null)
+
+  const [selectedStudy, setSelectedStudy] = useState<number | null>(null)
+  const [selectedPost, setSelectedPost] = useState<any>(null) // Para gestionar la visualización de post individuales
+
+  const sections = {
+    about: {
+      title: "Sobre Mí",
+      icon: <GraduationCap className="w-4 h-4" />,
+      content: (
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-xl font-bold mb-4">¡Hola! 👋</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Soy estudiante de Licenciatura en Ciencia de Datos en UCASAL, apasionado por convertir datos en insights
+              accionables. Actualmente estoy aprendiendo y desarrollando habilidades en{" "}
+              <span className="text-orange-500 font-semibold">Python</span>, explorando bibliotecas como{" "}
+              <span className="text-orange-500 font-semibold">NumPy</span>,{" "}
+              <span className="text-orange-500 font-semibold">Pandas</span> y{" "}
+              <span className="text-orange-500 font-semibold">Matplotlib</span> para análisis y visualización de datos.
+            </p>
+          </div>
+          <div>
+            <p className="text-muted-foreground leading-relaxed">
+              Mi objetivo es aplicar técnicas de análisis de datos y machine learning para resolver problemas reales, y
+              estoy constantly buscando oportunidades para aprender y crecer en este campo emocionante.
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    skills: {
+      title: "Habilidades",
+      icon: <Code2 className="w-4 h-4" />,
+      content: (
+        <div className="space-y-6">
+          <div>
+            <h4 className="font-semibold mb-3">Lenguajes de Programación</h4>
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                  alt="Python"
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-zinc-200">Python</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                  alt="SQL"
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-zinc-200">SQL</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                  alt="JavaScript"
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-zinc-200">JavaScript</span>
+              </div>
+            </div>
+          </div>
+          <Separator />
+          <div>
+            <h4 className="font-semibold mb-3">Análisis y Visualización</h4>
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                  alt="Pandas"
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-zinc-200">Pandas</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                  alt="NumPy"
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-zinc-200">NumPy</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
+                  alt="Matplotlib"
+                  className="w-5 h-5"
+                />
+                <span className="text-sm font-medium text-zinc-200">Matplotlib</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <svg className="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M28 4H10C8.9 4 8 4.9 8 6V42C8 43.1 8.9 44 10 44H38C39.1 44 40 43.1 40 42V16L28 4Z"
+                    fill="#21A366"
+                  />
+                  <path d="M28 4V16H40L28 4Z" fill="#107C41" />
+                  <path d="M16 22L20 28L16 34H24L28 28L24 22H16Z" fill="white" />
+                  <path opacity="0.5" d="M16 22L20 28L16 34H24L28 28L24 22H16Z" fill="#107C41" />
+                </svg>
+                <span className="text-sm font-medium text-zinc-200">Excel</span>
+              </div>
+            </div>
+          </div>
+          <Separator />
+          <div>
+            <h4 className="font-semibold mb-3">Herramientas</h4>
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                  alt="GitHub"
+                  className="w-5 h-5 invert"
+                />
+                <span className="text-sm font-medium text-zinc-200">GitHub</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="11" fill="#DD4814" />
+                  <circle cx="5.5" cy="12" r="2.2" fill="white" />
+                  <circle cx="18.5" cy="12" r="2.2" fill="white" />
+                  <circle cx="12" cy="5.5" r="2.2" fill="white" />
+                  <path d="M12 7.7C12 8.4 11.4 9 10.7 9L9.5 12H14.5L13.3 9C12.6 9 12 8.4 12 7.7Z" fill="white" />
+                  <path d="M7.7 12C8.4 12 9 12.6 9 13.3L12 14.5V9.5L9 10.7C9 11.4 8.4 12 7.7 12Z" fill="white" />
+                  <path
+                    d="M16.3 12C15.6 12 15 11.4 15 10.7L12 9.5V14.5L15 13.3C15 12.6 15.6 12 16.3 12Z"
+                    fill="white"
+                  />
+                  <circle cx="12" cy="12" r="1.8" fill="white" />
+                </svg>
+                <span className="text-sm font-medium text-zinc-200">Ubuntu</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    experience: {
+      title: "Experiencia",
+      icon: <GraduationCap className="w-4 h-4" />,
+      content: (
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <div>
+              <h4 className="font-semibold">Programador Backend</h4>
+              <p className="text-sm text-muted-foreground">Bewise Argentina - Pasantía (Remoto)</p>
+              <p className="text-xs text-muted-foreground">Agosto - Noviembre 2024</p>
+            </div>
+            <ul className="space-y-1 text-sm text-muted-foreground ml-4">
+              <li>• Desarrollo y mantenimiento de soluciones backend</li>
+              <li>• Uso de Python y bases de datos SQL</li>
+              <li>• Trabajo remoto con metodologías ágiles</li>
+            </ul>
+          </div>
+          <Separator />
+          <div className="space-y-3">
+            <div>
+              <h4 className="font-semibold">Programador</h4>
+              <p className="text-sm text-muted-foreground">Museo Güemes - Pasantía</p>
+              <p className="text-xs text-muted-foreground">Mayo - Agosto 2024</p>
+            </div>
+            <ul className="space-y-1 text-sm text-muted-foreground ml-4">
+              <li>• Sistema multimedia con Python y Raspberry Pi</li>
+              <li>• Configuración de Debian y protocolos UDP/TCP</li>
+              <li>• Presentación ante directivos y documentación</li>
+            </ul>
+          </div>
+        </div>
+      ),
+    },
+    certifications: {
+      title: "Educación",
+      icon: <GraduationCap className="w-4 h-4" />,
+      content: (
+        <div className="space-y-6">
+          <div>
+            <h4 className="font-semibold">Licenciatura en Ciencia de Datos</h4>
+            <p className="text-sm text-muted-foreground">Universidad Católica de Salta (UCASAL)</p>
+            <p className="text-xs text-muted-foreground">En curso - Modalidad online (2025)</p>
+          </div>
+          <Separator />
+          <div>
+            <h4 className="font-semibold">Técnico Informático Profesional y Personal</h4>
+            <p className="text-sm text-muted-foreground">
+              Escuela de Educación Técnica N° 3139 "Gral. M. M. de Güemes"
+            </p>
+            <p className="text-xs text-muted-foreground">Finalizado (2021 - 2024)</p>
+          </div>
+        </div>
+      ),
+    },
+    contact: {
+      title: "Contacto",
+      icon: <Mail className="w-4 h-4" />,
+      content: (
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <Mail className="w-5 h-5 text-muted-foreground" />
+              <a
+                href="mailto:gapsar.sebastian@gmail.com"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                gapsar.sebastian@gmail.com
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <Github className="w-5 h-5 text-muted-foreground" />
+              <a
+                href="https://github.com/RamiroSGaspar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                github.com/RamiroSGaspar
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <Linkedin className="w-5 h-5 text-muted-foreground" />
+              <a
+                href="https://www.linkedin.com/in/ramiro-sebastian-gaspar-b41697317"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                LinkedIn Profile
+              </a>
+            </div>
+          </div>
+          <Separator />
+          <form className="space-y-4">
+            <div>
+              <Input placeholder="Tu nombre" />
+            </div>
+            <div>
+              <Input type="email" placeholder="Tu email" />
+            </div>
+            <div>
+              <Textarea placeholder="Tu mensaje" rows={4} />
+            </div>
+            <Button className="w-full">Enviar Mensaje</Button>
+          </form>
+        </div>
+      ),
+    },
+  }
+
+  const handleContactClick = () => {
+    setActiveSection("contact")
+    setTimeout(() => {
+      contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, 100)
+  }
+
+  const projectsData = [
+    {
+      id: 3,
+      title: "Proyectos en desarrollo",
+      description: "Actualizaciones sobre los proyectos de análisis de datos que estoy construyendo.",
+      date: "Próximamente",
+      tags: ["Proyecto"],
+      fullDescription:
+        "Este es un proyecto de análisis de datos utilizando Python, Pandas y visualización con Matplotlib. El objetivo es analizar tendencias y patrones en conjuntos de datos complejos.",
+      technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "Jupyter"],
+      githubUrl: "https://github.com/RamiroSGaspar",
+      demoUrl: null,
+      images: [
+        "/placeholder.svg?height=400&width=600",
+        "/placeholder.svg?height=400&width=600",
+        "/placeholder.svg?height=400&width=600",
+      ],
+      timeline: [
+        {
+          phase: "Investigación",
+          description: "Análisis de requerimientos y selección de datasets",
+          status: "completed",
+          date: "15 Nov 2024",
+        },
+        {
+          phase: "Desarrollo",
+          description: "Implementación de scripts de análisis y limpieza de datos",
+          status: "in-progress",
+          date: "20 Nov 2024",
+        },
+        {
+          phase: "Visualización",
+          description: "Creación de dashboards y gráficos interactivos",
+          status: "pending",
+          date: "Previsto: 5 Dic 2024",
+        },
+        {
+          phase: "Documentación",
+          description: "Escritura de documentación técnica y guías de uso",
+          status: "pending",
+          date: "Previsto: 15 Dic 2024",
+        },
+      ],
+      features: [
+        "Análisis exploratorio de datos (EDA)",
+        "Limpieza y preprocesamiento de datos",
+        "Visualizaciones interactivas con Matplotlib",
+        "Estadísticas descriptivas e inferenciales",
+        "Exportación de reportes en PDF",
+      ],
+      challenges: [
+        {
+          challenge: "Manejo de datos faltantes y inconsistentes",
+          challengeDate: "18 Nov 2024",
+          solution: "Implementación de estrategias de imputación y validación de datos con Pandas",
+          solutionDate: "22 Nov 2024",
+        },
+        {
+          challenge: "Optimización de rendimiento con grandes volúmenes de datos",
+          challengeDate: "25 Nov 2024",
+          solution: "Uso de chunks en lectura de archivos y vectorización de operaciones con NumPy",
+          solutionDate: "28 Nov 2024",
+        },
+        {
+          challenge: "Visualizaciones legibles y efectivas",
+          challengeDate: "1 Dic 2024",
+          solution: "Diseño de gráficos personalizados con Matplotlib siguiendo principios de data visualization",
+          solutionDate: "3 Dic 2024",
+        },
+      ],
+      learnings: [
+        "Importancia de la limpieza de datos en proyectos reales",
+        "Técnicas avanzadas de manipulación de DataFrames con Pandas",
+        "Mejores prácticas en documentación de código y análisis",
+        "Comunicación efectiva de resultados a través de visualizaciones",
+      ],
+      futureUpdates:
+        "Se planea implementar modelos de machine learning para análisis predictivo, agregar un dashboard interactivo con Plotly, y automatizar el proceso de generación de reportes.",
+      updateHistory: [
+        {
+          version: "v1.2.0",
+          date: "28 Nov 2024",
+          changes: [
+            "Optimización del rendimiento con chunks y vectorización",
+            "Mejoras en la visualización de gráficos",
+            "Corrección de bugs en la limpieza de datos",
+          ],
+        },
+        {
+          version: "v1.1.0",
+          date: "22 Nov 2024",
+          changes: [
+            "Implementación de estrategias de imputación de datos",
+            "Validación automática de datasets",
+            "Documentación mejorada",
+          ],
+        },
+        {
+          version: "v1.0.0",
+          date: "15 Nov 2024",
+          changes: [
+            "Lanzamiento inicial del proyecto",
+            "Análisis exploratorio básico implementado",
+            "Integración con Jupyter Notebooks",
+          ],
+        },
+      ],
+    },
+  ]
+
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Proyecto de ejemplo",
+      description: "Este es un proyecto de ejemplo para mostrar la estructura de las tarjetas.",
+      date: "Próximamente",
+      tags: ["Proyecto"],
+    },
+    {
+      id: 2,
+      title: "Evento de ejemplo",
+      description: "Este es un evento de ejemplo para mostrar la estructura de las tarjetas.",
+      date: "Próximamente",
+      tags: ["Evento"],
+    },
+    {
+      id: 3,
+      title: "Experiencia de ejemplo",
+      description: "Esta es una experiencia laboral de ejemplo para mostrar la estructura.",
+      date: "Próximamente",
+      tags: ["Experiencia"],
+    },
+    {
+      id: 4,
+      title: "Aprendizaje de ejemplo",
+      description: "Este es un certificado o curso de ejemplo para mostrar la estructura.",
+      date: "Próximamente",
+      tags: ["Aprendizaje"], // Cambiado de "Estudio" a "Aprendizaje"
+    },
+  ]
+
+  const eventsData = [
+    {
+      id: 2,
+      title: "Eventos y networking",
+      description: "Fotos y reflexiones de eventos de tecnología e informática a los que asisto.",
+      date: "Próximamente",
+      tags: ["Evento", "Experiencia"],
+      eventLogo: "/placeholder.svg?height=100&width=100",
+      eventName: "Tech Conference 2024",
+      eventDate: "15 Noviembre 2024",
+      location: "Salta, Argentina",
+      fullDescription:
+        "Participé en la conferencia anual de tecnología donde se discutieron las últimas tendencias en Data Science, Machine Learning y desarrollo de software. Fue una experiencia increíble de aprendizaje y networking con profesionales de la industria.",
+      highlights: [
+        "Charlas sobre tendencias en Data Science",
+        "Workshop práctico de Machine Learning",
+        "Networking con profesionales del sector",
+        "Stands de empresas tech líderes",
+      ],
+      photos: [
+        "/placeholder.svg?height=400&width=600",
+        "/placeholder.svg?height=400&width=600",
+        "/placeholder.svg?height=400&width=600",
+      ],
+      socialPosts: [
+        {
+          platform: "Instagram",
+          url: "https://instagram.com",
+          preview: "/placeholder.svg?height=200&width=200",
+        },
+        {
+          platform: "LinkedIn",
+          url: "https://linkedin.com",
+          preview: "/placeholder.svg?height=200&width=200",
+        },
+      ],
+      learnings:
+        "Este evento me permitió conocer las últimas herramientas en el ecosistema de Python para análisis de datos, conectar con otros estudiantes y profesionales, y entender mejor las demandas actuales del mercado laboral en Data Science.",
+      connections:
+        "Conecté con 15+ profesionales del sector incluyendo data scientists, analistas y desarrolladores de empresas locales e internacionales.",
+    },
+  ]
+
+  const studiesData = [
+    {
+      id: 1,
+      title: "Licenciatura en Ciencia de Datos",
+      description: "Estudios universitarios actuales y anteriores.",
+      date: "En curso",
+      tags: ["Estudio"], // Mantener "Estudio" para este dato, pero el filtro será "Aprendizaje"
+      institution: "UCASAL - Licenciatura en Ciencia de Datos",
+      semester: "2do Semestre",
+      subjects: [
+        {
+          name: "Introducción a Python",
+          code: "CD101",
+          status: "completed",
+          progress: 100,
+          grade: 8.5,
+          topics: ["Sintaxis básica", "Estructuras de datos", "POO", "Módulos y paquetes"],
+          projects: ["Sistema de gestión de inventario", "Analizador de texto"],
+          professor: "Dr. Juan Pérez",
+        },
+        {
+          name: "Estadística Descriptiva",
+          code: "CD102",
+          status: "in-progress",
+          progress: 65,
+          grade: null,
+          topics: ["Medidas de tendencia central", "Dispersión", "Distribuciones", "Correlación"],
+          projects: ["Análisis de dataset de ventas"],
+          professor: "Lic. María González",
+        },
+        {
+          name: "Álgebra Lineal",
+          code: "MAT201",
+          status: "in-progress",
+          progress: 45,
+          grade: null,
+          topics: ["Matrices", "Vectores", "Transformaciones lineales"],
+          projects: [],
+          professor: "Dr. Carlos Ruiz",
+        },
+        {
+          name: "Machine Learning I",
+          code: "CD301",
+          status: "pending",
+          progress: 0,
+          grade: null,
+          topics: ["Regresión", "Clasificación", "Clustering"],
+          projects: [],
+          professor: "Dra. Ana Martínez",
+        },
+      ],
+      learnings: [
+        "Fundamentos sólidos de programación en Python",
+        "Análisis estadístico de datos reales",
+        "Importancia de las matemáticas en ciencia de datos",
+        "Metodología de trabajo en proyectos académicos",
+      ],
+      certifications: [
+        { name: "Python para Data Science", issuer: "Coursera", date: "Julio 2024" },
+        { name: "Introducción a SQL", issuer: "DataCamp", date: "Septiembre 2024" },
+      ],
+      resources: [
+        "Python for Data Analysis - Wes McKinney",
+        "Documentación oficial de Pandas",
+        "Kaggle Learn - Data Science",
+        "StatQuest - Videos de estadística",
+      ],
+    },
+    // Se agrega un nuevo objeto para representar un curso/certificación individual bajo la etiqueta "Aprendizaje"
+    {
+      id: 4,
+      title: "Certificación en Data Analysis",
+      description: "Certificación obtenida para reforzar habilidades en análisis de datos.",
+      date: "Septiembre 2024",
+      tags: ["Aprendizaje"], // Etiqueta para el filtro de "Aprendizaje"
+      institution: "DataCamp",
+      semester: "Curso Completo",
+      subjects: [], // Este tipo de entrada no tiene materias, sino un resumen general
+      learnings: [
+        "Manejo avanzado de datasets con Pandas",
+        "Técnicas de limpieza y transformación de datos",
+        "Visualización de datos efectiva con Matplotlib",
+        "Introducción a la estadística aplicada al análisis",
+      ],
+      certifications: [{ name: "Data Analysis with Python", issuer: "DataCamp", date: "Septiembre 2024" }],
+      resources: ["DataCamp Track: Data Analyst with Python", "Kaggle Datasets para práctica"],
+      duration: "6 semanas",
+      dedication: "4-6 horas/semana",
+    },
+  ]
+
+  const selectedStudyData = studiesData.find((study) => study.id === selectedStudy)
+
+  // Ajuste para filtrar por la nueva etiqueta "Aprendizaje" y manejar el caso de selectedPost
+  const filteredPosts = blogFilter === "all" ? blogPosts : blogPosts.filter((post) => post.tags.includes(blogFilter))
+
+  const handlePostClick = (post: (typeof blogPosts)[0]) => {
+    setSelectedPost(post) // Guarda el post completo para poder acceder a sus tags y contenido
+
+    if (post.tags.includes("Proyecto")) {
+      const project = projectsData.find((p) => p.id === post.id)
+      if (project) setSelectedProject(project.id)
+    } else if (post.tags.includes("Evento")) {
+      const event = eventsData.find((e) => e.id === post.id)
+      if (event) setSelectedEvent(event.id)
+    } else if (post.tags.includes("Estudio")) {
+      // Busca en studiesData por el ID del post, asumiendo que el ID coincide
+      const study = studiesData.find((s) => s.id === post.id)
+      if (study) setSelectedStudy(study.id)
+    } else if (post.tags.includes("Aprendizaje")) {
+      // Busca en studiesData para entradas con la etiqueta "Aprendizaje"
+      const learning = studiesData.find((s) => s.id === post.id && s.tags.includes("Aprendizaje"))
+      if (learning) {
+        setSelectedStudy(learning.id) // Usa setSelectedStudy para este modal
+      }
+    }
+  }
+
+  const closeModal = () => {
+    setSelectedProject(null)
+    setSelectedEvent(null)
+    setSelectedStudy(null)
+    setSelectedPost(null) // Limpia el post seleccionado
+  }
+
+  const currentProject = projectsData.find((p) => p.id === selectedProject)
+  const currentEvent = eventsData.find((e) => e.id === selectedEvent)
+
+  const getTagColor = (tag: string) => {
+    switch (tag) {
+      case "Proyecto":
+        return "bg-blue-500/20 text-blue-400 border-blue-500/30"
+      case "Evento":
+        return "bg-purple-500/20 text-purple-400 border-purple-500/30"
+      case "Experiencia":
+        return "bg-green-500/20 text-green-400 border-green-500/30"
+      case "Estudio": // Para mantener el estilo de "Estudio" si se usa internamente
+        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
+      case "Aprendizaje": // Color para la nueva etiqueta
+        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
+      default:
+        return "bg-zinc-500/20 text-zinc-400 border-zinc-500/30"
+    }
+  }
+
+  const filterButtons = [
+    { label: "Todos", value: "all", color: "orange" },
+    { label: "Proyectos", value: "Proyecto", color: "blue" },
+    { label: "Eventos", value: "Evento", color: "purple" },
+    { label: "Experiencias", value: "Experiencia", color: "green" },
+    { label: "Aprendizajes", value: "Aprendizaje", color: "orange" }, // Cambiado de "Estudio" a "Aprendizaje"
+  ]
+
+  const getFilterButtonColor = (filter: string) => {
+    if (blogFilter === filter) {
+      switch (filter) {
+        case "all":
+          return "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border-0 text-white shadow-[0_0_10px_rgba(251,146,60,0.3)]"
+        case "Proyecto":
+          return "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 border-0 text-white shadow-[0_0_10px_rgba(59,130,246,0.3)]"
+        case "Evento":
+          return "bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-400 hover:to-purple-500 border-0 text-white shadow-[0_0_10px_rgba(168,85,247,0.3)]"
+        case "Experiencia":
+          return "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 border-0 text-white shadow-[0_0_10px_rgba(34,197,94,0.3)]"
+        case "Aprendizaje": // Color para el filtro de "Aprendizaje"
+          return "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border-0 text-white shadow-[0_0_10px_rgba(251,146,60,0.3)]"
+        default:
+          return "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border-0 text-white shadow-[0_0_10px_rgba(251,146,60,0.3)]"
+      }
+    }
+    return "hover:bg-orange-500/10 border-orange-500/25 hover:border-orange-500/40 text-zinc-400 hover:text-orange-400 hover:shadow-[0_0_8px_rgba(251,146,60,0.15)] transition-all duration-300"
+  }
+
+  return (
+    <div className="dark min-h-screen bg-black relative overflow-x-hidden">
+      <NeuralNetworkBackground />
+
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-orange-600/5 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-8 max-w-3xl space-y-6">
+        <Card className="border-orange-500/20 backdrop-blur-xl bg-zinc-950/95 shadow-[0_0_30px_-12px_rgba(251,146,60,0.25)] hover:shadow-[0_0_40px_-12px_rgba(251,146,60,0.35)] transition-shadow duration-300">
+          <CardContent className="p-8">
+            <div className="flex flex-col items-center text-center space-y-6">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-orange-500 blur-lg opacity-20" />
+                <Avatar className="relative w-32 h-32 border-4 border-orange-500/60 shadow-[0_0_20px_rgba(251,146,60,0.3)]">
+                  <AvatarImage src="/profile.jpeg" alt="Ramiro Sebastian Gaspar" />
+                  <AvatarFallback className="bg-gradient-to-br from-orange-500 to-orange-600 text-white text-3xl font-bold">
+                    RG
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+
+              <div className="space-y-3">
+                <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(251,146,60,0.4)]">
+                  Ramiro Sebastian Gaspar
+                </h1>
+                <p className="text-xl md:text-2xl text-orange-400 font-semibold">Data Scientist</p>
+                <p className="text-sm text-zinc-500">Estudiante de Ciencia de Datos</p>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 text-sm text-zinc-500">
+                <div className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                  <GraduationCap className="w-4 h-4" />
+                  <span>UCASAL</span>
+                </div>
+                <div className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                  <MapPin className="w-4 h-4" />
+                  <span>Salta, Argentina</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 w-full">
+                <Button
+                  onClick={handleContactClick}
+                  className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 shadow-[0_0_15px_rgba(251,146,60,0.3)] hover:shadow-[0_0_20px_rgba(251,146,60,0.4)] transition-all duration-300 border-0 font-semibold text-white"
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  Contactar
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1 bg-zinc-900/50 border-orange-500/40 hover:border-orange-400 hover:bg-orange-500/10 hover:shadow-[0_0_12px_rgba(251,146,60,0.25)] transition-all duration-300 text-orange-400 hover:text-orange-300"
+                  asChild
+                >
+                  <a href="/CV_Ramiro_Gaspar.pdf" download>
+                    <Download className="w-4 h-4 mr-2" />
+                    Descargar CV
+                  </a>
+                </Button>
+              </div>
+
+              <div className="flex gap-4">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-orange-500/10 hover:shadow-[0_0_10px_rgba(251,146,60,0.2)] hover:text-orange-400 transition-all duration-300"
+                  asChild
+                >
+                  <a href="https://github.com/RamiroSGaspar" target="_blank" rel="noopener noreferrer">
+                    <Github className="w-5 h-5" />
+                  </a>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-orange-500/10 hover:shadow-[0_0_10px_rgba(251,146,60,0.2)] hover:text-orange-400 transition-all duration-300"
+                  asChild
+                >
+                  <a
+                    href="https://www.linkedin.com/in/ramiro-sebastian-gaspar-b41697317"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-orange-500/10 hover:shadow-[0_0_10px_rgba(251,146,60,0.2)] hover:text-orange-400 transition-all duration-300"
+                  asChild
+                >
+                  <a href="mailto:gapsar.sebastian@gmail.com">
+                    <Mail className="w-5 h-5" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card
+          ref={contentRef}
+          className="border-orange-500/15 backdrop-blur-xl bg-zinc-950/95 shadow-[0_0_25px_-12px_rgba(251,146,60,0.2)] hover:shadow-[0_0_35px_-12px_rgba(251,146,60,0.25)] transition-shadow duration-300"
+        >
+          <CardContent className="p-6">
+            <div className="flex flex-wrap gap-2 mb-6">
+              {Object.entries(sections).map(([key, section]) => (
+                <Button
+                  key={key}
+                  variant={activeSection === key ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveSection(key)}
+                  className={
+                    activeSection === key
+                      ? "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 shadow-[0_0_10px_rgba(59,130,246,0.3)] hover:shadow-[0_0_15px_rgba(251,146,60,0.4)] transition-all duration-300 border-0 text-white font-semibold text-xs px-3"
+                      : "hover:bg-orange-500/10 border-orange-500/25 hover:border-orange-500/40 text-zinc-400 hover:text-orange-400 hover:shadow-[0_0_8px_rgba(251,146,60,0.15)] transition-all duration-300 text-xs px-3"
+                  }
+                >
+                  {section.icon}
+                  <span className="ml-1.5">{section.title}</span>
+                </Button>
+              ))}
+            </div>
+
+            <div className="animate-in fade-in duration-300">
+              <h2 className="text-2xl font-bold mb-4 text-zinc-100">
+                {sections[activeSection as keyof typeof sections].title}
+              </h2>
+              <div className="text-zinc-200">{sections[activeSection as keyof typeof sections].content}</div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-orange-500/15 backdrop-blur-xl bg-zinc-950/95 shadow-[0_0_25px_-12px_rgba(251,146,60,0.2)] hover:shadow-[0_0_35px_-12px_rgba(251,146,60,0.25)] transition-shadow duration-300">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-orange-500/10 text-orange-400 shadow-[0_0_10px_rgba(251,146,60,0.2)]">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-zinc-100">Blog & Actualizaciones</h2>
+                <p className="text-sm text-zinc-500">Proyectos, eventos y aprendizajes</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2 mb-6">
+              {filterButtons.map((btn) => (
+                <Button
+                  key={btn.value}
+                  variant={blogFilter === btn.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setBlogFilter(btn.value)}
+                  className={`text-xs px-3 ${getFilterButtonColor(btn.value)}`}
+                >
+                  <Tag className="w-3 h-3 mr-1" />
+                  {btn.label}
+                </Button>
+              ))}
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {filteredPosts.map((post) => (
+                <Card
+                  key={post.id}
+                  className="bg-zinc-900/50 border border-zinc-800 hover:border-orange-500/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.15)] cursor-pointer"
+                  onClick={() => handlePostClick(post)} // Usar handlePostClick para gestionar la lógica
+                >
+                  <div className="aspect-video w-full bg-gradient-to-br from-orange-500/20 to-zinc-900 flex items-center justify-center">
+                    <ImageIcon className="w-12 h-12 text-orange-500/40" />
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-center gap-2 text-xs text-zinc-500">
+                      <Calendar className="w-3 h-3" />
+                      <span>{post.date}</span>
+                    </div>
+                    <h3 className="font-semibold text-zinc-200 group-hover:text-orange-400 transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-zinc-500 line-clamp-2">{post.description}</p>
+
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {post.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium border ${getTagColor(tag)}`}
+                        >
+                          <Tag className="w-3 h-3" />
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-2 text-xs text-orange-400 font-medium pt-2">
+                      <span>Leer más</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {filteredPosts.length === 0 && (
+              <div className="mt-6 p-8 rounded-lg border border-orange-500/20 bg-orange-500/5 text-center">
+                <p className="text-zinc-400">No hay publicaciones con esta etiqueta aún.</p>
+              </div>
+            )}
+
+            <div className="mt-6 p-4 rounded-lg border border-orange-500/20 bg-orange-500/5 text-center">
+              <p className="text-sm text-zinc-400">
+                Pronto estaré publicando contenido sobre proyectos, eventos y aprendizajes. Mantente atento a las
+                actualizaciones.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {currentProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-orange-500/30 rounded-2xl shadow-[0_0_50px_rgba(251,146,60,0.3)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-orange-400 hover:bg-orange-500/10"
+              onClick={closeModal}
+            >
+              <X className="w-5 h-5" />
+            </Button>
+
+            <div className="p-8 space-y-6">
+              {/* Header del proyecto */}
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  {currentProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border ${getTagColor(tag)}`}
+                    >
+                      <Tag className="w-3 h-3" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">{currentProject.title}</h2>
+                <p className="text-lg text-zinc-400">{currentProject.fullDescription}</p>
+
+                <div className="flex gap-3">
+                  {currentProject.githubUrl && (
+                    <Button
+                      variant="outline"
+                      className="border-orange-500/40 hover:border-orange-400 hover:bg-orange-500/10 text-orange-400 bg-transparent"
+                      asChild
+                    >
+                      <a href={currentProject.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <Github className="w-4 h-4 mr-2" />
+                        Ver en GitHub
+                      </a>
+                    </Button>
+                  )}
+                  {currentProject.demoUrl && (
+                    <Button
+                      className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500"
+                      asChild
+                    >
+                      <a href={currentProject.demoUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Ver Demo
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </div>
+
+              <Separator className="bg-orange-500/20" />
+
+              {/* Galería de imágenes */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <ImageIcon className="w-5 h-5 text-orange-400" />
+                  Vista Previa
+                </h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {currentProject.images.map((img, idx) => (
+                    <div key={idx} className="aspect-video rounded-lg overflow-hidden border border-orange-500/20">
+                      <img
+                        src={img || "/placeholder.svg"}
+                        alt={`${currentProject.title} preview ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Separator className="bg-orange-500/20" />
+
+              {/* Tecnologías */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <Code2 className="w-5 h-5 text-orange-400" />
+                  Stack Tecnológico
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {currentProject.technologies.map((tech) => {
+                    const getTechIcon = (techName: string) => {
+                      switch (techName) {
+                        case "Python":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                              alt="Python"
+                              className="w-5 h-5"
+                            />
+                          )
+                        case "Pandas":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                              alt="Pandas"
+                              className="w-5 h-5"
+                            />
+                          )
+                        case "NumPy":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                              alt="NumPy"
+                              className="w-5 h-5"
+                            />
+                          )
+                        case "Matplotlib":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
+                              alt="Matplotlib"
+                              className="w-5 h-5"
+                            />
+                          )
+                        case "Jupyter":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"
+                              alt="Jupyter"
+                              className="w-5 h-5"
+                            />
+                          )
+                        case "JavaScript":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                              alt="JavaScript"
+                              className="w-5 h-5"
+                            />
+                          )
+                        case "SQL":
+                          return (
+                            <img
+                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                              alt="SQL"
+                              className="w-5 h-5"
+                            />
+                          )
+                        default:
+                          return <Code2 className="w-4 h-4" />
+                      }
+                    }
+
+                    return (
+                      <div
+                        key={tech}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/30 text-orange-400 hover:border-orange-500/50 hover:bg-orange-500/5 transition-all duration-300"
+                      >
+                        {getTechIcon(tech)}
+                        <span className="text-sm font-medium">{tech}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <Separator className="bg-orange-500/20" />
+
+              {/* Características */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100">Características Principales</h3>
+                <ul className="space-y-2">
+                  {currentProject.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                      <span className="text-orange-400 mt-1">•</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Separator className="bg-orange-500/20" />
+
+              {/* Timeline/Evolución */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-orange-400" />
+                  Línea de Tiempo
+                </h3>
+                <div className="space-y-4">
+                  {currentProject.timeline.map((item, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div className="flex flex-col items-center">
+                        <div
+                          className={`w-3 h-3 rounded-full ${
+                            item.status === "completed"
+                              ? "bg-green-500"
+                              : item.status === "in-progress"
+                                ? "bg-orange-500"
+                                : "bg-zinc-600"
+                          }`}
+                        />
+                        {idx < currentProject.timeline.length - 1 && <div className="w-0.5 h-12 bg-orange-500/20" />}
+                      </div>
+                      <div className="flex-1 pb-8">
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className="font-semibold text-zinc-200">{item.phase}</h4>
+                          <span className="text-xs text-zinc-500">{item.date}</span>
+                        </div>
+                        <p className="text-sm text-zinc-500">{item.description}</p>
+                        <span
+                          className={`text-xs font-medium mt-1 inline-block ${
+                            item.status === "completed"
+                              ? "text-green-400"
+                              : item.status === "in-progress"
+                                ? "text-orange-400"
+                                : "text-zinc-500"
+                          }`}
+                        >
+                          {item.status === "completed"
+                            ? "Completado"
+                            : item.status === "in-progress"
+                              ? "En Progreso"
+                              : "Pendiente"}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Separator className="bg-orange-500/20" />
+
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <GitBranch className="w-5 h-5 text-orange-400" />
+                  Desafíos y Soluciones
+                </h3>
+                <div className="space-y-4">
+                  {currentProject.challenges?.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-lg border border-orange-500/20 bg-zinc-900/30 hover:bg-zinc-900/50 transition-all duration-300"
+                    >
+                      <div className="mb-3">
+                        <div className="flex items-start justify-between mb-1">
+                          <h4 className="font-semibold text-zinc-200 flex items-center gap-2">
+                            <span className="text-orange-400">⚠️</span>
+                            {item.challenge}
+                          </h4>
+                        </div>
+                        <span className="text-xs text-zinc-500 ml-7">Identificado: {item.challengeDate}</span>
+                      </div>
+                      <div>
+                        <p className="text-sm text-zinc-400 flex items-start gap-2 mb-1">
+                          <span className="text-green-400 mt-0.5">✓</span>
+                          <span>{item.solution}</span>
+                        </p>
+                        <span className="text-xs text-zinc-500 ml-7">Resuelto: {item.solutionDate}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Separator className="bg-orange-500/20" />
+
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-orange-400" />
+                  Aprendizajes Clave
+                </h3>
+                <ul className="space-y-2">
+                  {currentProject.learnings?.map((learning, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 text-zinc-300 p-3 rounded-lg hover:bg-orange-500/5 transition-all duration-300"
+                    >
+                      <span className="text-orange-400 text-lg">💡</span>
+                      <span>{learning}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {currentProject.updateHistory && currentProject.updateHistory.length > 0 && (
+                <>
+                  <Separator className="bg-orange-500/20" />
+
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                      <Calendar className="w-5 h-5 text-orange-400" />
+                      Historial de Actualizaciones
+                    </h3>
+                    <div className="space-y-3">
+                      {currentProject.updateHistory.map((update, idx) => (
+                        <div
+                          key={idx}
+                          className="p-4 rounded-lg border border-orange-500/20 bg-zinc-900/30 hover:bg-zinc-900/50 transition-all duration-300"
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-semibold text-orange-400">{update.version}</span>
+                            <span className="text-xs text-zinc-500">{update.date}</span>
+                          </div>
+                          <ul className="space-y-1.5">
+                            {update.changes.map((change, changeIdx) => (
+                              <li key={changeIdx} className="flex items-start gap-2 text-sm text-zinc-300">
+                                <span className="text-orange-400 mt-1">•</span>
+                                <span>{change}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {currentProject.timeline.some((t) => t.status === "in-progress" || t.status === "pending") &&
+                currentProject.futureUpdates && (
+                  <>
+                    <Separator className="bg-orange-500/20" />
+
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                        <ArrowRight className="w-5 h-5 text-orange-400" />
+                        Próximas Actualizaciones
+                      </h3>
+                      <div className="p-4 rounded-lg border border-orange-500/30 bg-gradient-to-br from-orange-500/10 to-transparent">
+                        <p className="text-zinc-300 leading-relaxed">{currentProject.futureUpdates}</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {currentEvent && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-purple-500/30 rounded-2xl shadow-[0_0_50px_rgba(168,85,247,0.3)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-purple-400 hover:bg-purple-500/10"
+              onClick={closeModal}
+            >
+              <X className="w-5 h-5" />
+            </Button>
+
+            <div className="p-8 space-y-6">
+              {/* Header con logo del evento */}
+              <div className="flex items-start gap-6">
+                <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-purple-500/30 bg-zinc-900/50 flex items-center justify-center flex-shrink-0">
+                  <img
+                    src={currentEvent.eventLogo || "/placeholder.svg"}
+                    alt={currentEvent.eventName}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 space-y-3">
+                  <div className="flex flex-wrap gap-2">
+                    {currentEvent.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border ${getTagColor(tag)}`}
+                      >
+                        <Tag className="w-3 h-3" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h2 className="text-3xl font-bold text-zinc-100">{currentEvent.eventName}</h2>
+                  <div className="flex flex-wrap gap-4 text-sm text-zinc-400">
+                    <span className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      {currentEvent.eventDate}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      {currentEvent.location}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <Separator className="bg-purple-500/20" />
+
+              {/* Descripción */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100">Sobre el Evento</h3>
+                <p className="text-zinc-300 leading-relaxed">{currentEvent.fullDescription}</p>
+              </div>
+
+              <Separator className="bg-purple-500/20" />
+
+              {/* Galería de fotos */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <ImageIcon className="w-5 h-5 text-purple-400" />
+                  Galería de Fotos
+                </h3>
+                <div className="grid gap-4 md:grid-cols-3">
+                  {currentEvent.photos.map((photo, idx) => (
+                    <div key={idx} className="aspect-video rounded-lg overflow-hidden border border-purple-500/20">
+                      <img
+                        src={photo || "/placeholder.svg"}
+                        alt={`${currentEvent.eventName} foto ${idx + 1}`}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Separator className="bg-purple-500/20" />
+
+              {/* Highlights */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100">Puntos Destacados</h3>
+                <ul className="space-y-2">
+                  {currentEvent.highlights.map((highlight, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-zinc-300">
+                      <span className="text-purple-400 text-lg">✨</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Separator className="bg-purple-500/20" />
+
+              {/* Publicaciones en redes sociales */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <ExternalLink className="w-5 h-5 text-purple-400" />
+                  Publicaciones en Redes
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {currentEvent.socialPosts.map((post, idx) => (
+                    <a
+                      key={idx}
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative aspect-square rounded-lg overflow-hidden border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
+                    >
+                      <img
+                        src={post.preview || "/placeholder.svg"}
+                        alt={`${post.platform} post`}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span className="text-white font-medium flex items-center gap-2">
+                          Ver en {post.platform}
+                          <ExternalLink className="w-4 h-4" />
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <Separator className="bg-purple-500/20" />
+
+              {/* Aprendizajes */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-purple-400" />
+                  Lo que Aprendí
+                </h3>
+                <div className="p-4 rounded-lg border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-transparent">
+                  <p className="text-zinc-300 leading-relaxed">{currentEvent.learnings}</p>
+                </div>
+              </div>
+
+              <Separator className="bg-purple-500/20" />
+
+              {/* Conexiones */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <Linkedin className="w-5 h-5 text-purple-400" />
+                  Networking
+                </h3>
+                <div className="p-4 rounded-lg border border-purple-500/20 bg-zinc-900/30">
+                  <p className="text-zinc-300">{currentEvent.connections}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Aprendizaje */}
+      {selectedStudy !== null && studiesData.find((s) => s.id === selectedStudy && s.tags.includes("Aprendizaje")) && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-orange-500/30 rounded-2xl shadow-[0_0_50px_rgba(251,146,60,0.3)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-50 p-3 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-all duration-200 shadow-2xl border-2 border-white"
+            >
+              <X className="w-5 h-5" strokeWidth={3} />
+            </button>
+
+            <div className="p-8 space-y-6">
+              {/* Certificado/Badge */}
+              <div className="bg-zinc-900/50 border border-orange-500/20 rounded-lg p-6 text-center">
+                <div className="flex justify-center mb-4">
+                  <Award className="w-24 h-24 text-orange-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Nombre del Certificado</h3>
+                <p className="text-zinc-400 mb-1">Institución: Coursera / Universidad</p>
+                <p className="text-zinc-400 mb-4">Fecha de obtención: Enero 2024</p>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 hover:bg-orange-500/20 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Ver Certificado
+                </a>
+              </div>
+
+              {/* Descripción del aprendizaje */}
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-orange-500" />
+                  Descripción del Aprendizaje
+                </h3>
+                <p className="text-zinc-300 leading-relaxed">
+                  Descripción detallada de lo que aprendiste en este curso o certificación. Incluye las habilidades
+                  adquiridas, proyectos realizados durante el curso, y cómo este conocimiento se aplica a tu desarrollo
+                  profesional.
+                </p>
+              </div>
+
+              {/* Habilidades adquiridas */}
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-orange-500" />
+                  Habilidades Adquiridas
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-sm">
+                    Python
+                  </span>
+                  <span className="px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-sm">
+                    Machine Learning
+                  </span>
+                  <span className="px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-sm">
+                    Data Analysis
+                  </span>
+                </div>
+              </div>
+
+              {/* Proyectos del curso */}
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                  <Code className="w-5 h-5 text-orange-500" />
+                  Proyectos Realizados
+                </h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2 text-zinc-300">
+                    <CheckCircle2 className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                    <span>Proyecto 1: Descripción del proyecto realizado en el curso</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-zinc-300">
+                    <CheckCircle2 className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                    <span>Proyecto 2: Otro proyecto del curso</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Duración y esfuerzo */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-zinc-900/50 border border-orange-500/20 rounded-lg p-4">
+                  <p className="text-zinc-400 text-sm mb-1">Duración</p>
+                  <p className="text-white font-semibold">8 semanas</p>
+                </div>
+                <div className="bg-zinc-900/50 border border-orange-500/20 rounded-lg p-4">
+                  <p className="text-zinc-400 text-sm mb-1">Dedicación</p>
+                  <p className="text-white font-semibold">5-7 horas/semana</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedStudy !== null && studiesData.find((s) => s.id === selectedStudy && s.tags.includes("Aprendizaje")) && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-zinc-950 border border-orange-500/30 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(251,146,60,0.2)]">
+            {/* Header */}
+            <div className="sticky top-0 bg-zinc-950 border-b border-zinc-800 p-6 flex justify-between items-start z-10">
+              <div className="flex-1">
+                <h2 className="text-3xl font-bold text-orange-500 mb-2">{selectedStudyData.title}</h2>
+                <div className="flex items-center gap-4 text-sm text-zinc-400">
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" />
+                    <span>{selectedStudyData.institution}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{selectedStudyData.semester}</span>
+                  </div>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSelectedStudy(null)}
+                className="hover:bg-orange-500/10"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+
+            <div className="p-6 space-y-8">
+              {/* Descripción */}
+              <div>
+                <p className="text-zinc-300 leading-relaxed">{selectedStudyData.description}</p>
+              </div>
+
+              {/* Timeline de Materias */}
+              {selectedStudyData.subjects && selectedStudyData.subjects.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-bold text-orange-500 mb-4 flex items-center gap-2">
+                    <BookOpen className="w-5 h-5" />
+                    Materias y Progreso
+                  </h3>
+                  <div className="space-y-4">
+                    {selectedStudyData.subjects.map((subject, idx) => (
+                      <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="font-semibold text-lg text-zinc-200">{subject.name}</h4>
+                            <p className="text-sm text-zinc-500">
+                              Código: {subject.code} • Prof: {subject.professor}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {subject.status === "completed" && (
+                              <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                                Aprobada {subject.grade && `- ${subject.grade}`}
+                              </Badge>
+                            )}
+                            {subject.status === "in-progress" && (
+                              <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30">
+                                Cursando - {subject.progress}%
+                              </Badge>
+                            )}
+                            {subject.status === "pending" && (
+                              <Badge className="bg-zinc-500/20 text-zinc-400 border-zinc-500/30">Pendiente</Badge>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Barra de progreso */}
+                        {subject.status !== "pending" && (
+                          <div className="mb-3">
+                            <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                              <div
+                                className={`h-full rounded-full transition-all duration-300 ${
+                                  subject.status === "completed" ? "bg-green-500" : "bg-orange-500"
+                                }`}
+                                style={{ width: `${subject.progress}%` }}
+                              />
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Temas */}
+                        {subject.topics.length > 0 && (
+                          <div className="mb-3">
+                            <p className="text-sm text-zinc-400 mb-2">Temas principales:</p>
+                            <div className="flex flex-wrap gap-2">
+                              {subject.topics.map((topic, topicIdx) => (
+                                <Badge
+                                  key={topicIdx}
+                                  variant="outline"
+                                  className="text-xs border-zinc-700 text-zinc-300"
+                                >
+                                  {topic}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Proyectos */}
+                        {subject.projects.length > 0 && (
+                          <div>
+                            <p className="text-sm text-zinc-400 mb-1">Proyectos realizados:</p>
+                            <ul className="text-sm text-zinc-300 ml-4">
+                              {subject.projects.map((project, projIdx) => (
+                                <li key={projIdx}>• {project}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Aprendizajes Clave */}
+              {selectedStudyData.learnings.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-bold text-orange-500 mb-4">Aprendizajes Clave</h3>
+                  <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
+                    <ul className="space-y-2">
+                      {selectedStudyData.learnings.map((learning, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                          <span className="text-orange-500 mt-1">•</span>
+                          <span>{learning}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {/* Certificaciones */}
+              {selectedStudyData.certifications.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-bold text-orange-500 mb-4">Certificaciones Obtenidas</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {selectedStudyData.certifications.map((cert, idx) => (
+                      <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
+                        <h4 className="font-semibold text-zinc-200">{cert.name}</h4>
+                        <p className="text-sm text-zinc-400">{cert.issuer}</p>
+                        <p className="text-xs text-zinc-500 mt-1">{cert.date}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Recursos de Estudio */}
+              {selectedStudyData.resources.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-bold text-orange-500 mb-4">Recursos de Estudio</h3>
+                  <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
+                    <ul className="space-y-2">
+                      {selectedStudyData.resources.map((resource, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                          <BookOpen className="w-4 h-4 text-orange-500 mt-1 flex-shrink-0" />
+                          <span>{resource}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
