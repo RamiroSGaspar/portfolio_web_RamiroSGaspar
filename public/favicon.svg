@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#000000"/>
+  <circle cx="50" cy="50" r="42" fill="#1a1a1a"/>
+  
+  <!-- Bar chart representation -->
+  <rect x="20" y="50" width="10" height="20" fill="#ff6b35" rx="2"/>
+  <rect x="35" y="35" width="10" height="35" fill="#ff6b35" rx="2"/>
+  <rect x="50" y="25" width="10" height="45" fill="#ff6b35" rx="2"/>
+  <rect x="65" y="40" width="10" height="30" fill="#ff6b35" rx="2"/>
+  
+  <!-- Line chart overlay -->
+  <polyline points="25,55 40,40 55,30 70,45" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Data points -->
+  <circle cx="25" cy="55" r="3" fill="#ffffff"/>
+  <circle cx="40" cy="40" r="3" fill="#ffffff"/>
+  <circle cx="55" cy="30" r="3" fill="#ffffff"/>
+  <circle cx="70" cy="45" r="3" fill="#ffffff"/>
+</svg>
