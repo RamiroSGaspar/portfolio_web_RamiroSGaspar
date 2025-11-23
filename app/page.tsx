@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,7 +15,6 @@ import {
   Linkedin,
   Download,
   Code2,
-  GitBranch,
   BookOpen,
   Calendar,
   ArrowRight,
@@ -26,9 +24,15 @@ import {
   ExternalLink,
   Clock,
   Award,
-  Brain,
   Code,
+  Briefcase,
   CheckCircle2,
+  TrendingUp,
+  History,
+  AlertCircle,
+  Lightbulb,
+  Rocket,
+  Circle,
 } from "lucide-react"
 
 // Componente de fondo animado con redes neuronales
@@ -118,6 +122,7 @@ export default function Portfolio() {
   const [blogFilter, setBlogFilter] = useState<string>("all")
   const [selectedProject, setSelectedProject] = useState<number | null>(null)
   const [selectedEvent, setSelectedEvent] = useState<number | null>(null)
+  const [selectedExperience, setSelectedExperience] = useState<number | null>(null)
 
   const [selectedStudy, setSelectedStudy] = useState<number | null>(null)
   const [selectedPost, setSelectedPost] = useState<any>(null) // Para gestionar la visualización de post individuales
@@ -486,7 +491,7 @@ export default function Portfolio() {
 
   const blogPosts = [
     {
-      id: 1,
+      id: 3,
       title: "Proyecto de ejemplo",
       description: "Este es un proyecto de ejemplo para mostrar la estructura de las tarjetas.",
       date: "Próximamente",
@@ -500,7 +505,7 @@ export default function Portfolio() {
       tags: ["Evento"],
     },
     {
-      id: 3,
+      id: 3, // Este ID ahora coincide con el ID de experiencesData
       title: "Experiencia de ejemplo",
       description: "Esta es una experiencia laboral de ejemplo para mostrar la estructura.",
       date: "Próximamente",
@@ -511,7 +516,7 @@ export default function Portfolio() {
       title: "Aprendizaje de ejemplo",
       description: "Este es un certificado o curso de ejemplo para mostrar la estructura.",
       date: "Próximamente",
-      tags: ["Aprendizaje"], // Cambiado de "Estudio" a "Aprendizaje"
+      tags: ["Aprendizaje"],
     },
   ]
 
@@ -555,6 +560,34 @@ export default function Portfolio() {
         "Este evento me permitió conocer las últimas herramientas en el ecosistema de Python para análisis de datos, conectar con otros estudiantes y profesionales, y entender mejor las demandas actuales del mercado laboral en Data Science.",
       connections:
         "Conecté con 15+ profesionales del sector incluyendo data scientists, analistas y desarrolladores de empresas locales e internacionales.",
+    },
+  ]
+
+  const experiencesData = [
+    {
+      id: 3,
+      title: "Analista de Datos Junior",
+      company: "Tech Solutions S.A.",
+      type: "Trabajo Formal", // Puede ser: "Trabajo Formal", "Freelance", "Pasantía", "Voluntariado"
+      location: "Salta, Argentina",
+      startDate: "Marzo 2024",
+      endDate: "Presente",
+      duration: "9 meses",
+      image: "/placeholder.svg?height=200&width=200",
+      description:
+        "Responsable del análisis de datos comerciales, creación de reportes automatizados y visualizaciones para la toma de decisiones estratégicas.",
+      responsibilities: [
+        "Análisis de datos de ventas y comportamiento de clientes",
+        "Creación de dashboards interactivos con Python y Power BI",
+        "Automatización de procesos de reportería con scripts de Python",
+        "Colaboración con equipos de marketing para análisis de campañas",
+      ],
+      achievements: [
+        "Reducción del 40% en tiempo de generación de reportes mediante automatización",
+        "Implementación de sistema de alertas para métricas clave de negocio",
+        "Presentación de insights que resultaron en mejora del 15% en conversiones",
+      ],
+      skills: ["Python", "SQL", "Power BI", "Excel", "Pandas", "Data Analysis"],
     },
   ]
 
@@ -635,8 +668,10 @@ export default function Portfolio() {
       tags: ["Aprendizaje"], // Etiqueta para el filtro de "Aprendizaje"
       institution: "DataCamp",
       semester: "Curso Completo",
+      completionDate: "Septiembre 2024", // Added for the modal structure
       subjects: [], // Este tipo de entrada no tiene materias, sino un resumen general
-      learnings: [
+      skills: ["Pandas", "Data Cleaning", "Data Visualization", "SQL Basics"], // Added skills
+      keyLearnings: [
         "Manejo avanzado de datasets con Pandas",
         "Técnicas de limpieza y transformación de datos",
         "Visualización de datos efectiva con Matplotlib",
@@ -644,8 +679,9 @@ export default function Portfolio() {
       ],
       certifications: [{ name: "Data Analysis with Python", issuer: "DataCamp", date: "Septiembre 2024" }],
       resources: ["DataCamp Track: Data Analyst with Python", "Kaggle Datasets para práctica"],
-      duration: "6 semanas",
+      duration: "6 semanas", // Added duration
       dedication: "4-6 horas/semana",
+      certificateLink: "https://www.datacamp.com/certificates/d-analysis-python-a754e", // Added certificate link
     },
   ]
 
@@ -663,16 +699,12 @@ export default function Portfolio() {
     } else if (post.tags.includes("Evento")) {
       const event = eventsData.find((e) => e.id === post.id)
       if (event) setSelectedEvent(event.id)
-    } else if (post.tags.includes("Estudio")) {
-      // Busca en studiesData por el ID del post, asumiendo que el ID coincide
-      const study = studiesData.find((s) => s.id === post.id)
-      if (study) setSelectedStudy(study.id)
+    } else if (post.tags.includes("Experiencia")) {
+      const experience = experiencesData.find((exp) => exp.id === post.id)
+      if (experience) setSelectedExperience(experience.id)
     } else if (post.tags.includes("Aprendizaje")) {
-      // Busca en studiesData para entradas con la etiqueta "Aprendizaje"
       const learning = studiesData.find((s) => s.id === post.id && s.tags.includes("Aprendizaje"))
-      if (learning) {
-        setSelectedStudy(learning.id) // Usa setSelectedStudy para este modal
-      }
+      if (learning) setSelectedStudy(learning.id)
     }
   }
 
@@ -680,11 +712,14 @@ export default function Portfolio() {
     setSelectedProject(null)
     setSelectedEvent(null)
     setSelectedStudy(null)
+    setSelectedExperience(null) // Limpia la experiencia seleccionada
     setSelectedPost(null) // Limpia el post seleccionado
   }
 
   const currentProject = projectsData.find((p) => p.id === selectedProject)
   const currentEvent = eventsData.find((e) => e.id === selectedEvent)
+  // Actualizando la variable currentExperience
+  const currentExperience = experiencesData.find((exp) => exp.id === selectedExperience)
 
   const getTagColor = (tag: string) => {
     switch (tag) {
@@ -773,7 +808,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 w-full">
+              <div className="flex flex-wrap w-full">
                 <Button
                   onClick={handleContactClick}
                   className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 shadow-[0_0_15px_rgba(251,146,60,0.3)] hover:shadow-[0_0_20px_rgba(251,146,60,0.4)] transition-all duration-300 border-0 font-semibold text-white"
@@ -950,32 +985,33 @@ export default function Portfolio() {
         </Card>
       </div>
 
+      {/* // Mejorando el modal de proyectos con más detalles */}
       {currentProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-orange-500/30 rounded-2xl shadow-[0_0_50px_rgba(251,146,60,0.3)]"
+            className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-blue-500/30 rounded-2xl shadow-[0_0_50px_rgba(59,130,246,0.2)]"
             onClick={(e) => e.stopPropagation()}
           >
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-orange-400 hover:bg-orange-500/10"
+              className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-blue-400 hover:bg-blue-500/10"
               onClick={closeModal}
             >
               <X className="w-5 h-5" />
             </Button>
 
             <div className="p-8 space-y-6">
-              {/* Header del proyecto */}
+              {/* Header */}
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {currentProject.tags.map((tag) => (
                     <span
                       key={tag}
-                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border ${getTagColor(tag)}`}
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border border-blue-500/40 bg-blue-500/10 text-blue-400"
                     >
                       <Tag className="w-3 h-3" />
                       {tag}
@@ -983,13 +1019,32 @@ export default function Portfolio() {
                   ))}
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">{currentProject.title}</h2>
+
+                <div className="flex flex-wrap gap-4 text-sm text-zinc-400">
+                  <span className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    Inicio: {currentProject.timeline[0].date}
+                  </span>
+                  {currentProject.timeline.some((t) => t.status === "in-progress") ? (
+                    <span className="flex items-center gap-2 text-blue-400">
+                      <Clock className="w-4 h-4" />
+                      En Curso
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 text-green-400">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Completado: {currentProject.timeline[currentProject.timeline.length - 1].date}
+                    </span>
+                  )}
+                </div>
+
                 <p className="text-lg text-zinc-400">{currentProject.fullDescription}</p>
 
                 <div className="flex gap-3">
                   {currentProject.githubUrl && (
                     <Button
                       variant="outline"
-                      className="border-orange-500/40 hover:border-orange-400 hover:bg-orange-500/10 text-orange-400 bg-transparent"
+                      className="border-blue-500/40 hover:border-blue-400 hover:bg-blue-500/10 text-blue-400 bg-transparent"
                       asChild
                     >
                       <a href={currentProject.githubUrl} target="_blank" rel="noopener noreferrer">
@@ -1000,7 +1055,7 @@ export default function Portfolio() {
                   )}
                   {currentProject.demoUrl && (
                     <Button
-                      className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500"
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500"
                       asChild
                     >
                       <a href={currentProject.demoUrl} target="_blank" rel="noopener noreferrer">
@@ -1012,282 +1067,158 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <Separator className="bg-orange-500/20" />
+              <Separator className="bg-blue-500/20" />
 
-              {/* Galería de imágenes */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <ImageIcon className="w-5 h-5 text-orange-400" />
-                  Vista Previa
+                  <ImageIcon className="w-5 h-5 text-blue-400" />
+                  Vista del Proyecto
                 </h3>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {currentProject.images.map((img, idx) => (
-                    <div key={idx} className="aspect-video rounded-lg overflow-hidden border border-orange-500/20">
-                      <img
-                        src={img || "/placeholder.svg"}
-                        alt={`${currentProject.title} preview ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                      />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {currentProject.images.slice(0, 2).map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img || "/placeholder.svg"}
+                      alt={`${currentProject.title} screenshot ${idx + 1}`}
+                      className="w-full rounded-lg border border-blue-500/20 hover:border-blue-400/40 transition-colors"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Tecnologías con logos */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <Code className="w-5 h-5 text-blue-400" />
+                  Stack Tecnológico
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {currentProject.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-sm font-medium text-blue-400 hover:bg-blue-500/20 transition-colors"
+                    >
+                      <i className={`devicon-${tech.toLowerCase()}-plain text-lg`}></i>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <History className="w-5 h-5 text-blue-400" />
+                  Historial de Versiones
+                </h3>
+                <div className="space-y-3">
+                  {currentProject.updateHistory.map((update, idx) => (
+                    <div key={idx} className="p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-blue-400">{update.version}</span>
+                        <span className="text-sm text-zinc-500">{update.date}</span>
+                      </div>
+                      <ul className="space-y-1">
+                        {update.changes.map((change, changeIdx) => (
+                          <li key={changeIdx} className="flex items-start gap-2 text-sm text-zinc-300">
+                            <span className="text-blue-400">•</span>
+                            {change}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <Separator className="bg-orange-500/20" />
-
-              {/* Tecnologías */}
+              {/* Línea de tiempo */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <Code2 className="w-5 h-5 text-orange-400" />
-                  Stack Tecnológico
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {currentProject.technologies.map((tech) => {
-                    const getTechIcon = (techName: string) => {
-                      switch (techName) {
-                        case "Python":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                              alt="Python"
-                              className="w-5 h-5"
-                            />
-                          )
-                        case "Pandas":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
-                              alt="Pandas"
-                              className="w-5 h-5"
-                            />
-                          )
-                        case "NumPy":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
-                              alt="NumPy"
-                              className="w-5 h-5"
-                            />
-                          )
-                        case "Matplotlib":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
-                              alt="Matplotlib"
-                              className="w-5 h-5"
-                            />
-                          )
-                        case "Jupyter":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"
-                              alt="Jupyter"
-                              className="w-5 h-5"
-                            />
-                          )
-                        case "JavaScript":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                              alt="JavaScript"
-                              className="w-5 h-5"
-                            />
-                          )
-                        case "SQL":
-                          return (
-                            <img
-                              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                              alt="SQL"
-                              className="w-5 h-5"
-                            />
-                          )
-                        default:
-                          return <Code2 className="w-4 h-4" />
-                      }
-                    }
-
-                    return (
-                      <div
-                        key={tech}
-                        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/50 border border-orange-500/30 text-orange-400 hover:border-orange-500/50 hover:bg-orange-500/5 transition-all duration-300"
-                      >
-                        {getTechIcon(tech)}
-                        <span className="text-sm font-medium">{tech}</span>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <Separator className="bg-orange-500/20" />
-
-              {/* Características */}
-              <div className="space-y-3">
-                <h3 className="text-xl font-semibold text-zinc-100">Características Principales</h3>
-                <ul className="space-y-2">
-                  {currentProject.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-zinc-300">
-                      <span className="text-orange-400 mt-1">•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Separator className="bg-orange-500/20" />
-
-              {/* Timeline/Evolución */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-orange-400" />
+                  <Calendar className="w-5 h-5 text-blue-400" />
                   Línea de Tiempo
                 </h3>
                 <div className="space-y-4">
                   {currentProject.timeline.map((item, idx) => (
-                    <div key={idx} className="flex gap-4">
-                      <div className="flex flex-col items-center">
-                        <div
-                          className={`w-3 h-3 rounded-full ${
-                            item.status === "completed"
-                              ? "bg-green-500"
-                              : item.status === "in-progress"
-                                ? "bg-orange-500"
-                                : "bg-zinc-600"
-                          }`}
-                        />
-                        {idx < currentProject.timeline.length - 1 && <div className="w-0.5 h-12 bg-orange-500/20" />}
+                    <div key={idx} className="flex gap-4 items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        {item.status === "completed" && <CheckCircle2 className="w-6 h-6 text-green-400" />}
+                        {item.status === "in-progress" && <Clock className="w-6 h-6 text-blue-400 animate-pulse" />}
+                        {item.status === "pending" && <Circle className="w-6 h-6 text-zinc-600" />}
                       </div>
-                      <div className="flex-1 pb-8">
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-semibold text-zinc-200">{item.phase}</h4>
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center justify-between">
+                          <h4 className="font-semibold text-zinc-100">{item.phase}</h4>
                           <span className="text-xs text-zinc-500">{item.date}</span>
                         </div>
-                        <p className="text-sm text-zinc-500">{item.description}</p>
-                        <span
-                          className={`text-xs font-medium mt-1 inline-block ${
-                            item.status === "completed"
-                              ? "text-green-400"
-                              : item.status === "in-progress"
-                                ? "text-orange-400"
-                                : "text-zinc-500"
-                          }`}
-                        >
-                          {item.status === "completed"
-                            ? "Completado"
-                            : item.status === "in-progress"
-                              ? "En Progreso"
-                              : "Pendiente"}
-                        </span>
+                        <p className="text-sm text-zinc-400">{item.description}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <Separator className="bg-orange-500/20" />
-
-              <div className="space-y-4">
+              {/* Desafíos y Soluciones */}
+              <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <GitBranch className="w-5 h-5 text-orange-400" />
+                  <AlertCircle className="w-5 h-5 text-blue-400" />
                   Desafíos y Soluciones
                 </h3>
                 <div className="space-y-4">
-                  {currentProject.challenges?.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-lg border border-orange-500/20 bg-zinc-900/30 hover:bg-zinc-900/50 transition-all duration-300"
-                    >
-                      <div className="mb-3">
-                        <div className="flex items-start justify-between mb-1">
-                          <h4 className="font-semibold text-zinc-200 flex items-center gap-2">
-                            <span className="text-orange-400">⚠️</span>
+                  {currentProject.challenges.map((item, idx) => (
+                    <div key={idx} className="p-4 bg-zinc-900 border border-blue-500/20 rounded-lg space-y-3">
+                      <div className="space-y-1">
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="text-sm font-medium text-zinc-300 flex items-start gap-2">
+                            <span className="text-red-400 flex-shrink-0">⚠</span>
                             {item.challenge}
-                          </h4>
+                          </p>
+                          <span className="text-xs text-zinc-500 whitespace-nowrap">{item.challengeDate}</span>
                         </div>
-                        <span className="text-xs text-zinc-500 ml-7">Identificado: {item.challengeDate}</span>
                       </div>
-                      <div>
-                        <p className="text-sm text-zinc-400 flex items-start gap-2 mb-1">
-                          <span className="text-green-400 mt-0.5">✓</span>
-                          <span>{item.solution}</span>
-                        </p>
-                        <span className="text-xs text-zinc-500 ml-7">Resuelto: {item.solutionDate}</span>
+                      <div className="space-y-1">
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="text-sm text-zinc-400 flex items-start gap-2">
+                            <span className="text-green-400 flex-shrink-0">✓</span>
+                            {item.solution}
+                          </p>
+                          <span className="text-xs text-zinc-500 whitespace-nowrap">{item.solutionDate}</span>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <Separator className="bg-orange-500/20" />
-
-              <div className="space-y-4">
+              {/* Aprendizajes */}
+              <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-orange-400" />
+                  <Lightbulb className="w-5 h-5 text-blue-400" />
                   Aprendizajes Clave
                 </h3>
                 <ul className="space-y-2">
-                  {currentProject.learnings?.map((learning, idx) => (
+                  {currentProject.learnings.map((learning, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-3 text-zinc-300 p-3 rounded-lg hover:bg-orange-500/5 transition-all duration-300"
+                      className="flex items-start gap-2 text-zinc-300 p-3 bg-blue-500/5 border border-blue-500/20 rounded-lg"
                     >
-                      <span className="text-orange-400 text-lg">💡</span>
-                      <span>{learning}</span>
+                      <span className="text-blue-400">💡</span>
+                      {learning}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {currentProject.updateHistory && currentProject.updateHistory.length > 0 && (
-                <>
-                  <Separator className="bg-orange-500/20" />
-
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                      <Calendar className="w-5 h-5 text-orange-400" />
-                      Historial de Actualizaciones
-                    </h3>
-                    <div className="space-y-3">
-                      {currentProject.updateHistory.map((update, idx) => (
-                        <div
-                          key={idx}
-                          className="p-4 rounded-lg border border-orange-500/20 bg-zinc-900/30 hover:bg-zinc-900/50 transition-all duration-300"
-                        >
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="font-semibold text-orange-400">{update.version}</span>
-                            <span className="text-xs text-zinc-500">{update.date}</span>
-                          </div>
-                          <ul className="space-y-1.5">
-                            {update.changes.map((change, changeIdx) => (
-                              <li key={changeIdx} className="flex items-start gap-2 text-sm text-zinc-300">
-                                <span className="text-orange-400 mt-1">•</span>
-                                <span>{change}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </>
+              {/* Próximas actualizaciones (solo si está en progreso) */}
+              {currentProject.timeline.some((t) => t.status === "in-progress" || t.status === "pending") && (
+                <div className="space-y-3">
+                  <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                    <Rocket className="w-5 h-5 text-blue-400" />
+                    Próximas Actualizaciones
+                  </h3>
+                  <p className="text-zinc-300 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg">
+                    {currentProject.futureUpdates}
+                  </p>
+                </div>
               )}
-
-              {currentProject.timeline.some((t) => t.status === "in-progress" || t.status === "pending") &&
-                currentProject.futureUpdates && (
-                  <>
-                    <Separator className="bg-orange-500/20" />
-
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                        <ArrowRight className="w-5 h-5 text-orange-400" />
-                        Próximas Actualizaciones
-                      </h3>
-                      <div className="p-4 rounded-lg border border-orange-500/30 bg-gradient-to-br from-orange-500/10 to-transparent">
-                        <p className="text-zinc-300 leading-relaxed">{currentProject.futureUpdates}</p>
-                      </div>
-                    </div>
-                  </>
-                )}
             </div>
           </div>
         </div>
@@ -1454,100 +1385,110 @@ export default function Portfolio() {
         </div>
       )}
 
-      {/* Modal de Aprendizaje */}
-      {selectedStudy !== null && studiesData.find((s) => s.id === selectedStudy && s.tags.includes("Aprendizaje")) && (
+      {/* Agregando modal de experiencia después del modal de eventos */}
+      {currentExperience && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-orange-500/30 rounded-2xl shadow-[0_0_50px_rgba(251,146,60,0.3)]"
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-green-500/30 rounded-2xl shadow-[0_0_50px_rgba(34,197,94,0.2)]"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-green-400 hover:bg-green-500/10"
               onClick={closeModal}
-              className="absolute top-4 right-4 z-50 p-3 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-all duration-200 shadow-2xl border-2 border-white"
             >
-              <X className="w-5 h-5" strokeWidth={3} />
-            </button>
+              <X className="w-5 h-5" />
+            </Button>
 
             <div className="p-8 space-y-6">
-              {/* Certificado/Badge */}
-              <div className="bg-zinc-900/50 border border-orange-500/20 rounded-lg p-6 text-center">
-                <div className="flex justify-center mb-4">
-                  <Award className="w-24 h-24 text-orange-500" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Nombre del Certificado</h3>
-                <p className="text-zinc-400 mb-1">Institución: Coursera / Universidad</p>
-                <p className="text-zinc-400 mb-4">Fecha de obtención: Enero 2024</p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-500 hover:bg-orange-500/20 transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Ver Certificado
-                </a>
-              </div>
-
-              {/* Descripción del aprendizaje */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-orange-500" />
-                  Descripción del Aprendizaje
-                </h3>
-                <p className="text-zinc-300 leading-relaxed">
-                  Descripción detallada de lo que aprendiste en este curso o certificación. Incluye las habilidades
-                  adquiridas, proyectos realizados durante el curso, y cómo este conocimiento se aplica a tu desarrollo
-                  profesional.
-                </p>
-              </div>
-
-              {/* Habilidades adquiridas */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-orange-500" />
-                  Habilidades Adquiridas
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-sm">
-                    Python
-                  </span>
-                  <span className="px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-sm">
-                    Machine Learning
-                  </span>
-                  <span className="px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-sm">
-                    Data Analysis
-                  </span>
+              {/* Header con logo y título */}
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                <img
+                  src={currentExperience.image || "/placeholder.svg"}
+                  alt={currentExperience.company}
+                  className="w-24 h-24 rounded-lg object-cover border-2 border-green-500/30"
+                />
+                <div className="flex-1 space-y-3">
+                  <div className="flex flex-wrap gap-2">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border border-green-500/40 bg-green-500/10 text-green-400">
+                      <Briefcase className="w-3 h-3" />
+                      {currentExperience.type}
+                    </span>
+                  </div>
+                  <h2 className="text-3xl font-bold text-zinc-100">{currentExperience.title}</h2>
+                  <div className="space-y-1 text-zinc-400">
+                    <p className="text-lg font-medium text-zinc-300">{currentExperience.company}</p>
+                    <p className="flex items-center gap-2 text-sm">
+                      <MapPin className="w-4 h-4" />
+                      {currentExperience.location}
+                    </p>
+                    <p className="flex items-center gap-2 text-sm">
+                      <Calendar className="w-4 h-4" />
+                      {currentExperience.startDate} - {currentExperience.endDate} · {currentExperience.duration}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Proyectos del curso */}
+              <Separator className="bg-green-500/20" />
+
+              {/* Descripción */}
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  <Code className="w-5 h-5 text-orange-500" />
-                  Proyectos Realizados
+                <h3 className="text-xl font-semibold text-zinc-100">Descripción</h3>
+                <p className="text-zinc-300 leading-relaxed">{currentExperience.description}</p>
+              </div>
+
+              {/* Responsabilidades */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
+                  Responsabilidades
                 </h3>
                 <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-zinc-300">
-                    <CheckCircle2 className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                    <span>Proyecto 1: Descripción del proyecto realizado en el curso</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-zinc-300">
-                    <CheckCircle2 className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                    <span>Proyecto 2: Otro proyecto del curso</span>
-                  </li>
+                  {currentExperience.responsibilities.map((resp, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>{resp}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              {/* Duración y esfuerzo */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-zinc-900/50 border border-orange-500/20 rounded-lg p-4">
-                  <p className="text-zinc-400 text-sm mb-1">Duración</p>
-                  <p className="text-white font-semibold">8 semanas</p>
-                </div>
-                <div className="bg-zinc-900/50 border border-orange-500/20 rounded-lg p-4">
-                  <p className="text-zinc-400 text-sm mb-1">Dedicación</p>
-                  <p className="text-white font-semibold">5-7 horas/semana</p>
+              {/* Logros */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-green-400" />
+                  Logros Destacados
+                </h3>
+                <ul className="space-y-2">
+                  {currentExperience.achievements.map((achievement, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2 text-zinc-300 p-3 bg-green-500/5 border border-green-500/20 rounded-lg"
+                    >
+                      <Award className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Habilidades utilizadas */}
+              <div className="space-y-3">
+                <h3 className="text-xl font-semibold text-zinc-100">Habilidades</h3>
+                <div className="flex flex-wrap gap-2">
+                  {currentExperience.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-lg text-sm font-medium text-green-400"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1555,176 +1496,168 @@ export default function Portfolio() {
         </div>
       )}
 
-      {selectedStudy !== null && studiesData.find((s) => s.id === selectedStudy && s.tags.includes("Aprendizaje")) && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-zinc-950 border border-orange-500/30 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_30px_rgba(251,146,60,0.2)]">
-            {/* Header */}
-            <div className="sticky top-0 bg-zinc-950 border-b border-zinc-800 p-6 flex justify-between items-start z-10">
-              <div className="flex-1">
-                <h2 className="text-3xl font-bold text-orange-500 mb-2">{selectedStudyData.title}</h2>
-                <div className="flex items-center gap-4 text-sm text-zinc-400">
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4" />
-                    <span>{selectedStudyData.institution}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{selectedStudyData.semester}</span>
-                  </div>
-                </div>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSelectedStudy(null)}
-                className="hover:bg-orange-500/10"
+      {selectedStudy &&
+        studiesData.find((s) => s.id === selectedStudy && s.tags.includes("Aprendizaje")) &&
+        (() => {
+          const currentStudy = studiesData.find((s) => s.id === selectedStudy)!
+          return (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              onClick={closeModal}
+            >
+              <div
+                className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-orange-500/30 rounded-2xl shadow-[0_0_50px_rgba(249,115,22,0.3)]"
+                onClick={(e) => e.stopPropagation()}
               >
-                <X className="w-5 h-5" />
-              </Button>
-            </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-orange-400 hover:bg-orange-500/10"
+                  onClick={closeModal}
+                >
+                  <X className="w-5 h-5" />
+                </Button>
 
-            <div className="p-6 space-y-8">
-              {/* Descripción */}
-              <div>
-                <p className="text-zinc-300 leading-relaxed">{selectedStudyData.description}</p>
-              </div>
+                <div className="p-8 space-y-6">
+                  {/* Header con badge del certificado */}
+                  <div className="flex items-start gap-6">
+                    <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-orange-500/30 bg-zinc-900/50 flex items-center justify-center flex-shrink-0">
+                      <Award className="w-12 h-12 text-orange-500" />
+                    </div>
+                    <div className="flex-1 space-y-3">
+                      <div className="flex flex-wrap gap-2">
+                        {currentStudy.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border ${getTagColor(tag)}`}
+                          >
+                            <Tag className="w-3 h-3" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h2 className="text-3xl font-bold text-zinc-100">{currentStudy.title}</h2>
+                      <div className="flex flex-wrap gap-4 text-sm text-zinc-400">
+                        <span className="flex items-center gap-2">
+                          <GraduationCap className="w-4 h-4" />
+                          {currentStudy.institution}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4" />
+                          {currentStudy.completionDate}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-              {/* Timeline de Materias */}
-              {selectedStudyData.subjects && selectedStudyData.subjects.length > 0 && (
-                <div>
-                  <h3 className="text-xl font-bold text-orange-500 mb-4 flex items-center gap-2">
-                    <BookOpen className="w-5 h-5" />
-                    Materias y Progreso
-                  </h3>
-                  <div className="space-y-4">
-                    {selectedStudyData.subjects.map((subject, idx) => (
-                      <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <h4 className="font-semibold text-lg text-zinc-200">{subject.name}</h4>
-                            <p className="text-sm text-zinc-500">
-                              Código: {subject.code} • Prof: {subject.professor}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {subject.status === "completed" && (
-                              <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                                Aprobada {subject.grade && `- ${subject.grade}`}
-                              </Badge>
-                            )}
-                            {subject.status === "in-progress" && (
-                              <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30">
-                                Cursando - {subject.progress}%
-                              </Badge>
-                            )}
-                            {subject.status === "pending" && (
-                              <Badge className="bg-zinc-500/20 text-zinc-400 border-zinc-500/30">Pendiente</Badge>
-                            )}
-                          </div>
+                  <Separator className="bg-orange-500/20" />
+
+                  {/* Descripción */}
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-semibold text-zinc-100">Sobre el Certificado</h3>
+                    <p className="text-zinc-300 leading-relaxed">{currentStudy.description}</p>
+                  </div>
+
+                  {currentStudy.certificateLink && (
+                    <>
+                      <Separator className="bg-orange-500/20" />
+                      {/* Enlace al certificado */}
+                      <div className="space-y-3">
+                        <a
+                          href={currentStudy.certificateLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 hover:bg-orange-500/20 transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Ver Certificado
+                        </a>
+                      </div>
+                    </>
+                  )}
+
+                  {currentStudy.skills && currentStudy.skills.length > 0 && (
+                    <>
+                      <Separator className="bg-orange-500/20" />
+                      {/* Habilidades adquiridas */}
+                      <div className="space-y-3">
+                        <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                          <Code className="w-5 h-5 text-orange-400" />
+                          Habilidades Adquiridas
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {currentStudy.skills.map((skill, idx) => (
+                            <span
+                              key={idx}
+                              className="px-3 py-1.5 rounded-md text-sm bg-orange-500/10 border border-orange-500/30 text-orange-300"
+                            >
+                              {skill}
+                            </span>
+                          ))}
                         </div>
-
-                        {/* Barra de progreso */}
-                        {subject.status !== "pending" && (
-                          <div className="mb-3">
-                            <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                              <div
-                                className={`h-full rounded-full transition-all duration-300 ${
-                                  subject.status === "completed" ? "bg-green-500" : "bg-orange-500"
-                                }`}
-                                style={{ width: `${subject.progress}%` }}
-                              />
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Temas */}
-                        {subject.topics.length > 0 && (
-                          <div className="mb-3">
-                            <p className="text-sm text-zinc-400 mb-2">Temas principales:</p>
-                            <div className="flex flex-wrap gap-2">
-                              {subject.topics.map((topic, topicIdx) => (
-                                <Badge
-                                  key={topicIdx}
-                                  variant="outline"
-                                  className="text-xs border-zinc-700 text-zinc-300"
-                                >
-                                  {topic}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Proyectos */}
-                        {subject.projects.length > 0 && (
-                          <div>
-                            <p className="text-sm text-zinc-400 mb-1">Proyectos realizados:</p>
-                            <ul className="text-sm text-zinc-300 ml-4">
-                              {subject.projects.map((project, projIdx) => (
-                                <li key={projIdx}>• {project}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                    </>
+                  )}
 
-              {/* Aprendizajes Clave */}
-              {selectedStudyData.learnings.length > 0 && (
-                <div>
-                  <h3 className="text-xl font-bold text-orange-500 mb-4">Aprendizajes Clave</h3>
-                  <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-                    <ul className="space-y-2">
-                      {selectedStudyData.learnings.map((learning, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-zinc-300">
-                          <span className="text-orange-500 mt-1">•</span>
-                          <span>{learning}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-
-              {/* Certificaciones */}
-              {selectedStudyData.certifications.length > 0 && (
-                <div>
-                  <h3 className="text-xl font-bold text-orange-500 mb-4">Certificaciones Obtenidas</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {selectedStudyData.certifications.map((cert, idx) => (
-                      <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-                        <h4 className="font-semibold text-zinc-200">{cert.name}</h4>
-                        <p className="text-sm text-zinc-400">{cert.issuer}</p>
-                        <p className="text-xs text-zinc-500 mt-1">{cert.date}</p>
+                  {currentStudy.keyLearnings && currentStudy.keyLearnings.length > 0 && (
+                    <>
+                      <Separator className="bg-orange-500/20" />
+                      {/* Aprendizajes clave */}
+                      <div className="space-y-3">
+                        <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                          <BookOpen className="w-5 h-5 text-orange-400" />
+                          Aprendizajes Clave
+                        </h3>
+                        <ul className="space-y-2">
+                          {currentStudy.keyLearnings.map((learning, idx) => (
+                            <li key={idx} className="flex items-start gap-3 text-zinc-300">
+                              <span className="text-orange-400 text-lg">📚</span>
+                              <span>{learning}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                    </>
+                  )}
 
-              {/* Recursos de Estudio */}
-              {selectedStudyData.resources.length > 0 && (
-                <div>
-                  <h3 className="text-xl font-bold text-orange-500 mb-4">Recursos de Estudio</h3>
-                  <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
-                    <ul className="space-y-2">
-                      {selectedStudyData.resources.map((resource, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-zinc-300">
-                          <BookOpen className="w-4 h-4 text-orange-500 mt-1 flex-shrink-0" />
-                          <span>{resource}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {currentStudy.projects && currentStudy.projects.length > 0 && (
+                    <>
+                      <Separator className="bg-orange-500/20" />
+                      {/* Proyectos realizados */}
+                      <div className="space-y-3">
+                        <h3 className="text-xl font-semibold text-zinc-100">Proyectos Realizados</h3>
+                        <ul className="space-y-2">
+                          {currentStudy.projects.map((project, idx) => (
+                            <li key={idx} className="flex items-start gap-3 text-zinc-300">
+                              <span className="text-orange-400 text-lg">🔨</span>
+                              <span>{project}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  )}
+
+                  {currentStudy.duration && (
+                    <>
+                      <Separator className="bg-orange-500/20" />
+                      {/* Duración */}
+                      <div className="space-y-3">
+                        <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                          <Clock className="w-5 h-5 text-orange-400" />
+                          Duración
+                        </h3>
+                        <div className="p-4 rounded-lg border border-orange-500/20 bg-zinc-900/30">
+                          <p className="text-zinc-300">{currentStudy.duration}</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          )
+        })()}
     </div>
   )
 }
