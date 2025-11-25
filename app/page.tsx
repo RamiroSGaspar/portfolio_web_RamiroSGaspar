@@ -264,27 +264,41 @@ export default function Portfolio() {
     },
     experience: {
       title: "Experiencia",
-      icon: <GraduationCap className="w-4 h-4" />,
+      icon: <Briefcase className="w-4 h-4" />, // Changed icon to Briefcase for consistency
       content: (
         <div className="space-y-6">
           <div className="space-y-3">
-            <div>
-              <h4 className="font-semibold">Programador Backend</h4>
-              <p className="text-sm text-muted-foreground">Bewise Argentina - Pasantía (Remoto)</p>
-              <p className="text-xs text-muted-foreground">Agosto - Noviembre 2024</p>
+            <div className="flex items-start gap-4">
+              <img
+                src="/bewise-logo.jpeg"
+                alt="Bewise Logo"
+                className="w-12 h-12 rounded-lg object-cover border border-orange-500/30"
+              />
+              <div className="flex-1">
+                <h4 className="font-semibold">Programador Backend</h4>
+                <p className="text-sm text-muted-foreground">Bewise Argentina - Pasantía (Remoto)</p>
+                <p className="text-xs text-muted-foreground">Agosto - Noviembre 2024</p>
+              </div>
             </div>
             <ul className="space-y-1 text-sm text-muted-foreground ml-4">
               <li>• Desarrollo y mantenimiento de soluciones backend</li>
-              <li>• Uso de Python y bases de datos SQL</li>
+              <li>• Uso de Java con Spring Boot y bases de datos SQL</li>
               <li>• Trabajo remoto con metodologías ágiles</li>
             </ul>
           </div>
           <Separator />
           <div className="space-y-3">
-            <div>
-              <h4 className="font-semibold">Programador</h4>
-              <p className="text-sm text-muted-foreground">Museo Güemes - Pasantía</p>
-              <p className="text-xs text-muted-foreground">Mayo - Agosto 2024</p>
+            <div className="flex items-start gap-4">
+              <img
+                src="/museo-guemes.jpeg"
+                alt="Museo Güemes"
+                className="w-12 h-12 rounded-lg object-cover border border-orange-500/30"
+              />
+              <div className="flex-1">
+                <h4 className="font-semibold">Programador</h4>
+                <p className="text-sm text-muted-foreground">Museo Güemes - Pasantía</p>
+                <p className="text-xs text-muted-foreground">Mayo - Agosto 2024</p>
+              </div>
             </div>
             <ul className="space-y-1 text-sm text-muted-foreground ml-4">
               <li>• Sistema multimedia con Python y Raspberry Pi</li>
@@ -300,18 +314,32 @@ export default function Portfolio() {
       icon: <GraduationCap className="w-4 h-4" />,
       content: (
         <div className="space-y-6">
-          <div>
-            <h4 className="font-semibold">Licenciatura en Ciencia de Datos</h4>
-            <p className="text-sm text-muted-foreground">Universidad Católica de Salta (UCASAL)</p>
-            <p className="text-xs text-muted-foreground">En curso - Modalidad online (2025)</p>
+          <div className="flex gap-4 items-start">
+            <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-white">
+              <img src="/ucasal-logo.jpg" alt="UCASAL Logo" className="w-full h-full object-contain p-1" />
+            </div>
+            <div>
+              <h4 className="font-semibold">Licenciatura en Ciencia de Datos</h4>
+              <p className="text-sm text-muted-foreground">Universidad Católica de Salta (UCASAL)</p>
+              <p className="text-xs text-muted-foreground">En curso - Modalidad online (2025)</p>
+            </div>
           </div>
           <Separator />
-          <div>
-            <h4 className="font-semibold">Técnico Informático Profesional y Personal</h4>
-            <p className="text-sm text-muted-foreground">
-              Escuela de Educación Técnica N° 3139 "Gral. M. M. de Güemes"
-            </p>
-            <p className="text-xs text-muted-foreground">Finalizado (2021 - 2024)</p>
+          <div className="flex gap-4 items-start">
+            <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-white">
+              <img
+                src="/tec3-logo.jpeg"
+                alt="Escuela Técnica N° 3139 Logo"
+                className="w-full h-full object-contain p-1"
+              />
+            </div>
+            <div>
+              <h4 className="font-semibold">Técnico Informático Profesional y Personal</h4>
+              <p className="text-sm text-muted-foreground">
+                Escuela de Educación Técnica N° 3139 "Gral. M. M. de Güemes"
+              </p>
+              <p className="text-xs text-muted-foreground">Finalizado (2021 - 2024)</p>
+            </div>
           </div>
         </div>
       ),
@@ -795,6 +823,17 @@ export default function Portfolio() {
                 </h1>
                 <p className="text-xl md:text-2xl text-orange-400 font-semibold">Data Scientist</p>
                 <p className="text-sm text-zinc-500">Estudiante de Ciencia de Datos</p>
+              </div>
+
+              <div className="flex flex-col items-center gap-2 text-sm text-zinc-500">
+                <div className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                  <GraduationCap className="w-4 h-4" />
+                  <span>UCASAL</span>
+                </div>
+                <div className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                  <MapPin className="w-4 h-4" />
+                  <span>Salta, Argentina</span>
+                </div>
               </div>
 
               <div className="flex flex-col items-center gap-2 text-sm text-zinc-500">
