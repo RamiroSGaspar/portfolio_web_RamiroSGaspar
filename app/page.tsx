@@ -836,17 +836,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center gap-2 text-sm text-zinc-500">
-                <div className="flex items-center gap-2 hover:text-orange-400 transition-colors">
-                  <GraduationCap className="w-4 h-4" />
-                  <span>UCASAL</span>
-                </div>
-                <div className="flex items-center gap-2 hover:text-orange-400 transition-colors">
-                  <MapPin className="w-4 h-4" />
-                  <span>Salta, Argentina</span>
-                </div>
-              </div>
-
               <div className="flex flex-wrap w-full">
                 <Button
                   onClick={handleContactClick}
