@@ -132,25 +132,19 @@ export default function Portfolio() {
       title: "Sobre Mí",
       icon: <GraduationCap className="w-4 h-4" />,
       content: (
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-bold mb-4">¡Hola!</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Soy estudiante de Licenciatura en Ciencia de Datos en UCASAL. Me fascina cómo los datos nunca mueren, 
-              sino que se transforman y evolucionan, sirviendo como base para cualquier decisión. Disfruto extraer 
-              información específica combinando lógica y matemática a través de{" "}
-              <span className="text-orange-500 font-semibold">Python</span> y{" "}
-              <span className="text-orange-500 font-semibold">SQL</span>, aprovechando lo mejor de ambos mundos: 
-              el poder procedural de Python con bibliotecas como Pandas, NumPy y Matplotlib, junto con la elegancia 
-              declarativa de SQL para consultar bases de datos.
-            </p>
-          </div>
-          <div>
-            <p className="text-muted-foreground leading-relaxed">
-              Busco constantemente oportunidades para crecer como profesional en el mundo de los datos, desarrollando 
-              tanto mis habilidades técnicas como personales.
-            </p>
-          </div>
+        <div className="space-y-4 text-center">
+          <p className="text-muted-foreground leading-relaxed">
+            Estudiante de la Licenciatura en Ciencia de Datos en la Universidad Católica de Salta, con formación 
+            técnica en informática y experiencia práctica en programación y análisis de datos.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Interesado en el trabajo con datos, desde su procesamiento y análisis hasta su interpretación para 
+            la toma de decisiones. Cuento con experiencia en Python, SQL y trabajo colaborativo en entornos remotos.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Busco constantemente oportunidades para crecer como profesional en el mundo de los datos, 
+            desarrollando tanto mis habilidades técnicas como personales.
+          </p>
         </div>
       ),
     },
