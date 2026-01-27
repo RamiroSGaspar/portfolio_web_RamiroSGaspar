@@ -134,20 +134,21 @@ export default function Portfolio() {
       content: (
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-bold mb-4">¡Hola! 👋</h3>
+            <h3 className="text-xl font-bold mb-4">¡Hola!</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Soy estudiante de Licenciatura en Ciencia de Datos en UCASAL, apasionado por convertir datos en insights
-              accionables. Actualmente estoy aprendiendo y desarrollando habilidades en{" "}
-              <span className="text-orange-500 font-semibold">Python</span>, explorando bibliotecas como{" "}
-              <span className="text-orange-500 font-semibold">NumPy</span>,{" "}
-              <span className="text-orange-500 font-semibold">Pandas</span> y{" "}
-              <span className="text-orange-500 font-semibold">Matplotlib</span> para análisis y visualización de datos.
+              Soy estudiante de Licenciatura en Ciencia de Datos en UCASAL. Me fascina cómo los datos nunca mueren, 
+              sino que se transforman y evolucionan, sirviendo como base para cualquier decisión. Disfruto extraer 
+              información específica combinando lógica y matemática a través de{" "}
+              <span className="text-orange-500 font-semibold">Python</span> y{" "}
+              <span className="text-orange-500 font-semibold">SQL</span>, aprovechando lo mejor de ambos mundos: 
+              el poder procedural de Python con bibliotecas como Pandas, NumPy y Matplotlib, junto con la elegancia 
+              declarativa de SQL para consultar bases de datos.
             </p>
           </div>
           <div>
             <p className="text-muted-foreground leading-relaxed">
-              Mi objetivo es aplicar técnicas de análisis de datos y machine learning para resolver problemas reales, y
-              estoy constantly buscando oportunidades para aprender y crecer en este campo emocionante.
+              Busco constantemente oportunidades para crecer como profesional en el mundo de los datos, desarrollando 
+              tanto mis habilidades técnicas como personales.
             </p>
           </div>
         </div>
