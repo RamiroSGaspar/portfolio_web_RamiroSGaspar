@@ -132,18 +132,15 @@ export default function Portfolio() {
       title: "Sobre Mí",
       icon: <GraduationCap className="w-4 h-4" />,
       content: (
-        <div className="space-y-4 text-center">
+        <div className="space-y-4 text-justify">
           <p className="text-muted-foreground leading-relaxed">
-            Estudiante de la Licenciatura en Ciencia de Datos en la Universidad Católica de Salta, con formación 
-            técnica en informática y experiencia práctica en programación y análisis de datos.
+            Estudiante de Ciencia de Datos con formación técnica en informática y experiencia en programación 
+            y análisis de datos. Me apasiona todo el ciclo de vida de los datos: desde su recolección y procesamiento 
+            hasta su análisis e interpretación para generar valor en la toma de decisiones.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Interesado en el trabajo con datos, desde su procesamiento y análisis hasta su interpretación para 
-            la toma de decisiones. Cuento con experiencia en Python, SQL y trabajo colaborativo en entornos remotos.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Busco constantemente oportunidades para crecer como profesional en el mundo de los datos, 
-            desarrollando tanto mis habilidades técnicas como personales.
+            Con experiencia en entornos colaborativos y remotos, busco constantemente oportunidades para 
+            seguir creciendo profesionalmente en el mundo de los datos.
           </p>
         </div>
       ),
