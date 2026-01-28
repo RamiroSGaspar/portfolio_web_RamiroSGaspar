@@ -132,24 +132,22 @@ export default function Portfolio() {
       title: "Sobre Mí",
       icon: <GraduationCap className="w-4 h-4" />,
       content: (
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-bold mb-4">¡Hola! 👋</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Soy estudiante de Licenciatura en Ciencia de Datos en UCASAL, apasionado por convertir datos en insights
-              accionables. Actualmente estoy aprendiendo y desarrollando habilidades en{" "}
-              <span className="text-orange-500 font-semibold">Python</span>, explorando bibliotecas como{" "}
-              <span className="text-orange-500 font-semibold">NumPy</span>,{" "}
-              <span className="text-orange-500 font-semibold">Pandas</span> y{" "}
-              <span className="text-orange-500 font-semibold">Matplotlib</span> para análisis y visualización de datos.
-            </p>
-          </div>
-          <div>
-            <p className="text-muted-foreground leading-relaxed">
-              Mi objetivo es aplicar técnicas de análisis de datos y machine learning para resolver problemas reales, y
-              estoy constantly buscando oportunidades para aprender y crecer en este campo emocionante.
-            </p>
-          </div>
+        <div className="space-y-4 text-justify">
+          <p className="text-muted-foreground leading-relaxed">
+            Mi interés por la <span className="text-orange-500 font-semibold">Ciencia de Datos</span> surgió a partir 
+            de mi formación técnica en informática, donde descubrí que lo que más me motivaba era trabajar con 
+            <span className="text-orange-500 font-semibold"> datos</span> y entender sus relaciones en un contexto real. 
+            Disfruto escribir y optimizar consultas <span className="text-orange-500 font-semibold">SQL</span>, estructurar 
+            programas en <span className="text-orange-500 font-semibold">Python</span> y analizar resultados, buscando 
+            siempre que los datos obtenidos sean correctos, útiles y bien interpretados.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Actualmente estudio la Licenciatura en Ciencias de Datos y continúo formándome en 
+            <span className="text-orange-500 font-semibold"> SQL</span>, 
+            <span className="text-orange-500 font-semibold"> NumPy</span> y 
+            <span className="text-orange-500 font-semibold"> Pandas</span>, con el objetivo de desarrollar proyectos 
+            de análisis de datos que aporten valor y ayuden a la <span className="text-orange-500 font-semibold">toma de decisiones</span>.
+          </p>
         </div>
       ),
     },
