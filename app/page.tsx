@@ -1698,11 +1698,11 @@ export default function Portfolio() {
           >
             <X className="w-6 h-6" />
           </button>
-          <div className="relative max-w-4xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-auto h-auto max-w-lg" onClick={(e) => e.stopPropagation()}>
             <img
               src="/profile.jpeg"
               alt="Ramiro Sebastian Gaspar"
-              className="w-full h-full object-contain rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-4 border-orange-500/40"
+              className="w-full h-auto rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-4 border-orange-500/40"
             />
           </div>
         </div>
