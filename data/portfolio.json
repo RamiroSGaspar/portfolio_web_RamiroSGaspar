@@ -42,6 +42,7 @@
       "title": "Análisis de Datos con Python",
       "description": "Proyecto de análisis exploratorio de datos usando Python y bibliotecas de Data Science.",
       "fullDescription": "Proyecto completo de análisis de datos que incluye limpieza, transformación, análisis exploratorio y visualización de resultados. Utiliza datasets reales para generar insights accionables.",
+      "tags": ["Proyecto"],
       "technologies": ["Python", "Pandas", "NumPy", "Matplotlib", "Jupyter"],
       "status": "in-progress",
       "startDate": "Noviembre 2024",
@@ -110,6 +111,7 @@
     {
       "id": 2,
       "title": "Tech Conference Salta 2024",
+      "tags": ["Evento"],
       "eventName": "Tech Conference Salta",
       "eventLogo": "/placeholder.svg?height=100&width=100",
       "eventDate": "15 Noviembre 2024",
@@ -168,6 +170,7 @@
     {
       "id": 4,
       "title": "Certificación Data Analysis",
+      "tags": ["Aprendizaje"],
       "institution": "DataCamp",
       "completionDate": "Septiembre 2024",
       "duration": "6 semanas",
@@ -179,6 +182,10 @@
         "Técnicas de limpieza y transformación de datos",
         "Visualización efectiva con Matplotlib",
         "Estadística aplicada al análisis"
+      ],
+      "projects": [
+        "Análisis de dataset de ventas",
+        "Dashboard de visualización de datos"
       ],
       "certifications": [
         {
