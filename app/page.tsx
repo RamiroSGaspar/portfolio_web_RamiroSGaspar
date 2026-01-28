@@ -126,6 +126,7 @@ export default function Portfolio() {
 
   const [selectedStudy, setSelectedStudy] = useState<number | null>(null)
   const [selectedPost, setSelectedPost] = useState<any>(null) // Para gestionar la visualización de post individuales
+  const [isProfileImageOpen, setIsProfileImageOpen] = useState(false)
 
   const sections = {
     about: {
@@ -805,9 +806,9 @@ export default function Portfolio() {
         <Card className="border-orange-500/20 backdrop-blur-xl bg-zinc-950/95 shadow-[0_0_30px_-12px_rgba(251,146,60,0.25)] hover:shadow-[0_0_40px_-12px_rgba(251,146,60,0.35)] transition-shadow duration-300">
           <CardContent className="p-8">
             <div className="flex flex-col items-center text-center space-y-6">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-full bg-orange-500 blur-lg opacity-20" />
-                <Avatar className="relative w-32 h-32 border-4 border-orange-500/60 shadow-[0_0_20px_rgba(251,146,60,0.3)]">
+              <div className="relative cursor-pointer group" onClick={() => setIsProfileImageOpen(true)}>
+                <div className="absolute inset-0 rounded-full bg-orange-500 blur-lg opacity-20 group-hover:opacity-30 transition-opacity" />
+                <Avatar className="relative w-32 h-32 border-4 border-orange-500/60 shadow-[0_0_20px_rgba(251,146,60,0.3)] group-hover:border-orange-400 group-hover:shadow-[0_0_25px_rgba(251,146,60,0.4)] transition-all">
                   <AvatarImage src="/profile.jpeg" alt="Ramiro Sebastian Gaspar" />
                   <AvatarFallback className="bg-gradient-to-br from-orange-500 to-orange-600 text-white text-3xl font-bold">
                     RG
@@ -1684,6 +1685,28 @@ export default function Portfolio() {
             </div>
           )
         })()}
+
+      {/* Modal de imagen de perfil maximizada */}
+      {isProfileImageOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          onClick={() => setIsProfileImageOpen(false)}
+        >
+          <button
+            onClick={() => setIsProfileImageOpen(false)}
+            className="absolute top-6 right-6 z-[110] w-10 h-10 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-orange-500 border border-zinc-700 transition-all duration-200 flex items-center justify-center"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <div className="relative w-auto h-auto max-w-md" onClick={(e) => e.stopPropagation()}>
+            <img
+              src="/profile.jpeg"
+              alt="Ramiro Sebastian Gaspar"
+              className="w-full h-auto rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-2 border-orange-500/30"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
