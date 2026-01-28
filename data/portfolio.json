@@ -1,0 +1,198 @@
+{
+  "_INSTRUCCIONES": {
+    "como_usar": "Para agregar contenido nuevo, copia el ejemplo de la sección correspondiente y modifica los valores",
+    "etiquetas": ["Proyecto", "Evento", "Experiencia", "Aprendizaje"],
+    "importante": "El ID en blogPosts debe coincidir con el ID en la sección de detalle correspondiente"
+  },
+
+  "blogPosts": [
+    {
+      "_comentario": "EJEMPLO PROYECTO - Tarjeta que aparece en el blog",
+      "id": 1,
+      "title": "Titulo del Proyecto",
+      "description": "Breve descripcion que aparece en la tarjeta del blog (1-2 lineas).",
+      "date": "Enero 2025",
+      "tags": ["Proyecto"]
+    },
+    {
+      "_comentario": "EJEMPLO EVENTO - Tarjeta que aparece en el blog",
+      "id": 2,
+      "title": "Nombre del Evento",
+      "description": "Breve descripcion del evento (1-2 lineas).",
+      "date": "Noviembre 2024",
+      "tags": ["Evento"]
+    },
+    {
+      "_comentario": "EJEMPLO EXPERIENCIA - Tarjeta que aparece en el blog",
+      "id": 3,
+      "title": "Cargo o Puesto",
+      "description": "Breve descripcion de la experiencia laboral (1-2 lineas).",
+      "date": "2024",
+      "tags": ["Experiencia"]
+    },
+    {
+      "_comentario": "EJEMPLO APRENDIZAJE - Tarjeta que aparece en el blog",
+      "id": 4,
+      "title": "Nombre del Curso o Certificacion",
+      "description": "Breve descripcion del aprendizaje (1-2 lineas).",
+      "date": "Septiembre 2024",
+      "tags": ["Aprendizaje"]
+    }
+  ],
+
+  "projects": [
+    {
+      "_comentario": "EJEMPLO PROYECTO - Detalle completo que se muestra al hacer clic",
+      "id": 1,
+      "title": "Titulo del Proyecto",
+      "description": "Descripcion corta",
+      "fullDescription": "Descripcion completa y detallada del proyecto. Explica el objetivo, que problema resuelve y como lo hace.",
+      "tags": ["Proyecto"],
+      "technologies": ["Python", "Pandas", "SQL"],
+      "status": "in-progress",
+      "startDate": "Noviembre 2024",
+      "endDate": null,
+      "githubUrl": "https://github.com/tu-usuario/proyecto",
+      "demoUrl": null,
+      "images": ["/placeholder.svg?height=400&width=600"],
+      "features": [
+        "Caracteristica 1 del proyecto",
+        "Caracteristica 2 del proyecto",
+        "Caracteristica 3 del proyecto"
+      ],
+      "timeline": [
+        {
+          "phase": "Fase 1",
+          "description": "Descripcion de la fase",
+          "status": "completed",
+          "date": "Fecha"
+        },
+        {
+          "phase": "Fase 2",
+          "description": "Descripcion de la fase",
+          "status": "in-progress",
+          "date": "En progreso"
+        },
+        {
+          "phase": "Fase 3",
+          "description": "Descripcion de la fase",
+          "status": "pending",
+          "date": "Pendiente"
+        }
+      ],
+      "challenges": [
+        {
+          "challenge": "Desafio que encontraste",
+          "challengeDate": "Fecha",
+          "solution": "Como lo resolviste",
+          "solutionDate": "Fecha"
+        }
+      ],
+      "learnings": [
+        "Aprendizaje 1",
+        "Aprendizaje 2",
+        "Aprendizaje 3"
+      ],
+      "futureUpdates": "Que planeas agregar o mejorar en el futuro.",
+      "updateHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "Fecha",
+          "changes": ["Cambio 1", "Cambio 2"]
+        }
+      ]
+    }
+  ],
+
+  "events": [
+    {
+      "_comentario": "EJEMPLO EVENTO - Detalle completo que se muestra al hacer clic",
+      "id": 2,
+      "title": "Nombre del Evento",
+      "tags": ["Evento"],
+      "eventName": "Nombre oficial del evento",
+      "eventLogo": "/placeholder.svg?height=100&width=100",
+      "eventDate": "15 Noviembre 2024",
+      "location": "Ciudad, Pais",
+      "fullDescription": "Descripcion completa del evento. Que hiciste, que aprendiste, como fue la experiencia.",
+      "highlights": [
+        "Punto destacado 1",
+        "Punto destacado 2",
+        "Punto destacado 3"
+      ],
+      "photos": ["/placeholder.svg?height=400&width=600"],
+      "socialPosts": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://linkedin.com/tu-post",
+          "preview": "/placeholder.svg?height=200&width=200"
+        }
+      ],
+      "learnings": "Que aprendiste en este evento y como te ayudo profesionalmente.",
+      "connections": "Conexiones que hiciste, personas que conociste."
+    }
+  ],
+
+  "experiences": [
+    {
+      "_comentario": "EJEMPLO EXPERIENCIA - Detalle completo que se muestra al hacer clic",
+      "id": 3,
+      "title": "Cargo o Puesto",
+      "company": "Nombre de la Empresa",
+      "type": "Pasantia",
+      "location": "Ciudad o Remoto",
+      "startDate": "Mes Anio",
+      "endDate": "Mes Anio",
+      "duration": "X meses",
+      "image": "/placeholder.svg?height=200&width=200",
+      "description": "Descripcion general de tu rol y responsabilidades.",
+      "responsibilities": [
+        "Responsabilidad 1",
+        "Responsabilidad 2",
+        "Responsabilidad 3"
+      ],
+      "achievements": [
+        "Logro 1",
+        "Logro 2",
+        "Logro 3"
+      ],
+      "skills": ["Skill 1", "Skill 2", "Skill 3"]
+    }
+  ],
+
+  "learning": [
+    {
+      "_comentario": "EJEMPLO APRENDIZAJE - Detalle completo que se muestra al hacer clic",
+      "id": 4,
+      "title": "Nombre del Curso o Certificacion",
+      "tags": ["Aprendizaje"],
+      "institution": "Plataforma o Institucion",
+      "completionDate": "Mes Anio",
+      "duration": "X semanas",
+      "dedication": "X horas/semana",
+      "description": "Descripcion de que trata el curso o certificacion.",
+      "skills": ["Skill 1", "Skill 2", "Skill 3"],
+      "keyLearnings": [
+        "Aprendizaje clave 1",
+        "Aprendizaje clave 2",
+        "Aprendizaje clave 3"
+      ],
+      "projects": [
+        "Proyecto realizado 1",
+        "Proyecto realizado 2"
+      ],
+      "certifications": [
+        {
+          "name": "Nombre del certificado",
+          "issuer": "Emisor",
+          "date": "Fecha",
+          "link": "https://link-al-certificado.com"
+        }
+      ],
+      "resources": [
+        "Recurso utilizado 1",
+        "Recurso utilizado 2"
+      ]
+    }
+  ]
+}
