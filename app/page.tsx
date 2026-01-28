@@ -134,13 +134,19 @@ export default function Portfolio() {
       content: (
         <div className="space-y-4 text-justify">
           <p className="text-muted-foreground leading-relaxed">
-            Estudiante de Ciencia de Datos con formación técnica en informática y experiencia en programación 
-            y análisis de datos. Me apasiona todo el ciclo de vida de los datos: desde su recolección y procesamiento 
-            hasta su análisis e interpretación para generar valor en la toma de decisiones.
+            Mi interés por la <span className="text-orange-500 font-semibold">Ciencia de Datos</span> surgió a partir 
+            de mi formación técnica en informática, donde descubrí que lo que más me motivaba era trabajar con 
+            <span className="text-orange-500 font-semibold"> datos</span> y entender sus relaciones en un contexto real. 
+            Disfruto escribir y optimizar consultas <span className="text-orange-500 font-semibold">SQL</span>, estructurar 
+            programas en <span className="text-orange-500 font-semibold">Python</span> y analizar resultados, buscando 
+            siempre que los datos obtenidos sean correctos, útiles y bien interpretados.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Con experiencia en entornos colaborativos y remotos, busco constantemente oportunidades para 
-            seguir creciendo profesionalmente en el mundo de los datos.
+            Actualmente estudio la Licenciatura en Ciencias de Datos y continúo formándome en 
+            <span className="text-orange-500 font-semibold"> SQL</span>, 
+            <span className="text-orange-500 font-semibold"> NumPy</span> y 
+            <span className="text-orange-500 font-semibold"> Pandas</span>, con el objetivo de desarrollar proyectos 
+            de análisis de datos que aporten valor y ayuden a la <span className="text-orange-500 font-semibold">toma de decisiones</span>.
           </p>
         </div>
       ),
