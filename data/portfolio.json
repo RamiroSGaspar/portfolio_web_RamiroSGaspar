@@ -1,0 +1,197 @@
+{
+  "_comentarios": {
+    "instrucciones": "Este archivo contiene todos los datos del portfolio. Para agregar nuevos items, copia el ejemplo correspondiente y modifica los valores.",
+    "etiquetas_disponibles": ["Proyecto", "Evento", "Experiencia", "Aprendizaje"],
+    "nota": "Los IDs deben ser únicos dentro de cada sección y coincidir entre blogPosts y su sección correspondiente"
+  },
+
+  "blogPosts": [
+    {
+      "id": 1,
+      "title": "Análisis de Datos con Python",
+      "description": "Proyecto de análisis exploratorio de datos usando Python y bibliotecas de Data Science.",
+      "date": "Enero 2025",
+      "tags": ["Proyecto"]
+    },
+    {
+      "id": 2,
+      "title": "Tech Conference Salta 2024",
+      "description": "Participación en la conferencia de tecnología más importante de la región.",
+      "date": "Noviembre 2024",
+      "tags": ["Evento"]
+    },
+    {
+      "id": 3,
+      "title": "Pasantía en Bewise",
+      "description": "Experiencia como desarrollador backend con Java y Spring Boot.",
+      "date": "2024",
+      "tags": ["Experiencia"]
+    },
+    {
+      "id": 4,
+      "title": "Certificación Data Analysis",
+      "description": "Certificación profesional en análisis de datos obtenida en DataCamp.",
+      "date": "Septiembre 2024",
+      "tags": ["Aprendizaje"]
+    }
+  ],
+
+  "projects": [
+    {
+      "id": 1,
+      "title": "Análisis de Datos con Python",
+      "description": "Proyecto de análisis exploratorio de datos usando Python y bibliotecas de Data Science.",
+      "fullDescription": "Proyecto completo de análisis de datos que incluye limpieza, transformación, análisis exploratorio y visualización de resultados. Utiliza datasets reales para generar insights accionables.",
+      "technologies": ["Python", "Pandas", "NumPy", "Matplotlib", "Jupyter"],
+      "status": "in-progress",
+      "startDate": "Noviembre 2024",
+      "endDate": null,
+      "githubUrl": "https://github.com/RamiroSGaspar",
+      "demoUrl": null,
+      "images": [
+        "/placeholder.svg?height=400&width=600",
+        "/placeholder.svg?height=400&width=600"
+      ],
+      "features": [
+        "Análisis exploratorio de datos (EDA)",
+        "Limpieza y preprocesamiento de datos",
+        "Visualizaciones con Matplotlib",
+        "Exportación de reportes"
+      ],
+      "timeline": [
+        {
+          "phase": "Investigación",
+          "description": "Análisis de requerimientos y selección de datasets",
+          "status": "completed",
+          "date": "15 Nov 2024"
+        },
+        {
+          "phase": "Desarrollo",
+          "description": "Implementación de scripts de análisis",
+          "status": "in-progress",
+          "date": "En progreso"
+        },
+        {
+          "phase": "Visualización",
+          "description": "Creación de gráficos y dashboards",
+          "status": "pending",
+          "date": "Pendiente"
+        }
+      ],
+      "challenges": [
+        {
+          "challenge": "Manejo de datos faltantes",
+          "challengeDate": "18 Nov 2024",
+          "solution": "Implementación de estrategias de imputación con Pandas",
+          "solutionDate": "22 Nov 2024"
+        }
+      ],
+      "learnings": [
+        "Importancia de la limpieza de datos",
+        "Técnicas de manipulación con Pandas",
+        "Comunicación efectiva de resultados"
+      ],
+      "futureUpdates": "Se planea implementar modelos predictivos y dashboards interactivos con Plotly.",
+      "updateHistory": [
+        {
+          "version": "v1.0.0",
+          "date": "15 Nov 2024",
+          "changes": [
+            "Lanzamiento inicial",
+            "Análisis exploratorio básico",
+            "Integración con Jupyter"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "events": [
+    {
+      "id": 2,
+      "title": "Tech Conference Salta 2024",
+      "eventName": "Tech Conference Salta",
+      "eventLogo": "/placeholder.svg?height=100&width=100",
+      "eventDate": "15 Noviembre 2024",
+      "location": "Salta, Argentina",
+      "fullDescription": "Participé en la conferencia anual de tecnología donde se discutieron las últimas tendencias en Data Science y desarrollo de software. Una experiencia de aprendizaje y networking.",
+      "highlights": [
+        "Charlas sobre tendencias en Data Science",
+        "Workshop práctico de Machine Learning",
+        "Networking con profesionales",
+        "Stands de empresas tech"
+      ],
+      "photos": [
+        "/placeholder.svg?height=400&width=600",
+        "/placeholder.svg?height=400&width=600"
+      ],
+      "socialPosts": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://linkedin.com",
+          "preview": "/placeholder.svg?height=200&width=200"
+        }
+      ],
+      "learnings": "Este evento me permitió conocer las últimas herramientas en Python para análisis de datos y conectar con profesionales del sector.",
+      "connections": "Conecté con 15+ profesionales incluyendo data scientists y desarrolladores."
+    }
+  ],
+
+  "experiences": [
+    {
+      "id": 3,
+      "title": "Desarrollador Backend",
+      "company": "Bewise",
+      "type": "Pasantía",
+      "location": "Remoto",
+      "startDate": "Marzo 2024",
+      "endDate": "Agosto 2024",
+      "duration": "6 meses",
+      "image": "/bewise-logo.jpeg",
+      "description": "Desarrollo de APIs y servicios backend utilizando Java con Spring Boot en un entorno de trabajo colaborativo y remoto.",
+      "responsibilities": [
+        "Desarrollo de APIs RESTful con Spring Boot",
+        "Mantenimiento y optimización de bases de datos",
+        "Colaboración en equipo usando metodologías ágiles",
+        "Documentación técnica de servicios"
+      ],
+      "achievements": [
+        "Implementación de nuevos endpoints para módulo de reportes",
+        "Optimización de queries reduciendo tiempos de respuesta",
+        "Participación activa en code reviews"
+      ],
+      "skills": ["Java", "Spring Boot", "SQL", "Git", "REST APIs", "Trabajo remoto"]
+    }
+  ],
+
+  "learning": [
+    {
+      "id": 4,
+      "title": "Certificación Data Analysis",
+      "institution": "DataCamp",
+      "completionDate": "Septiembre 2024",
+      "duration": "6 semanas",
+      "dedication": "4-6 horas/semana",
+      "description": "Certificación profesional que cubre análisis de datos con Python, desde manipulación de datos hasta visualización.",
+      "skills": ["Pandas", "Data Cleaning", "Data Visualization", "SQL Basics"],
+      "keyLearnings": [
+        "Manejo avanzado de datasets con Pandas",
+        "Técnicas de limpieza y transformación de datos",
+        "Visualización efectiva con Matplotlib",
+        "Estadística aplicada al análisis"
+      ],
+      "certifications": [
+        {
+          "name": "Data Analysis with Python",
+          "issuer": "DataCamp",
+          "date": "Septiembre 2024",
+          "link": "https://www.datacamp.com/certificates/example"
+        }
+      ],
+      "resources": [
+        "DataCamp Track: Data Analyst with Python",
+        "Kaggle Datasets para práctica"
+      ]
+    }
+  ]
+}
