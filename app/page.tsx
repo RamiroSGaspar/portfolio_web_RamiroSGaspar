@@ -1694,15 +1694,15 @@ export default function Portfolio() {
         >
           <button
             onClick={() => setIsProfileImageOpen(false)}
-            className="absolute top-4 right-4 z-[110] w-12 h-12 rounded-full bg-orange-500 hover:bg-orange-400 text-white border-2 border-white shadow-lg transition-all duration-200 flex items-center justify-center"
+            className="absolute top-6 right-6 z-[110] w-10 h-10 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-orange-500 border border-zinc-700 transition-all duration-200 flex items-center justify-center"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
-          <div className="relative w-auto h-auto max-w-lg" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-auto h-auto max-w-md" onClick={(e) => e.stopPropagation()}>
             <img
               src="/profile.jpeg"
               alt="Ramiro Sebastian Gaspar"
-              className="w-full h-auto rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-4 border-orange-500/40"
+              className="w-full h-auto rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-2 border-orange-500/30"
             />
           </div>
         </div>
