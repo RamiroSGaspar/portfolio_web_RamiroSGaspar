@@ -678,8 +678,12 @@ export default function Portfolio() {
                   className="bg-zinc-900/50 border border-zinc-800 hover:border-orange-500/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.15)] cursor-pointer"
                   onClick={() => handlePostClick(post)} // Usar handlePostClick para gestionar la lógica
                 >
-                  <div className="aspect-video w-full bg-gradient-to-br from-orange-500/20 to-zinc-900 flex items-center justify-center">
-                    <ImageIcon className="w-12 h-12 text-orange-500/40" />
+                  <div className="aspect-video w-full bg-gradient-to-br from-orange-500/20 to-zinc-900 flex items-center justify-center overflow-hidden">
+                    {post.image ? (
+                      <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full h-full object-cover" />
+                    ) : (
+                      <ImageIcon className="w-12 h-12 text-orange-500/40" />
+                    )}
                   </div>
                   <div className="p-4 space-y-3">
                     <div className="flex items-center gap-2 text-xs text-zinc-500">
@@ -1202,23 +1206,25 @@ export default function Portfolio() {
               </div>
 
               {/* Logros */}
-              <div className="space-y-3">
-                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-green-400" />
-                  Logros Destacados
-                </h3>
-                <ul className="space-y-2">
-                  {currentExperience.achievements.map((achievement, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-2 text-zinc-300 p-3 bg-green-500/5 border border-green-500/20 rounded-lg"
-                    >
-                      <Award className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {currentExperience.achievements && currentExperience.achievements.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-400" />
+                    Logros Destacados
+                  </h3>
+                  <ul className="space-y-2">
+                    {currentExperience.achievements.map((achievement, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-zinc-300 p-3 bg-green-500/5 border border-green-500/20 rounded-lg"
+                      >
+                        <Award className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Habilidades utilizadas */}
               <div className="space-y-3">

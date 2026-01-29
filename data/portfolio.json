@@ -23,12 +23,12 @@
       "tags": ["Evento"]
     },
     {
-      "_comentario": "EJEMPLO EXPERIENCIA - Tarjeta que aparece en el blog",
       "id": 3,
-      "title": "Cargo o Puesto",
-      "description": "Breve descripcion de la experiencia laboral (1-2 lineas).",
-      "date": "2024",
-      "tags": ["Experiencia"]
+      "title": "Programador Backend (Pasante) - Bewise",
+      "description": "Pasantia en desarrollo backend como parte del Programa Sinergia 2024, trabajando con Java y Spring Boot.",
+      "date": "Agosto - Noviembre 2024",
+      "tags": ["Experiencia"],
+      "image": "/bewise-card.jpeg"
     },
     {
       "_comentario": "EJEMPLO APRENDIZAJE - Tarjeta que aparece en el blog",
@@ -135,28 +135,23 @@
 
   "experiences": [
     {
-      "_comentario": "EJEMPLO EXPERIENCIA - Detalle completo que se muestra al hacer clic",
       "id": 3,
-      "title": "Cargo o Puesto",
-      "company": "Nombre de la Empresa",
+      "title": "Programador Backend (Pasante)",
+      "company": "Bewise",
       "type": "Pasantia",
-      "location": "Ciudad o Remoto",
-      "startDate": "Mes Anio",
-      "endDate": "Mes Anio",
-      "duration": "X meses",
-      "image": "/placeholder.svg?height=200&width=200",
-      "description": "Descripcion general de tu rol y responsabilidades.",
+      "location": "Remoto",
+      "startDate": "Agosto 2024",
+      "endDate": "Noviembre 2024",
+      "duration": "4 meses",
+      "image": "/bewise-logo.jpeg",
+      "description": "Participe en una pasantia en la empresa Bewise, como parte del Programa Sinergia 2024, donde fui seleccionado para llevar a cabo mi practica profesional en el area de desarrollo backend. Durante este periodo, tuve la oportunidad de aprender y trabajar con las tecnologias principales que la empresa utiliza en sus proyectos, lo que me permitio adquirir conocimientos tecnicos solidos y aplicarlos en un entorno profesional real. El trabajo se realizo de forma remota, lo que implico la utilizacion de herramientas de comunicacion como Discord, mediante las cuales mantuvimos reuniones periodicas para coordinar tareas, resolver dudas y garantizar un flujo de trabajo eficiente dentro del equipo. Ademas, fui parte de un equipo colaborativo en el que se promovio el aprendizaje mutuo, la responsabilidad compartida y el enfoque en alcanzar los objetivos de los proyectos en los que participe. Esta experiencia no solo fortalecio mis habilidades tecnicas, sino tambien mi capacidad para colaborar en entornos dinamicos y distribuidos, trabajando en sinergia con colegas de diversas especialidades.",
       "responsibilities": [
-        "Responsabilidad 1",
-        "Responsabilidad 2",
-        "Responsabilidad 3"
+        "Desarrollo y mantenimiento de soluciones backend",
+        "Uso de Java con Spring Boot y bases de datos SQL",
+        "Trabajo remoto con metodologias agiles"
       ],
-      "achievements": [
-        "Logro 1",
-        "Logro 2",
-        "Logro 3"
-      ],
-      "skills": ["Skill 1", "Skill 2", "Skill 3"]
+      "achievements": [],
+      "skills": ["Java", "Spring Boot", "Base de datos SQL"]
     }
   ],
 
