@@ -128,6 +128,7 @@ export default function Portfolio() {
   const [selectedStudy, setSelectedStudy] = useState<number | null>(null)
   const [selectedPost, setSelectedPost] = useState<any>(null) // Para gestionar la visualización de post individuales
   const [isProfileImageOpen, setIsProfileImageOpen] = useState(false)
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null)
   const [emailCopied, setEmailCopied] = useState(false)
 
   const copyEmailToClipboard = () => {
@@ -1248,11 +1249,12 @@ export default function Portfolio() {
                     <ImageIcon className="w-5 h-5 text-orange-400" />
                     Fotos del Trabajo
                   </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {currentExperience.gallery.map((photo, idx) => (
                       <div
                         key={idx}
-                        className="aspect-square overflow-hidden rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-all duration-300"
+                        onClick={() => setSelectedGalleryImage(photo)}
+                        className="aspect-square overflow-hidden rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-all duration-300 cursor-pointer"
                       >
                         <img
                           src={photo || "/placeholder.svg"}
@@ -1449,6 +1451,28 @@ export default function Portfolio() {
               src="/profile.jpeg"
               alt="Ramiro Sebastian Gaspar"
               className="w-full h-auto rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-2 border-orange-500/30"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Modal de imagen de galería maximizada */}
+      {selectedGalleryImage && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          onClick={() => setSelectedGalleryImage(null)}
+        >
+          <button
+            onClick={() => setSelectedGalleryImage(null)}
+            className="absolute top-6 right-6 z-[110] w-10 h-10 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-orange-500 border border-zinc-700 transition-all duration-200 flex items-center justify-center"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <div className="relative w-auto h-auto max-w-4xl max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={selectedGalleryImage || "/placeholder.svg"}
+              alt="Foto del trabajo"
+              className="w-full h-full object-contain rounded-lg shadow-[0_0_50px_rgba(251,146,60,0.3)] border-2 border-orange-500/30"
             />
           </div>
         </div>
