@@ -1202,23 +1202,25 @@ export default function Portfolio() {
               </div>
 
               {/* Logros */}
-              <div className="space-y-3">
-                <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-green-400" />
-                  Logros Destacados
-                </h3>
-                <ul className="space-y-2">
-                  {currentExperience.achievements.map((achievement, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-2 text-zinc-300 p-3 bg-green-500/5 border border-green-500/20 rounded-lg"
-                    >
-                      <Award className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {currentExperience.achievements && currentExperience.achievements.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-400" />
+                    Logros Destacados
+                  </h3>
+                  <ul className="space-y-2">
+                    {currentExperience.achievements.map((achievement, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-zinc-300 p-3 bg-green-500/5 border border-green-500/20 rounded-lg"
+                      >
+                        <Award className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Habilidades utilizadas */}
               <div className="space-y-3">

@@ -144,7 +144,11 @@
       "duration": "4 meses",
       "image": "/bewise-logo.jpeg",
       "description": "Participe en una pasantia en la empresa Bewise, como parte del Programa Sinergia 2024, donde fui seleccionado para llevar a cabo mi practica profesional en el area de desarrollo backend. Durante este periodo, tuve la oportunidad de aprender y trabajar con las tecnologias principales que la empresa utiliza en sus proyectos, lo que me permitio adquirir conocimientos tecnicos solidos y aplicarlos en un entorno profesional real. El trabajo se realizo de forma remota, lo que implico la utilizacion de herramientas de comunicacion como Discord, mediante las cuales mantuvimos reuniones periodicas para coordinar tareas, resolver dudas y garantizar un flujo de trabajo eficiente dentro del equipo. Ademas, fui parte de un equipo colaborativo en el que se promovio el aprendizaje mutuo, la responsabilidad compartida y el enfoque en alcanzar los objetivos de los proyectos en los que participe. Esta experiencia no solo fortalecio mis habilidades tecnicas, sino tambien mi capacidad para colaborar en entornos dinamicos y distribuidos, trabajando en sinergia con colegas de diversas especialidades.",
-      "responsibilities": [],
+      "responsibilities": [
+        "Desarrollo y mantenimiento de soluciones backend",
+        "Uso de Java con Spring Boot y bases de datos SQL",
+        "Trabajo remoto con metodologias agiles"
+      ],
       "achievements": [],
       "skills": ["Java", "Spring Boot", "Base de datos SQL"]
     }
