@@ -31,6 +31,14 @@
       "image": "/bewise-card.jpeg"
     },
     {
+      "id": 5,
+      "title": "Programador Python (Pasante) - Museo Güemes",
+      "description": "Desarrollo de sistema de sincronizacion de videos para la Sala de los Recuerdos del Museo Güemes.",
+      "date": "Mayo - Agosto 2024",
+      "tags": ["Experiencia"],
+      "image": "/museo-guemes-exterior.jpeg"
+    },
+    {
       "_comentario": "EJEMPLO APRENDIZAJE - Tarjeta que aparece en el blog",
       "id": 4,
       "title": "Nombre del Curso o Certificacion",
@@ -152,6 +160,41 @@
       ],
       "achievements": [],
       "skills": ["Java", "Spring Boot", "Base de datos SQL"]
+    },
+    {
+      "id": 5,
+      "title": "Programador Python (Pasante)",
+      "company": "Museo Güemes - Salta Capital",
+      "type": "Pasantia",
+      "location": "España 730, A4400 Salta",
+      "workMode": "Hibrida",
+      "startDate": "Mayo 2024",
+      "endDate": "Agosto 2024",
+      "duration": "4 meses",
+      "image": "/museo-guemes-logo.jpeg",
+      "description": "Pleno de estimulos visuales y sonoros, el Museo propone un recorrido por la historia del General Martin Miguel de Guemes y la gesta emancipadora de un modo didactico, unico e innovador. Compuesto por diez salas, cada una despliega un recurso escenico y audiovisual distinto, en busca de mantener la atencion de los visitantes de todas las edades. Las tecnicas de exhibicion incluyen efectos escenograficos, luminicos, programas multimedia y presentaciones audiovisuales ineditas para los Museos de Salta y la Region, que convertiran a cada visitante en el protagonista de una experiencia sensorial inolvidable. En la practica profesional del Museo Guemes, somos dos personas seleccionadas: Clarita Zolorza y yo. Donde los dos tenemos que realizar un proyecto que aporta al sistema del museo, especificamente nos concentramos en la Sala de los Recuerdos donde hay un cofre con 2 pantallas, desarrollamos un programa que muestra 2 videos sincronizados.",
+      "responsibilities": [
+        "Desarrollo de sistema de reproduccion sincronizada de videos",
+        "Implementacion en Raspberry Pi para la Sala de los Recuerdos",
+        "Trabajo colaborativo con Clarita Zolorza en el proyecto"
+      ],
+      "achievements": [
+        "Sistema de 2 pantallas sincronizadas",
+        "Controles: play, stop, subtitulos, modo manual y automatico",
+        "Compatibilidad UDP/TCP para comunicacion entre dispositivos",
+        "Sistema de archivo de registros",
+        "Arranque automatico del sistema",
+        "Sistema de apagado controlado",
+        "Proteccion de apagado seguro",
+        "Monitoreo de estado en tiempo real"
+      ],
+      "skills": ["Python", "Raspberry Pi", "Componentes", "Internet de las cosas", "Trabajo en equipo", "Comunicacion y organizacion", "Pruebas/testeo"],
+      "gallery": [
+        "/museo-guemes-gallery-1.jpeg",
+        "/museo-guemes-gallery-2.jpeg",
+        "/museo-guemes-gallery-3.jpeg",
+        "/museo-guemes-gallery-4.jpeg"
+      ]
     }
   ],
 

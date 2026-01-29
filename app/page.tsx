@@ -1240,6 +1240,30 @@ export default function Portfolio() {
                   ))}
                 </div>
               </div>
+
+              {/* Galería de fotos */}
+              {currentExperience.gallery && currentExperience.gallery.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
+                    <ImageIcon className="w-5 h-5 text-orange-400" />
+                    Fotos del Trabajo
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {currentExperience.gallery.map((photo, idx) => (
+                      <div
+                        key={idx}
+                        className="aspect-square overflow-hidden rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-all duration-300"
+                      >
+                        <img
+                          src={photo || "/placeholder.svg"}
+                          alt={`Foto ${idx + 1} del trabajo`}
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
