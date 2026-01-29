@@ -678,8 +678,12 @@ export default function Portfolio() {
                   className="bg-zinc-900/50 border border-zinc-800 hover:border-orange-500/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.15)] cursor-pointer"
                   onClick={() => handlePostClick(post)} // Usar handlePostClick para gestionar la lógica
                 >
-                  <div className="aspect-video w-full bg-gradient-to-br from-orange-500/20 to-zinc-900 flex items-center justify-center">
-                    <ImageIcon className="w-12 h-12 text-orange-500/40" />
+                  <div className="aspect-video w-full bg-gradient-to-br from-orange-500/20 to-zinc-900 flex items-center justify-center overflow-hidden">
+                    {post.image ? (
+                      <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full h-full object-cover" />
+                    ) : (
+                      <ImageIcon className="w-12 h-12 text-orange-500/40" />
+                    )}
                   </div>
                   <div className="p-4 space-y-3">
                     <div className="flex items-center gap-2 text-xs text-zinc-500">
