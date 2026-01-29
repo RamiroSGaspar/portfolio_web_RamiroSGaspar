@@ -557,7 +557,7 @@ export default function Portfolio() {
                   className="flex-1 bg-zinc-900/50 border-orange-500/40 hover:border-orange-400 hover:bg-orange-500/10 hover:shadow-[0_0_12px_rgba(251,146,60,0.25)] transition-all duration-300 text-orange-400 hover:text-orange-300"
                   asChild
                 >
-                  <a href="/CV_RamiroSebastianGaspar.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="/api/download-cv" download="CV_RamiroSebastianGaspar.pdf">
                     <Download className="w-4 h-4 mr-2" />
                     Descargar CV
                   </a>
