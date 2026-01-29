@@ -7,6 +7,25 @@
 
   "blogPosts": [
     {
+      "id": 3,
+      "title": "Programador Backend (Pasante) - Bewise",
+      "description": "Pasantia en desarrollo backend como parte del Programa Sinergia 2024, trabajando con Java y Spring Boot.",
+      "date": "Agosto - Noviembre 2024",
+      "tags": ["Experiencia"],
+      "image": "/bewise-card.jpeg"
+    },
+    {
+      "id": 5,
+      "title": "Programador Python (Pasante) - Museo Güemes",
+      "description": "Desarrollo de sistema de sincronizacion de videos para la Sala de los Recuerdos del Museo Güemes.",
+      "date": "Mayo - Agosto 2024",
+      "tags": ["Experiencia"],
+      "image": "/museo-guemes-exterior.jpeg"
+    }
+  ],
+
+  "_blogPosts_ejemplos": [
+    {
       "_comentario": "EJEMPLO PROYECTO - Tarjeta que aparece en el blog",
       "id": 1,
       "title": "Titulo del Proyecto",
@@ -23,22 +42,6 @@
       "tags": ["Evento"]
     },
     {
-      "id": 3,
-      "title": "Programador Backend (Pasante) - Bewise",
-      "description": "Pasantia en desarrollo backend como parte del Programa Sinergia 2024, trabajando con Java y Spring Boot.",
-      "date": "Agosto - Noviembre 2024",
-      "tags": ["Experiencia"],
-      "image": "/bewise-card.jpeg"
-    },
-    {
-      "id": 5,
-      "title": "Programador Python (Pasante) - Museo Güemes",
-      "description": "Desarrollo de sistema de sincronizacion de videos para la Sala de los Recuerdos del Museo Güemes.",
-      "date": "Mayo - Agosto 2024",
-      "tags": ["Experiencia"],
-      "image": "/museo-guemes-exterior.jpeg"
-    },
-    {
       "_comentario": "EJEMPLO APRENDIZAJE - Tarjeta que aparece en el blog",
       "id": 4,
       "title": "Nombre del Curso o Certificacion",
@@ -48,7 +51,9 @@
     }
   ],
 
-  "projects": [
+  "projects": [],
+
+  "_projects_ejemplos": [
     {
       "_comentario": "EJEMPLO PROYECTO - Detalle completo que se muestra al hacer clic",
       "id": 1,
@@ -112,7 +117,9 @@
     }
   ],
 
-  "events": [
+  "events": [],
+
+  "_events_ejemplos": [
     {
       "_comentario": "EJEMPLO EVENTO - Detalle completo que se muestra al hacer clic",
       "id": 2,
@@ -197,7 +204,9 @@
     }
   ],
 
-  "learning": [
+  "learning": [],
+
+  "_learning_ejemplos": [
     {
       "_comentario": "EJEMPLO APRENDIZAJE - Detalle completo que se muestra al hacer clic",
       "id": 4,
