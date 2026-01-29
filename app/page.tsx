@@ -128,6 +128,13 @@ export default function Portfolio() {
   const [selectedStudy, setSelectedStudy] = useState<number | null>(null)
   const [selectedPost, setSelectedPost] = useState<any>(null) // Para gestionar la visualización de post individuales
   const [isProfileImageOpen, setIsProfileImageOpen] = useState(false)
+  const [emailCopied, setEmailCopied] = useState(false)
+
+  const copyEmailToClipboard = () => {
+    navigator.clipboard.writeText("gapsar.sebastian@gmail.com")
+    setEmailCopied(true)
+    setTimeout(() => setEmailCopied(false), 2000)
+  }
 
   const sections = {
     about: {
@@ -550,7 +557,7 @@ export default function Portfolio() {
                   className="flex-1 bg-zinc-900/50 border-orange-500/40 hover:border-orange-400 hover:bg-orange-500/10 hover:shadow-[0_0_12px_rgba(251,146,60,0.25)] transition-all duration-300 text-orange-400 hover:text-orange-300"
                   asChild
                 >
-                  <a href="/CV_Ramiro_Gaspar.pdf" download>
+                  <a href="/CV_RamiroSebastianGaspar.pdf" download="CV_RamiroSebastianGaspar.pdf">
                     <Download className="w-4 h-4 mr-2" />
                     Descargar CV
                   </a>
@@ -582,16 +589,21 @@ export default function Portfolio() {
                     <Linkedin className="w-5 h-5" />
                   </a>
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="hover:bg-orange-500/10 hover:shadow-[0_0_10px_rgba(251,146,60,0.2)] hover:text-orange-400 transition-all duration-300"
-                  asChild
-                >
-                  <a href="mailto:gapsar.sebastian@gmail.com">
+                <div className="relative">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-orange-500/10 hover:shadow-[0_0_10px_rgba(251,146,60,0.2)] hover:text-orange-400 transition-all duration-300"
+                    onClick={copyEmailToClipboard}
+                  >
                     <Mail className="w-5 h-5" />
-                  </a>
-                </Button>
+                  </Button>
+                  {emailCopied && (
+                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs px-3 py-1.5 rounded shadow-lg whitespace-nowrap">
+                      Correo copiado
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </CardContent>
