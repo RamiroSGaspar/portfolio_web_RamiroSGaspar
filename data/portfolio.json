@@ -7,6 +7,14 @@
 
   "blogPosts": [
     {
+      "id": 6,
+      "title": "Crypto Coffee Rave - SaltaDev",
+      "description": "Evento de networking con café, música y crypto organizado por SaltaDev, Bitget y Selina Salta.",
+      "date": "Enero 2025",
+      "tags": ["Evento"],
+      "image": "/saltadev-crypto-coffee-card.jpg"
+    },
+    {
       "id": 3,
       "title": "Programador Backend (Pasante) - Bewise",
       "description": "Pasantia en desarrollo backend como parte del Programa Sinergia 2024, trabajando con Java y Spring Boot.",
@@ -117,7 +125,32 @@
     }
   ],
 
-  "events": [],
+  "events": [
+    {
+      "id": 6,
+      "title": "Crypto Coffee Rave - SaltaDev",
+      "tags": ["Evento"],
+      "eventName": "Bitget Coffee Rave",
+      "eventLogo": "/saltadev-logo.png",
+      "eventDate": "31 Enero 2025",
+      "location": "Hotel Selina - Balcarce 460, Salta",
+      "fullDescription": "Evento de networking organizado por SaltaDev, Bitget, Selina Salta y Vincles donde el café se vivió de una manera diferente. Una tarde con café, música en vivo con DJs y conversaciones sobre criptomonedas y tecnología en un ambiente único. El evento reunió a personas de diversos ámbitos: informática, criptomonedas, turismo, marketing y más, creando un espacio ideal para el networking y el intercambio de ideas.",
+      "highlights": [
+        "Ambiente diverso con profesionales de IT, crypto, turismo, marketing y otras áreas",
+        "Café de alta calidad gratuito para los primeros 50 registrados en Bitget",
+        "Música en vivo con DJs y sorteos exclusivos",
+        "Charlas y networking con ingenieros de software, estudiantes y ganadores de hackathons"
+      ],
+      "photos": [
+        "/saltadev-crypto-coffee-1.jpg",
+        "/saltadev-crypto-coffee-2.jpg",
+        "/saltadev-crypto-coffee-3.jpg"
+      ],
+      "socialPosts": [],
+      "learnings": "Más allá de lo técnico, el evento me permitió conocer la realidad del ecosistema tech en Salta desde diferentes perspectivas. Aprendí sobre las dinámicas de contratación en empresas IT de la región y cambié mi percepción sobre instituciones educativas como UPATECO, gracias a conversar directamente con estudiantes que me compartieron su experiencia real. El valor principal estuvo en las conversaciones genuinas y en entender que el networking va más allá de lo profesional.",
+      "connections": "Conocí a un ingeniero de software con quien compartí la mayor parte del evento, una estudiante de turismo que me mostró perspectivas diferentes sobre la industria, un compañero de carrera de otra universidad, y varios ganadores de hackathons con quienes intercambiamos experiencias sobre competencias de programación."
+    }
+  ],
 
   "_events_ejemplos": [
     {
