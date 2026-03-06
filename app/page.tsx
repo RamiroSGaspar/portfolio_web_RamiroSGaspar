@@ -156,7 +156,7 @@ export default function Portfolio() {
             <span className="text-orange-500 font-semibold">Python</span>,{" "}
             <span className="text-orange-500 font-semibold">SQL</span> y{" "}
             <span className="text-orange-500 font-semibold">Pandas</span>, pero lo técnico es solo una parte
-            — también aplico <span className="text-orange-500 font-semibold">pensamiento analítico</span>,{" "}
+            , también aplico <span className="text-orange-500 font-semibold">pensamiento analítico</span>,{" "}
             diseño metodológico y criterio propio para decidir qué preguntar y cómo responderlo.
           </p>
           <p className="text-muted-foreground leading-relaxed">
@@ -166,7 +166,7 @@ export default function Portfolio() {
             <span className="text-orange-500 font-semibold">datos</span> y no solo con opiniones.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Cuando algo no me cierra, quiero ver qué dicen los números — y si me contradicen, mejor,
+            Cuando algo no me cierra, quiero ver qué dicen los números, y si me contradicen, mejor,
             porque <span className="text-orange-500 font-semibold">de eso se aprende</span>.
             Estoy construyendo mis primeros proyectos con esa mentalidad.
           </p>
