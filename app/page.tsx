@@ -363,57 +363,42 @@ export default function Portfolio() {
         </div>
       ),
     },
-    contact: {
+  contact: {
       title: "Contacto",
       icon: <Mail className="w-4 h-4" />,
       content: (
-        <div className="space-y-6">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Mail className="w-5 h-5 text-muted-foreground" />
-              <a
-                href="mailto:gapsar.sebastian@gmail.com"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                gapsar.sebastian@gmail.com
-              </a>
-            </div>
-            <div className="flex items-center gap-3">
-              <Github className="w-5 h-5 text-muted-foreground" />
-              <a
-                href="https://github.com/RamiroSGaspar"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                github.com/RamiroSGaspar
-              </a>
-            </div>
-            <div className="flex items-center gap-3">
-              <Linkedin className="w-5 h-5 text-muted-foreground" />
-              <a
-                href="https://www.linkedin.com/in/ramiro-sebastian-gaspar-b41697317"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                LinkedIn Profile
-              </a>
-            </div>
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <Mail className="w-5 h-5 text-muted-foreground" />
+            
+              href="mailto:gapsar.sebastian@gmail.com"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              gapsar.sebastian@gmail.com
+            </a>
           </div>
-          <Separator />
-          <form className="space-y-4">
-            <div>
-              <Input placeholder="Tu nombre" />
-            </div>
-            <div>
-              <Input type="email" placeholder="Tu email" />
-            </div>
-            <div>
-              <Textarea placeholder="Tu mensaje" rows={4} />
-            </div>
-            <Button className="w-full">Enviar Mensaje</Button>
-          </form>
+          <div className="flex items-center gap-3">
+            <Github className="w-5 h-5 text-muted-foreground" />
+            
+              href="https://github.com/RamiroSGaspar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              github.com/RamiroSGaspar
+            </a>
+          </div>
+          <div className="flex items-center gap-3">
+            <Linkedin className="w-5 h-5 text-muted-foreground" />
+            
+              href="https://www.linkedin.com/in/ramiro-sebastian-gaspar-b41697317"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              LinkedIn Profile
+            </a>
+          </div>
         </div>
       ),
     },
