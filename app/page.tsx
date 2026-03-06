@@ -125,8 +125,7 @@ export default function Portfolio() {
   const [selectedEvent, setSelectedEvent] = useState<number | null>(null)
   const [selectedExperience, setSelectedExperience] = useState<number | null>(null)
 
-  const [selectedStudy, setSelectedStudy] = useState<number | null>(null)
-  const [selectedPost, setSelectedPost] = useState<any>(null) // Para gestionar la visualización de post individuales
+  const [selectedPost, setSelectedPost] = useState<any>(null)
   const [isProfileImageOpen, setIsProfileImageOpen] = useState(false)
   const [selectedGalleryImage, setSelectedGalleryImage] = useState<string | null>(null)
   const [emailCopied, setEmailCopied] = useState(false)
@@ -138,14 +137,7 @@ export default function Portfolio() {
   }
 
   const sections = {
-// ============================================
-// REEMPLAZÁ la sección "about" dentro del objeto "sections" en app/page.tsx
-// Buscá el bloque que empieza con:  about: {
-// Y termina antes de:  skills: {
-// Reemplazalo por esto:
-// ============================================
-
-  about: {
+    about: {
       title: "Sobre Mí",
       icon: <GraduationCap className="w-4 h-4" />,
       content: (
@@ -291,7 +283,7 @@ export default function Portfolio() {
     },
     experience: {
       title: "Experiencia",
-      icon: <Briefcase className="w-4 h-4" />, // Changed icon to Briefcase for consistency
+      icon: <Briefcase className="w-4 h-4" />,
       content: (
         <div className="space-y-6">
           <div className="space-y-3">
@@ -439,15 +431,12 @@ export default function Portfolio() {
   const blogPosts = portfolioData.blogPosts
   const eventsData = portfolioData.events
   const experiencesData = portfolioData.experiences
-  const studiesData = portfolioData.learning
 
-  const selectedStudyData = studiesData.find((study: any) => study.id === selectedStudy)
-
-  // Ajuste para filtrar por la nueva etiqueta "Aprendizaje" y manejar el caso de selectedPost
+  // Ajuste para filtrar por etiqueta y manejar el caso de selectedPost
   const filteredPosts = blogFilter === "all" ? blogPosts : blogPosts.filter((post) => post.tags.includes(blogFilter))
 
   const handlePostClick = (post: (typeof blogPosts)[0]) => {
-    setSelectedPost(post) // Guarda el post completo para poder acceder a sus tags y contenido
+    setSelectedPost(post)
 
     if (post.tags.includes("Proyecto")) {
       const project = projectsData.find((p) => p.id === post.id)
@@ -458,23 +447,18 @@ export default function Portfolio() {
     } else if (post.tags.includes("Experiencia")) {
       const experience = experiencesData.find((exp) => exp.id === post.id)
       if (experience) setSelectedExperience(experience.id)
-    } else if (post.tags.includes("Aprendizaje")) {
-      const learning = studiesData.find((s: any) => s.id === post.id)
-      if (learning) setSelectedStudy(learning.id)
     }
   }
 
   const closeModal = () => {
     setSelectedProject(null)
     setSelectedEvent(null)
-    setSelectedStudy(null)
-    setSelectedExperience(null) // Limpia la experiencia seleccionada
-    setSelectedPost(null) // Limpia el post seleccionado
+    setSelectedExperience(null)
+    setSelectedPost(null)
   }
 
   const currentProject = projectsData.find((p) => p.id === selectedProject)
   const currentEvent = eventsData.find((e) => e.id === selectedEvent)
-  // Actualizando la variable currentExperience
   const currentExperience = experiencesData.find((exp) => exp.id === selectedExperience)
 
   const getTagColor = (tag: string) => {
@@ -485,10 +469,6 @@ export default function Portfolio() {
         return "bg-purple-500/20 text-purple-400 border-purple-500/30"
       case "Experiencia":
         return "bg-green-500/20 text-green-400 border-green-500/30"
-      case "Estudio": // Para mantener el estilo de "Estudio" si se usa internamente
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
-      case "Aprendizaje": // Color para la nueva etiqueta
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
       default:
         return "bg-zinc-500/20 text-zinc-400 border-zinc-500/30"
     }
@@ -499,7 +479,6 @@ export default function Portfolio() {
     { label: "Proyectos", value: "Proyecto", color: "blue" },
     { label: "Eventos", value: "Evento", color: "purple" },
     { label: "Experiencias", value: "Experiencia", color: "green" },
-    { label: "Aprendizajes", value: "Aprendizaje", color: "orange" }, // Cambiado de "Estudio" a "Aprendizaje"
   ]
 
   const getFilterButtonColor = (filter: string) => {
@@ -513,8 +492,6 @@ export default function Portfolio() {
           return "bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-400 hover:to-purple-500 border-0 text-white shadow-[0_0_10px_rgba(168,85,247,0.3)]"
         case "Experiencia":
           return "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 border-0 text-white shadow-[0_0_10px_rgba(34,197,94,0.3)]"
-        case "Aprendizaje": // Color para el filtro de "Aprendizaje"
-          return "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border-0 text-white shadow-[0_0_10px_rgba(251,146,60,0.3)]"
         default:
           return "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 border-0 text-white shadow-[0_0_10px_rgba(251,146,60,0.3)]"
       }
@@ -672,7 +649,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-zinc-100">Blog & Actualizaciones</h2>
-                <p className="text-sm text-zinc-500">Proyectos, eventos y aprendizajes</p>
+                <p className="text-sm text-zinc-500">Proyectos, eventos y experiencias</p>
               </div>
             </div>
 
@@ -696,7 +673,7 @@ export default function Portfolio() {
                 <Card
                   key={post.id}
                   className="bg-zinc-900/50 border border-zinc-800 hover:border-orange-500/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(251,146,60,0.15)] cursor-pointer"
-                  onClick={() => handlePostClick(post)} // Usar handlePostClick para gestionar la lógica
+                  onClick={() => handlePostClick(post)}
                 >
                   <div className="aspect-video w-full bg-gradient-to-br from-orange-500/20 to-zinc-900 flex items-center justify-center overflow-hidden">
                     {post.image ? (
@@ -744,7 +721,7 @@ export default function Portfolio() {
 
             <div className="mt-6 p-4 rounded-lg border border-orange-500/20 bg-orange-500/5 text-center">
               <p className="text-sm text-zinc-400">
-                Pronto estaré publicando contenido sobre proyectos, eventos y aprendizajes. Mantente atento a las
+                Pronto estaré publicando contenido sobre proyectos, eventos y experiencias. Mantente atento a las
                 actualizaciones.
               </p>
             </div>
@@ -752,7 +729,7 @@ export default function Portfolio() {
         </Card>
       </div>
 
-      {/* // Mejorando el modal de proyectos con más detalles */}
+      {/* Modal de proyectos */}
       {currentProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
@@ -772,7 +749,6 @@ export default function Portfolio() {
             </Button>
 
             <div className="p-8 space-y-6">
-              {/* Header */}
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {currentProject.tags.map((tag) => (
@@ -853,7 +829,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Tecnologías con logos */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <Code className="w-5 h-5 text-blue-400" />
@@ -897,7 +872,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Línea de tiempo */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-blue-400" />
@@ -923,7 +897,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Desafíos y Soluciones */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <AlertCircle className="w-5 h-5 text-blue-400" />
@@ -955,7 +928,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Aprendizajes */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <Lightbulb className="w-5 h-5 text-blue-400" />
@@ -974,7 +946,6 @@ export default function Portfolio() {
                 </ul>
               </div>
 
-              {/* Próximas actualizaciones (solo si está en progreso) */}
               {currentProject.timeline.some((t) => t.status === "in-progress" || t.status === "pending") && (
                 <div className="space-y-3">
                   <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
@@ -991,6 +962,7 @@ export default function Portfolio() {
         </div>
       )}
 
+      {/* Modal de eventos */}
       {currentEvent && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
@@ -1010,7 +982,6 @@ export default function Portfolio() {
             </Button>
 
             <div className="p-8 space-y-6">
-              {/* Header con logo del evento */}
               <div className="flex items-start gap-6">
                 <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-purple-500/30 bg-zinc-900/50 flex items-center justify-center flex-shrink-0">
                   <img
@@ -1047,7 +1018,6 @@ export default function Portfolio() {
 
               <Separator className="bg-purple-500/20" />
 
-              {/* Descripción */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100">Sobre el Evento</h3>
                 <p className="text-zinc-300 leading-relaxed">{currentEvent.fullDescription}</p>
@@ -1055,7 +1025,6 @@ export default function Portfolio() {
 
               <Separator className="bg-purple-500/20" />
 
-              {/* Galería de fotos */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <ImageIcon className="w-5 h-5 text-purple-400" />
@@ -1076,7 +1045,6 @@ export default function Portfolio() {
 
               <Separator className="bg-purple-500/20" />
 
-              {/* Highlights */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100">Puntos Destacados</h3>
                 <ul className="space-y-2">
@@ -1091,7 +1059,6 @@ export default function Portfolio() {
 
               <Separator className="bg-purple-500/20" />
 
-              {/* Publicaciones en redes sociales */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <ExternalLink className="w-5 h-5 text-purple-400" />
@@ -1124,7 +1091,6 @@ export default function Portfolio() {
 
               <Separator className="bg-purple-500/20" />
 
-              {/* Aprendizajes */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-purple-400" />
@@ -1137,7 +1103,6 @@ export default function Portfolio() {
 
               <Separator className="bg-purple-500/20" />
 
-              {/* Conexiones */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <Linkedin className="w-5 h-5 text-purple-400" />
@@ -1152,7 +1117,7 @@ export default function Portfolio() {
         </div>
       )}
 
-      {/* Agregando modal de experiencia después del modal de eventos */}
+      {/* Modal de experiencia */}
       {currentExperience && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
@@ -1172,7 +1137,6 @@ export default function Portfolio() {
             </Button>
 
             <div className="p-4 sm:p-6 md:p-8 space-y-6">
-              {/* Header con logo y título */}
               <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
                 <img
                   src={currentExperience.image || "/placeholder.svg"}
@@ -1203,13 +1167,11 @@ export default function Portfolio() {
 
               <Separator className="bg-green-500/20" />
 
-              {/* Descripción */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100">Descripción</h3>
                 <p className="text-zinc-300 leading-relaxed">{currentExperience.description}</p>
               </div>
 
-              {/* Responsabilidades */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-400" />
@@ -1225,7 +1187,6 @@ export default function Portfolio() {
                 </ul>
               </div>
 
-              {/* Logros */}
               {currentExperience.achievements && currentExperience.achievements.length > 0 && (
                 <div className="space-y-3">
                   <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
@@ -1246,7 +1207,6 @@ export default function Portfolio() {
                 </div>
               )}
 
-              {/* Habilidades utilizadas */}
               <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-zinc-100">Habilidades</h3>
                 <div className="flex flex-wrap gap-2">
@@ -1261,7 +1221,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Galería de fotos */}
               {currentExperience.gallery && currentExperience.gallery.length > 0 && (
                 <div className="space-y-3">
                   <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
@@ -1289,169 +1248,6 @@ export default function Portfolio() {
           </div>
         </div>
       )}
-
-      {selectedStudy &&
-        studiesData.find((s) => s.id === selectedStudy && s.tags.includes("Aprendizaje")) &&
-        (() => {
-          const currentStudy = studiesData.find((s) => s.id === selectedStudy)!
-          return (
-            <div
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-              onClick={closeModal}
-            >
-              <div
-                className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-orange-500/30 rounded-2xl shadow-[0_0_50px_rgba(249,115,22,0.3)]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-orange-400 hover:bg-orange-500/10"
-                  onClick={closeModal}
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-
-                <div className="p-8 space-y-6">
-                  {/* Header con badge del certificado */}
-                  <div className="flex items-start gap-6">
-                    <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-orange-500/30 bg-zinc-900/50 flex items-center justify-center flex-shrink-0">
-                      <Award className="w-12 h-12 text-orange-500" />
-                    </div>
-                    <div className="flex-1 space-y-3">
-                      <div className="flex flex-wrap gap-2">
-                        {currentStudy.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border ${getTagColor(tag)}`}
-                          >
-                            <Tag className="w-3 h-3" />
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h2 className="text-3xl font-bold text-zinc-100">{currentStudy.title}</h2>
-                      <div className="flex flex-wrap gap-4 text-sm text-zinc-400">
-                        <span className="flex items-center gap-2">
-                          <GraduationCap className="w-4 h-4" />
-                          {currentStudy.institution}
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4" />
-                          {currentStudy.completionDate}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Separator className="bg-orange-500/20" />
-
-                  {/* Descripción */}
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-semibold text-zinc-100">Sobre el Certificado</h3>
-                    <p className="text-zinc-300 leading-relaxed">{currentStudy.description}</p>
-                  </div>
-
-                  {currentStudy.certificateLink && (
-                    <>
-                      <Separator className="bg-orange-500/20" />
-                      {/* Enlace al certificado */}
-                      <div className="space-y-3">
-                        <a
-                          href={currentStudy.certificateLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 hover:bg-orange-500/20 transition-colors"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          Ver Certificado
-                        </a>
-                      </div>
-                    </>
-                  )}
-
-                  {currentStudy.skills && currentStudy.skills.length > 0 && (
-                    <>
-                      <Separator className="bg-orange-500/20" />
-                      {/* Habilidades adquiridas */}
-                      <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                          <Code className="w-5 h-5 text-orange-400" />
-                          Habilidades Adquiridas
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {currentStudy.skills.map((skill, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1.5 rounded-md text-sm bg-orange-500/10 border border-orange-500/30 text-orange-300"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {currentStudy.keyLearnings && currentStudy.keyLearnings.length > 0 && (
-                    <>
-                      <Separator className="bg-orange-500/20" />
-                      {/* Aprendizajes clave */}
-                      <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                          <BookOpen className="w-5 h-5 text-orange-400" />
-                          Aprendizajes Clave
-                        </h3>
-                        <ul className="space-y-2">
-                          {currentStudy.keyLearnings.map((learning, idx) => (
-                            <li key={idx} className="flex items-start gap-3 text-zinc-300">
-                              <span className="text-orange-400 text-lg">📚</span>
-                              <span>{learning}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )}
-
-                  {currentStudy.projects && currentStudy.projects.length > 0 && (
-                    <>
-                      <Separator className="bg-orange-500/20" />
-                      {/* Proyectos realizados */}
-                      <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-zinc-100">Proyectos Realizados</h3>
-                        <ul className="space-y-2">
-                          {currentStudy.projects.map((project, idx) => (
-                            <li key={idx} className="flex items-start gap-3 text-zinc-300">
-                              <span className="text-orange-400 text-lg">🔨</span>
-                              <span>{project}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )}
-
-                  {currentStudy.duration && (
-                    <>
-                      <Separator className="bg-orange-500/20" />
-                      {/* Duración */}
-                      <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-zinc-100 flex items-center gap-2">
-                          <Clock className="w-5 h-5 text-orange-400" />
-                          Duración
-                        </h3>
-                        <div className="p-4 rounded-lg border border-orange-500/20 bg-zinc-900/30">
-                          <p className="text-zinc-300">{currentStudy.duration}</p>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          )
-        })()}
 
       {/* Modal de imagen de perfil maximizada */}
       {isProfileImageOpen && (
