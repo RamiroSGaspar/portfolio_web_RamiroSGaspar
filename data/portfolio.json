@@ -237,42 +237,7 @@
         "/museo-guemes-gallery-3.jpg"
       ]
     }
-  ],
-
-  "learning": [],
-
-  "_learning_ejemplos": [
-    {
-      "_comentario": "EJEMPLO APRENDIZAJE - Detalle completo que se muestra al hacer clic",
-      "id": 4,
-      "title": "Nombre del Curso o Certificacion",
-      "tags": ["Aprendizaje"],
-      "institution": "Plataforma o Institucion",
-      "completionDate": "Mes Anio",
-      "duration": "X semanas",
-      "dedication": "X horas/semana",
-      "description": "Descripcion de que trata el curso o certificacion.",
-      "skills": ["Skill 1", "Skill 2", "Skill 3"],
-      "keyLearnings": [
-        "Aprendizaje clave 1",
-        "Aprendizaje clave 2",
-        "Aprendizaje clave 3"
-      ],
-      "projects": [
-        "Proyecto realizado 1",
-        "Proyecto realizado 2"
-      ],
-      "certifications": [
-        {
-          "name": "Nombre del certificado",
-          "issuer": "Emisor",
-          "date": "Fecha",
-          "link": "https://link-al-certificado.com"
-        }
-      ],
-      "resources": [
-        "Recurso utilizado 1",
-        "Recurso utilizado 2"
+  ]
       ]
     }
   ]
