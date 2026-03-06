@@ -17,12 +17,33 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
-  description:
-    "Portfolio de Ramiro Sebastian Gaspar - Data Scientist y Estudiante de Ciencia de Datos. Proyectos, experiencia y certificaciones en análisis de datos, Python, Machine Learning y visualización.",
+  title: "Ramiro Sebastian Gaspar | Portfolio",
+  description: "Portfolio profesional - Ciencia de datos, análisis de datos y desarrollo técnico. Proyectos, experiencia y certificaciones en Python, análisis de datos y backend development.",
   generator: "v0.app",
   icons: {
     icon: "/favicon.svg",
+  },
+  openGraph: {
+    title: "Ramiro Sebastian Gaspar | Portfolio",
+    description: "Portfolio profesional - Ciencia de datos, análisis de datos y desarrollo técnico",
+    url: "https://ramirosgaspar.vercel.app",
+    siteName: "Ramiro Gaspar Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ramiro Sebastian Gaspar - Portfolio",
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ramiro Sebastian Gaspar | Portfolio",
+    description: "Portfolio profesional - Ciencia de datos, análisis de datos y desarrollo técnico",
+    images: ["/og-image.jpg"],
   },
 }
 
