@@ -1,7 +1,7 @@
 {
   "_INSTRUCCIONES": {
     "como_usar": "Para agregar contenido nuevo, copia el ejemplo de la sección correspondiente y modifica los valores",
-    "etiquetas": ["Proyecto", "Evento", "Experiencia", "Aprendizaje"],
+    "etiquetas": ["Proyecto", "Evento", "Experiencia"],
     "importante": "El ID en blogPosts debe coincidir con el ID en la sección de detalle correspondiente"
   },
 
@@ -48,14 +48,6 @@
       "description": "Breve descripcion del evento (1-2 lineas).",
       "date": "Noviembre 2024",
       "tags": ["Evento"]
-    },
-    {
-      "_comentario": "EJEMPLO APRENDIZAJE - Tarjeta que aparece en el blog",
-      "id": 4,
-      "title": "Nombre del Curso o Certificacion",
-      "description": "Breve descripcion del aprendizaje (1-2 lineas).",
-      "date": "Septiembre 2024",
-      "tags": ["Aprendizaje"]
     }
   ],
 
@@ -148,7 +140,7 @@
         "/saltadev-crypto-coffee-4.jpg",
         "/saltadev-crypto-coffee-5.jpg"
       ],
-        "socialPosts": [],
+      "socialPosts": [],
       "learnings": "Más allá de lo técnico, el evento me permitió conocer la realidad del ecosistema tech en Salta desde diferentes perspectivas. Aprendí sobre las dinámicas de contratación en empresas IT de la región y cambié mi percepción sobre instituciones educativas como UPATECO, gracias a conversar directamente con estudiantes que me compartieron su experiencia real. El valor principal estuvo en las conversaciones genuinas y en entender que el networking va más allá de lo profesional.",
       "connections": "Conocí a un ingeniero de software con quien compartí la mayor parte del evento, una estudiante de turismo que me mostró perspectivas diferentes sobre la industria, un compañero de carrera de otra universidad, y varios ganadores de hackathons con quienes intercambiamos experiencias sobre competencias de programación."
     }
@@ -235,9 +227,6 @@
         "/museo-guemes-gallery-1.jpeg",
         "/museo-guemes-gallery-2.jpeg",
         "/museo-guemes-gallery-3.jpg"
-      ]
-    }
-  ]
       ]
     }
   ]
