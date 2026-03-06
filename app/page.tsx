@@ -138,25 +138,37 @@ export default function Portfolio() {
   }
 
   const sections = {
+// ============================================
+// REEMPLAZÁ la sección "about" dentro del objeto "sections" en app/page.tsx
+// Buscá el bloque que empieza con:  about: {
+// Y termina antes de:  skills: {
+// Reemplazalo por esto:
+// ============================================
+
     about: {
       title: "Sobre Mí",
       icon: <GraduationCap className="w-4 h-4" />,
       content: (
         <div className="space-y-4 text-justify">
           <p className="text-muted-foreground leading-relaxed">
-            Mi interés por la <span className="text-orange-500 font-semibold">Ciencia de Datos</span> surgió a partir 
-            de mi formación técnica en informática, donde descubrí que lo que más me motivaba era trabajar con 
-            <span className="text-orange-500 font-semibold"> datos</span> y entender sus relaciones en un contexto real. 
-            Disfruto escribir y optimizar consultas <span className="text-orange-500 font-semibold">SQL</span>, estructurar 
-            programas en <span className="text-orange-500 font-semibold">Python</span> y analizar resultados, buscando 
-            siempre que los datos obtenidos sean correctos, útiles y bien interpretados.
+            Estudio <span className="text-orange-500 font-semibold">Ciencia de Datos</span> en la{" "}
+            <span className="text-orange-500 font-semibold">UCASAL</span>. Trabajo principalmente con{" "}
+            <span className="text-orange-500 font-semibold">Python</span>,{" "}
+            <span className="text-orange-500 font-semibold">SQL</span> y{" "}
+            <span className="text-orange-500 font-semibold">Pandas</span>, pero lo técnico es solo una parte
+            — también aplico <span className="text-orange-500 font-semibold">pensamiento analítico</span>,{" "}
+            diseño metodológico y criterio propio para decidir qué preguntar y cómo responderlo.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Actualmente estudio la Licenciatura en Ciencias de Datos y continúo formándome en 
-            <span className="text-orange-500 font-semibold"> SQL</span>, 
-            <span className="text-orange-500 font-semibold"> NumPy</span> y 
-            <span className="text-orange-500 font-semibold"> Pandas</span>, con el objetivo de desarrollar proyectos 
-            de análisis de datos que aporten valor y ayuden a la <span className="text-orange-500 font-semibold">toma de decisiones</span>.
+            Lo que más me interesa no son las herramientas sino las{" "}
+            <span className="text-orange-500 font-semibold">preguntas que puedo responder</span> con ellas.
+            Me atraen los temas que generan debate, los que merecen ser mirados con{" "}
+            <span className="text-orange-500 font-semibold">datos</span> y no solo con opiniones.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Cuando algo no me cierra, quiero ver qué dicen los números — y si me contradicen, mejor,
+            porque <span className="text-orange-500 font-semibold">de eso se aprende</span>.
+            Estoy construyendo mis primeros proyectos con esa mentalidad.
           </p>
         </div>
       ),
