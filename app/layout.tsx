@@ -1,31 +1,39 @@
 import type React from "react"
-import type { Metadata } from "next"
-
+import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
+import { Inter } from "next/font/google"
 import "./globals.css"
-
-import { Inter, DM_Sans as V0_Font_DM_Sans, Space_Mono as V0_Font_Space_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-
-// Initialize fonts
-const _dmSans = V0_Font_DM_Sans({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900","1000"] })
-const _spaceMono = V0_Font_Space_Mono({ subsets: ['latin'], weight: ["400","700"] })
-const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "Ramiro Sebastian Gaspar | Portfolio",
-  description: "Portfolio profesional - Ciencia de datos, análisis de datos y desarrollo técnico. Proyectos, experiencia y certificaciones en Python, análisis de datos y backend development.",
-  generator: "v0.app",
-  icons: {
-    icon: "/favicon.svg",
-  },
+  metadataBase: new URL("https://ramirosgaspar.vercel.app"),
+  title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
+  description:
+    "Portfolio de Ramiro Sebastian Gaspar — Data Scientist en Salta, Argentina. Análisis de datos, Python, SQL, Pandas y proyectos basados en datos reales.",
+  keywords: [
+    "Data Scientist",
+    "Ciencia de Datos",
+    "Análisis de Datos",
+    "Python",
+    "SQL",
+    "Pandas",
+    "Salta",
+    "Argentina",
+    "UCASAL",
+    "Ramiro Gaspar",
+  ],
+  authors: [{ name: "Ramiro Sebastian Gaspar" }],
+  creator: "Ramiro Sebastian Gaspar",
+  icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "Ramiro Sebastian Gaspar | Portfolio",
-    description: "Portfolio profesional - Ciencia de datos, análisis de datos y desarrollo técnico",
+    title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
+    description:
+      "Análisis de datos & pensamiento crítico. Python, SQL, Pandas. Disponible para oportunidades interesantes.",
     url: "https://ramirosgaspar.vercel.app",
     siteName: "Ramiro Gaspar Portfolio",
     images: [
@@ -33,7 +41,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Ramiro Sebastian Gaspar - Portfolio",
+        alt: "Ramiro Sebastian Gaspar — Data Scientist",
       },
     ],
     locale: "es_AR",
@@ -41,10 +49,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ramiro Sebastian Gaspar | Portfolio",
-    description: "Portfolio profesional - Ciencia de datos, análisis de datos y desarrollo técnico",
+    title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
+    description:
+      "Análisis de datos & pensamiento crítico. Python, SQL, Pandas. Disponible para oportunidades interesantes.",
     images: ["/og-image.jpg"],
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+  width: "device-width",
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -53,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="es" className="bg-background">
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
         <Analytics />
