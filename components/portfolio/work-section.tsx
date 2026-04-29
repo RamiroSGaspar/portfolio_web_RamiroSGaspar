@@ -125,11 +125,28 @@ export function WorkSection({ onProjectClick, onExperienceClick, onEventClick }:
               <EmptyProjects />
             ) : (
               <>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {sortedProjects.slice(0, projectsShown).map((p) => (
-                    <ProjectCard key={p.id} project={p} onOpen={onProjectClick} />
-                  ))}
-                </div>
+                {(() => {
+                  const visible = sortedProjects.slice(0, projectsShown)
+                  // With a single project, render it as a wide "featured" card so it
+                  // never sits in a half-empty 2-col grid. Two or more → grid.
+                  if (visible.length === 1) {
+                    return (
+                      <ProjectCard
+                        key={visible[0].id}
+                        project={visible[0]}
+                        onOpen={onProjectClick}
+                        featured
+                      />
+                    )
+                  }
+                  return (
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {visible.map((p) => (
+                        <ProjectCard key={p.id} project={p} onOpen={onProjectClick} />
+                      ))}
+                    </div>
+                  )
+                })()}
                 {sortedProjects.length > projectsShown && (
                   <ShowMoreButton
                     onClick={() => setProjectsShown((n) => n + PAGE_STEP)}
