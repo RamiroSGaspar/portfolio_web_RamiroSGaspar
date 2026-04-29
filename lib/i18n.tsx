@@ -15,7 +15,7 @@ const es: Dictionary = {
   "profile.cta.contact": "Contactar",
   "profile.cta.cv": "Descargar CV",
   "profile.email.copied": "Correo copiado",
-  "profile.availability": "Abierto a oportunidades interesantes",
+  "profile.availability": "Abierto a oportunidades",
 
   // Section tabs
   "section.about": "Sobre Mí",
@@ -27,16 +27,8 @@ const es: Dictionary = {
   // About copy
   "about.p1.prefix": "Estudio ",
   "about.p1.field": "Ciencia de Datos",
-  "about.p1.in": " en la ",
-  "about.p1.uni": "UCASAL",
-  "about.p1.tools": ". Trabajo principalmente con ",
-  "about.p1.python": "Python",
-  "about.p1.sep1": ", ",
-  "about.p1.sql": "SQL",
-  "about.p1.sep2": " y ",
-  "about.p1.pandas": "Pandas",
   "about.p1.body":
-    ", pero lo técnico es solo una parte. También aplico pensamiento analítico, diseño metodológico y criterio propio para decidir qué preguntar y cómo responderlo.",
+    " en la UCASAL, pero lo técnico es solo una parte. Aplico pensamiento analítico, diseño metodológico y criterio propio para decidir qué preguntar y cómo responderlo.",
   "about.p2":
     "Lo que más me interesa no son las herramientas sino las preguntas que puedo responder con ellas. Me atraen los temas que generan debate, los que merecen ser mirados con datos y no solo con opiniones.",
   "about.p3":
@@ -138,7 +130,7 @@ const en: Dictionary = {
   "profile.cta.contact": "Get in touch",
   "profile.cta.cv": "Download CV",
   "profile.email.copied": "Email copied",
-  "profile.availability": "Open to interesting opportunities",
+  "profile.availability": "Open to opportunities",
 
   "section.about": "About",
   "section.skills": "Skills",
@@ -148,16 +140,8 @@ const en: Dictionary = {
 
   "about.p1.prefix": "I'm studying ",
   "about.p1.field": "Data Science",
-  "about.p1.in": " at ",
-  "about.p1.uni": "UCASAL",
-  "about.p1.tools": ". I mostly work with ",
-  "about.p1.python": "Python",
-  "about.p1.sep1": ", ",
-  "about.p1.sql": "SQL",
-  "about.p1.sep2": " and ",
-  "about.p1.pandas": "Pandas",
   "about.p1.body":
-    ", but tooling is only part of the picture. I also bring analytical thinking, methodological design and judgment to decide what to ask and how to answer it.",
+    " at UCASAL, but tooling is only part of the picture. I bring analytical thinking, methodological design and judgment to decide what to ask and how to answer it.",
   "about.p2":
     "What interests me most is not the tools but the questions I can answer with them. I'm drawn to topics that spark debate — the ones worth looking at with data, not just opinions.",
   "about.p3":
