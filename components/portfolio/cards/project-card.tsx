@@ -9,21 +9,16 @@ import { StatusDot } from "./status-dot"
 type Props = {
   project: Project
   onOpen: (project: Project) => void
-  /**
-   * When true, renders a wide horizontal layout (image left, content right).
-   * Used when a single project is shown so it never sits in a half-empty grid.
-   */
-  featured?: boolean
 }
 
 /**
  * High-impact card. Smart Brevity: title + 1-line lead + stack chips + actions.
  * Detailed content lives inside the modal.
  */
-export function ProjectCard({ project, onOpen, featured = false }: Props) {
+export function ProjectCard({ project, onOpen }: Props) {
   const { t } = useLanguage()
   const dateLabel = project.dateLabel ?? project.startDate ?? ""
-  const stack = project.technologies?.slice(0, featured ? 6 : 4) ?? []
+  const stack = project.technologies?.slice(0, 4) ?? []
 
   const handleClick = () => onOpen(project)
   const handleKey = (e: React.KeyboardEvent) => {
@@ -33,27 +28,15 @@ export function ProjectCard({ project, onOpen, featured = false }: Props) {
     }
   }
 
-  const containerClass = featured
-    ? "group relative grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] overflow-hidden rounded-xl border border-orange-500/30 bg-zinc-900/60 transition-all duration-300 hover:border-orange-400/60 hover:shadow-[0_0_30px_-6px_rgba(251,146,60,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 cursor-pointer"
-    : "group relative flex flex-col overflow-hidden rounded-xl border border-orange-500/30 bg-zinc-900/60 transition-all duration-300 hover:border-orange-400/60 hover:shadow-[0_0_25px_-8px_rgba(251,146,60,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 cursor-pointer"
-
-  const mediaClass = featured
-    ? "aspect-[16/10] md:aspect-auto md:h-full w-full overflow-hidden bg-gradient-to-br from-orange-500/15 via-zinc-900 to-zinc-950 flex items-center justify-center md:border-r md:border-orange-500/15"
-    : "aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-orange-500/15 via-zinc-900 to-zinc-950 flex items-center justify-center"
-
-  const bodyClass = featured
-    ? "flex flex-col gap-3 p-5 sm:p-6 md:gap-4"
-    : "flex flex-col gap-3 p-5"
-
   return (
     <article
       role="button"
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={handleKey}
-      className={containerClass}
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-orange-500/30 bg-zinc-900/60 transition-all duration-300 hover:border-orange-400/60 hover:shadow-[0_0_25px_-8px_rgba(251,146,60,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 cursor-pointer"
     >
-      <div className={mediaClass}>
+      <div className="aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-orange-500/15 via-zinc-900 to-zinc-950 flex items-center justify-center">
         {project.images?.[0] ? (
           <img
             src={project.images[0] || "/placeholder.svg"}
@@ -61,17 +44,14 @@ export function ProjectCard({ project, onOpen, featured = false }: Props) {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
-          <ImageIcon
-            className={featured ? "w-16 h-16 text-orange-500/40" : "w-12 h-12 text-orange-500/40"}
-            aria-hidden="true"
-          />
+          <ImageIcon className="w-12 h-12 text-orange-500/40" aria-hidden="true" />
         )}
       </div>
 
-      <div className={bodyClass}>
+      <div className="flex flex-col gap-3 p-5">
         <div className="flex items-center justify-between gap-3">
           <span className="inline-flex items-center gap-1.5 rounded-md border border-orange-500/40 bg-orange-500/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-orange-400">
-            {featured ? t("work.featured") : t("tag.project")}
+            {t("tag.project")}
           </span>
           <div className="flex items-center gap-3 text-xs text-zinc-500">
             <StatusDot status={project.status} />
@@ -79,19 +59,11 @@ export function ProjectCard({ project, onOpen, featured = false }: Props) {
           </div>
         </div>
 
-        <h3
-          className={`font-semibold text-zinc-100 group-hover:text-orange-300 transition-colors leading-snug text-pretty ${
-            featured ? "text-xl sm:text-2xl" : "text-lg"
-          }`}
-        >
+        <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-orange-300 transition-colors leading-snug text-pretty">
           {project.title}
         </h3>
 
-        <p
-          className={`text-sm text-zinc-400 leading-relaxed ${
-            featured ? "line-clamp-3 sm:text-base" : "line-clamp-2"
-          }`}
-        >
+        <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
           {project.description}
         </p>
 
@@ -113,11 +85,7 @@ export function ProjectCard({ project, onOpen, featured = false }: Props) {
           </div>
         )}
 
-        <div
-          className={`flex items-center justify-between pt-3 border-t border-zinc-800/80 ${
-            featured ? "mt-2" : "mt-auto"
-          }`}
-        >
+        <div className="flex items-center justify-between pt-3 border-t border-zinc-800/80 mt-auto">
           <div className="flex items-center gap-1">
             {project.githubUrl && (
               <a

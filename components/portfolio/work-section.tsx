@@ -127,16 +127,18 @@ export function WorkSection({ onProjectClick, onExperienceClick, onEventClick }:
               <>
                 {(() => {
                   const visible = sortedProjects.slice(0, projectsShown)
-                  // With a single project, render it as a wide "featured" card so it
-                  // never sits in a half-empty 2-col grid. Two or more → grid.
+                  // One project → keep the original vertical card centered with a
+                  // sane max-width so it doesn't float in a half-empty 2-col grid.
+                  // Two or more → standard 2-col grid.
                   if (visible.length === 1) {
                     return (
-                      <ProjectCard
-                        key={visible[0].id}
-                        project={visible[0]}
-                        onOpen={onProjectClick}
-                        featured
-                      />
+                      <div className="mx-auto w-full max-w-md">
+                        <ProjectCard
+                          key={visible[0].id}
+                          project={visible[0]}
+                          onOpen={onProjectClick}
+                        />
+                      </div>
                     )
                   }
                   return (
