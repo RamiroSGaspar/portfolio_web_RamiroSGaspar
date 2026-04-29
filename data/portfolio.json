@@ -1,118 +1,117 @@
 {
   "_INSTRUCCIONES": {
-    "como_usar": "Para agregar contenido nuevo, copia el ejemplo de la sección correspondiente y modifica los valores",
+    "como_usar": "Este archivo es la única fuente de verdad. Sumá items a 'projects', 'experiences' y 'events'. La sección 'Trabajo & Actividad' los muestra ordenados por 'dateIso' descendente dentro de su grupo.",
+    "campos_obligatorios_proyecto": ["id", "title", "description", "tags", "dateIso"],
+    "campos_opcionales_proyecto": "Todo lo demás (technologies, status, githubUrl, demoUrl, images, features, timeline, challenges, learnings, futureUpdates, updateHistory) es opcional. Cargá solo lo que tengas; lo que falte simplemente no se renderiza.",
+    "estados_proyecto": ["planning", "in-progress", "completed", "archived"],
+    "formato_dateIso": "YYYY-MM-DD (ej. 2025-01-31). Se usa solo para ordenar; al usuario se le muestra el campo legible (date / startDate / eventDate).",
     "etiquetas": ["Proyecto", "Evento", "Experiencia"],
-    "importante": "El ID en blogPosts debe coincidir con el ID en la sección de detalle correspondiente"
+    "ids_unicos": "Cada item debe tener un ID único entre todos los projects/experiences/events."
   },
-
-  "blogPosts": [
-    {
-      "id": 10,
-      "title": "Crypto Coffee Rave - SaltaDev",
-      "description": "Evento de networking con café, música y crypto organizado por SaltaDev, Bitget y Selina Salta.",
-      "date": "Enero 2025",
-      "tags": ["Evento"],
-      "image": "/saltadev-crypto-coffee-card.jpg"
-    },
-    {
-      "id": 3,
-      "title": "Programador Backend (Pasante) - Bewise",
-      "description": "Pasantia en desarrollo backend como parte del Programa Sinergia 2024, trabajando con Java y Spring Boot.",
-      "date": "Agosto - Noviembre 2024",
-      "tags": ["Experiencia"],
-      "image": "/bewise-card.jpeg"
-    },
-    {
-      "id": 5,
-      "title": "Programador Python (Pasante) - Museo Güemes",
-      "description": "Desarrollo de sistema de sincronizacion de videos para la Sala de los Recuerdos del Museo Güemes.",
-      "date": "Mayo - Agosto 2024",
-      "tags": ["Experiencia"],
-      "image": "/museo-guemes-exterior.jpeg"
-    }
-  ],
-
-  "_blogPosts_ejemplos": [
-    {
-      "_comentario": "EJEMPLO PROYECTO - Tarjeta que aparece en el blog",
-      "id": 1,
-      "title": "Titulo del Proyecto",
-      "description": "Breve descripcion que aparece en la tarjeta del blog (1-2 lineas).",
-      "date": "Enero 2025",
-      "tags": ["Proyecto"]
-    },
-    {
-      "_comentario": "EJEMPLO EVENTO - Tarjeta que aparece en el blog",
-      "id": 2,
-      "title": "Nombre del Evento",
-      "description": "Breve descripcion del evento (1-2 lineas).",
-      "date": "Noviembre 2024",
-      "tags": ["Evento"]
-    }
-  ],
 
   "projects": [],
 
   "_projects_ejemplos": [
     {
-      "_comentario": "EJEMPLO PROYECTO - Detalle completo que se muestra al hacer clic",
-      "id": 1,
-      "title": "Titulo del Proyecto",
-      "description": "Descripcion corta",
-      "fullDescription": "Descripcion completa y detallada del proyecto. Explica el objetivo, que problema resuelve y como lo hace.",
+      "_comentario_minimo": "EJEMPLO PROYECTO MÍNIMO - Solo lo esencial. Suficiente para publicar.",
+      "id": 100,
+      "title": "Análisis de Salarios IT en Argentina",
+      "description": "Exploración de la encuesta SysArmy 2024 para detectar patrones de remuneración por stack y región.",
       "tags": ["Proyecto"],
-      "technologies": ["Python", "Pandas", "SQL"],
+      "dateIso": "2025-03-15",
+      "dateLabel": "Marzo 2025",
       "status": "in-progress",
+      "technologies": ["Python", "Pandas", "Seaborn"],
+      "githubUrl": "https://github.com/usuario/proyecto"
+    },
+    {
+      "_comentario_completo": "EJEMPLO PROYECTO COMPLETO - Con todas las secciones opcionales del modal cargadas. Cargá solo las que tengas datos reales.",
+      "id": 101,
+      "title": "Título del Proyecto",
+      "description": "Headline en 1-2 líneas: qué problema resuelve y cómo (Smart Brevity).",
+      "fullDescription": "Descripción completa para el modal. Contexto, objetivo y enfoque.",
+      "tags": ["Proyecto"],
+      "dateIso": "2025-01-15",
+      "dateLabel": "Enero 2025",
+      "status": "completed",
+      "technologies": ["Python", "Pandas", "Scikit-learn"],
       "startDate": "Noviembre 2024",
-      "endDate": null,
-      "githubUrl": "https://github.com/tu-usuario/proyecto",
+      "endDate": "Enero 2025",
+      "githubUrl": "https://github.com/usuario/proyecto",
       "demoUrl": null,
       "images": ["/placeholder.svg?height=400&width=600"],
-      "features": [
-        "Caracteristica 1 del proyecto",
-        "Caracteristica 2 del proyecto",
-        "Caracteristica 3 del proyecto"
-      ],
+      "features": ["Característica 1", "Característica 2"],
       "timeline": [
-        {
-          "phase": "Fase 1",
-          "description": "Descripcion de la fase",
-          "status": "completed",
-          "date": "Fecha"
-        },
-        {
-          "phase": "Fase 2",
-          "description": "Descripcion de la fase",
-          "status": "in-progress",
-          "date": "En progreso"
-        },
-        {
-          "phase": "Fase 3",
-          "description": "Descripcion de la fase",
-          "status": "pending",
-          "date": "Pendiente"
-        }
+        { "phase": "Fase 1", "description": "Descripción", "status": "completed", "date": "Nov 2024" },
+        { "phase": "Fase 2", "description": "Descripción", "status": "in-progress", "date": "En progreso" }
       ],
       "challenges": [
-        {
-          "challenge": "Desafio que encontraste",
-          "challengeDate": "Fecha",
-          "solution": "Como lo resolviste",
-          "solutionDate": "Fecha"
-        }
+        { "challenge": "Desafío", "challengeDate": "Nov 2024", "solution": "Solución", "solutionDate": "Dic 2024" }
       ],
-      "learnings": [
-        "Aprendizaje 1",
-        "Aprendizaje 2",
-        "Aprendizaje 3"
-      ],
-      "futureUpdates": "Que planeas agregar o mejorar en el futuro.",
+      "learnings": ["Aprendizaje 1", "Aprendizaje 2"],
+      "futureUpdates": "Próximos pasos.",
       "updateHistory": [
-        {
-          "version": "v1.0.0",
-          "date": "Fecha",
-          "changes": ["Cambio 1", "Cambio 2"]
-        }
+        { "version": "v1.0.0", "date": "Ene 2025", "changes": ["Cambio 1"] }
+      ]
+    }
+  ],
+
+  "experiences": [
+    {
+      "id": 3,
+      "title": "Programador Backend (Pasante)",
+      "company": "Bewise",
+      "type": "Pasantia",
+      "location": "Remoto",
+      "startDate": "Agosto 2024",
+      "endDate": "Noviembre 2024",
+      "dateIso": "2024-11-30",
+      "duration": "4 meses",
+      "image": "/bewise-logo.jpeg",
+      "description": "Participe en una pasantia en la empresa Bewise, como parte del Programa Sinergia 2024, donde fui seleccionado para llevar a cabo mi practica profesional en el area de desarrollo backend. Durante este periodo, tuve la oportunidad de aprender y trabajar con las tecnologias principales que la empresa utiliza en sus proyectos, lo que me permitio adquirir conocimientos tecnicos solidos y aplicarlos en un entorno profesional real. El trabajo se realizo de forma remota, lo que implico la utilizacion de herramientas de comunicacion como Discord, mediante las cuales mantuvimos reuniones periodicas para coordinar tareas, resolver dudas y garantizar un flujo de trabajo eficiente dentro del equipo. Ademas, fui parte de un equipo colaborativo en el que se promovio el aprendizaje mutuo, la responsabilidad compartida y el enfoque en alcanzar los objetivos de los proyectos en los que participe. Esta experiencia no solo fortalecio mis habilidades tecnicas, sino tambien mi capacidad para colaborar en entornos dinamicos y distribuidos, trabajando en sinergia con colegas de diversas especialidades.",
+      "shortDescription": "Pasantía remota en desarrollo backend con Java + Spring Boot dentro del Programa Sinergia 2024.",
+      "responsibilities": [
+        "Desarrollo y mantenimiento de soluciones backend",
+        "Uso de Java con Spring Boot y bases de datos SQL",
+        "Trabajo remoto con metodologias agiles"
+      ],
+      "achievements": [],
+      "skills": ["Java", "Spring Boot", "Base de datos SQL"]
+    },
+    {
+      "id": 5,
+      "title": "Programador Python (Pasante)",
+      "company": "Museo Güemes - Salta Capital",
+      "type": "Pasantia",
+      "location": "España 730, A4400 Salta",
+      "workMode": "Hibrida",
+      "startDate": "Mayo 2024",
+      "endDate": "Agosto 2024",
+      "dateIso": "2024-08-31",
+      "duration": "4 meses",
+      "image": "/museo-guemes-logo.jpeg",
+      "description": "Pleno de estimulos visuales y sonoros, el Museo propone un recorrido por la historia del General Martin Miguel de Guemes y la gesta emancipadora de un modo didactico, unico e innovador. Compuesto por diez salas, cada una despliega un recurso escenico y audiovisual distinto, en busca de mantener la atencion de los visitantes de todas las edades. Las tecnicas de exhibicion incluyen efectos escenograficos, luminicos, programas multimedia y presentaciones audiovisuales ineditas para los Museos de Salta y la Region, que convertiran a cada visitante en el protagonista de una experiencia sensorial inolvidable. En la practica profesional del Museo Guemes, somos dos personas seleccionadas: Clarita Zolorza y yo. Donde los dos tenemos que realizar un proyecto que aporta al sistema del museo, especificamente nos concentramos en la Sala de los Recuerdos donde hay un cofre con 2 pantallas, desarrollamos un programa que muestra 2 videos sincronizados.",
+      "shortDescription": "Sistema de reproducción sincronizada de video sobre Raspberry Pi para la Sala de los Recuerdos del Museo Güemes.",
+      "responsibilities": [
+        "Desarrollo de sistema de reproduccion sincronizada de videos",
+        "Implementacion en Raspberry Pi para la Sala de los Recuerdos",
+        "Trabajo colaborativo con Clarita Zolorza en el proyecto"
+      ],
+      "achievements": [
+        "Sistema de 2 pantallas sincronizadas",
+        "Controles: play, stop, subtitulos, modo manual y automatico",
+        "Compatibilidad UDP/TCP para comunicacion entre dispositivos",
+        "Sistema de archivo de registros",
+        "Arranque automatico del sistema",
+        "Sistema de apagado controlado",
+        "Proteccion de apagado seguro",
+        "Monitoreo de estado en tiempo real"
+      ],
+      "skills": ["Python", "Raspberry Pi", "Componentes", "Internet de las cosas", "Trabajo en equipo", "Comunicacion y organizacion", "Pruebas/testeo"],
+      "gallery": [
+        "/museo-guemes-gallery-1.jpeg",
+        "/museo-guemes-gallery-2.jpeg",
+        "/museo-guemes-gallery-3.jpg"
       ]
     }
   ],
@@ -125,6 +124,7 @@
       "eventName": "Bitget Coffee Rave",
       "eventLogo": "/saltadev-crypto-coffee-card.jpg",
       "eventDate": "31 Enero 2025",
+      "dateIso": "2025-01-31",
       "location": "Hotel Selina - Balcarce 460, Salta",
       "fullDescription": "Evento de networking organizado por SaltaDev, Bitget, Selina Salta y Vincles donde el café se vivió de una manera diferente. Una tarde con café, música en vivo con DJs y conversaciones sobre criptomonedas y tecnología en un ambiente único. El evento reunió a personas de diversos ámbitos: informática, criptomonedas, turismo, marketing y más, creando un espacio ideal para el networking y el intercambio de ideas.",
       "highlights": [
@@ -155,79 +155,14 @@
       "eventName": "Nombre oficial del evento",
       "eventLogo": "/placeholder.svg?height=100&width=100",
       "eventDate": "15 Noviembre 2024",
+      "dateIso": "2024-11-15",
       "location": "Ciudad, Pais",
-      "fullDescription": "Descripcion completa del evento. Que hiciste, que aprendiste, como fue la experiencia.",
-      "highlights": [
-        "Punto destacado 1",
-        "Punto destacado 2",
-        "Punto destacado 3"
-      ],
+      "fullDescription": "Descripcion completa del evento.",
+      "highlights": ["Punto destacado 1", "Punto destacado 2"],
       "photos": ["/placeholder.svg?height=400&width=600"],
-      "socialPosts": [
-        {
-          "platform": "LinkedIn",
-          "url": "https://linkedin.com/tu-post",
-          "preview": "/placeholder.svg?height=200&width=200"
-        }
-      ],
-      "learnings": "Que aprendiste en este evento y como te ayudo profesionalmente.",
-      "connections": "Conexiones que hiciste, personas que conociste."
-    }
-  ],
-
-  "experiences": [
-    {
-      "id": 3,
-      "title": "Programador Backend (Pasante)",
-      "company": "Bewise",
-      "type": "Pasantia",
-      "location": "Remoto",
-      "startDate": "Agosto 2024",
-      "endDate": "Noviembre 2024",
-      "duration": "4 meses",
-      "image": "/bewise-logo.jpeg",
-      "description": "Participe en una pasantia en la empresa Bewise, como parte del Programa Sinergia 2024, donde fui seleccionado para llevar a cabo mi practica profesional en el area de desarrollo backend. Durante este periodo, tuve la oportunidad de aprender y trabajar con las tecnologias principales que la empresa utiliza en sus proyectos, lo que me permitio adquirir conocimientos tecnicos solidos y aplicarlos en un entorno profesional real. El trabajo se realizo de forma remota, lo que implico la utilizacion de herramientas de comunicacion como Discord, mediante las cuales mantuvimos reuniones periodicas para coordinar tareas, resolver dudas y garantizar un flujo de trabajo eficiente dentro del equipo. Ademas, fui parte de un equipo colaborativo en el que se promovio el aprendizaje mutuo, la responsabilidad compartida y el enfoque en alcanzar los objetivos de los proyectos en los que participe. Esta experiencia no solo fortalecio mis habilidades tecnicas, sino tambien mi capacidad para colaborar en entornos dinamicos y distribuidos, trabajando en sinergia con colegas de diversas especialidades.",
-      "responsibilities": [
-        "Desarrollo y mantenimiento de soluciones backend",
-        "Uso de Java con Spring Boot y bases de datos SQL",
-        "Trabajo remoto con metodologias agiles"
-      ],
-      "achievements": [],
-      "skills": ["Java", "Spring Boot", "Base de datos SQL"]
-    },
-    {
-      "id": 5,
-      "title": "Programador Python (Pasante)",
-      "company": "Museo Güemes - Salta Capital",
-      "type": "Pasantia",
-      "location": "España 730, A4400 Salta",
-      "workMode": "Hibrida",
-      "startDate": "Mayo 2024",
-      "endDate": "Agosto 2024",
-      "duration": "4 meses",
-      "image": "/museo-guemes-logo.jpeg",
-      "description": "Pleno de estimulos visuales y sonoros, el Museo propone un recorrido por la historia del General Martin Miguel de Guemes y la gesta emancipadora de un modo didactico, unico e innovador. Compuesto por diez salas, cada una despliega un recurso escenico y audiovisual distinto, en busca de mantener la atencion de los visitantes de todas las edades. Las tecnicas de exhibicion incluyen efectos escenograficos, luminicos, programas multimedia y presentaciones audiovisuales ineditas para los Museos de Salta y la Region, que convertiran a cada visitante en el protagonista de una experiencia sensorial inolvidable. En la practica profesional del Museo Guemes, somos dos personas seleccionadas: Clarita Zolorza y yo. Donde los dos tenemos que realizar un proyecto que aporta al sistema del museo, especificamente nos concentramos en la Sala de los Recuerdos donde hay un cofre con 2 pantallas, desarrollamos un programa que muestra 2 videos sincronizados.",
-      "responsibilities": [
-        "Desarrollo de sistema de reproduccion sincronizada de videos",
-        "Implementacion en Raspberry Pi para la Sala de los Recuerdos",
-        "Trabajo colaborativo con Clarita Zolorza en el proyecto"
-      ],
-      "achievements": [
-        "Sistema de 2 pantallas sincronizadas",
-        "Controles: play, stop, subtitulos, modo manual y automatico",
-        "Compatibilidad UDP/TCP para comunicacion entre dispositivos",
-        "Sistema de archivo de registros",
-        "Arranque automatico del sistema",
-        "Sistema de apagado controlado",
-        "Proteccion de apagado seguro",
-        "Monitoreo de estado en tiempo real"
-      ],
-      "skills": ["Python", "Raspberry Pi", "Componentes", "Internet de las cosas", "Trabajo en equipo", "Comunicacion y organizacion", "Pruebas/testeo"],
-      "gallery": [
-        "/museo-guemes-gallery-1.jpeg",
-        "/museo-guemes-gallery-2.jpeg",
-        "/museo-guemes-gallery-3.jpg"
-      ]
+      "socialPosts": [],
+      "learnings": "Que aprendiste.",
+      "connections": "Conexiones que hiciste."
     }
   ]
 }

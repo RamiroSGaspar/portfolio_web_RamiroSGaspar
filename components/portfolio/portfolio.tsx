@@ -1,13 +1,13 @@
 "use client"
 
-import { useMemo, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { LanguageProvider } from "@/lib/i18n"
-import { type BlogPost, blogPosts, events, experiences, projects } from "@/lib/portfolio-data"
+import type { EventItem, Experience, Project } from "@/lib/portfolio-data"
 import { LanguageToggle } from "./language-toggle"
 import { NeuralNetworkBackground } from "./neural-network-background"
 import { ProfileCard } from "./profile-card"
 import { InfoTabs } from "./info-tabs"
-import { BlogSection } from "./blog-section"
+import { WorkSection } from "./work-section"
 import { ProjectModal } from "./modals/project-modal"
 import { EventModal } from "./modals/event-modal"
 import { ExperienceModal } from "./modals/experience-modal"
@@ -18,10 +18,9 @@ type SectionKey = "about" | "skills" | "experience" | "education" | "contact"
 function PortfolioInner() {
   const contentRef = useRef<HTMLDivElement>(null)
   const [activeSection, setActiveSection] = useState<SectionKey>("about")
-  const [blogFilter, setBlogFilter] = useState("all")
-  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null)
-  const [selectedEventId, setSelectedEventId] = useState<number | null>(null)
-  const [selectedExperienceId, setSelectedExperienceId] = useState<number | null>(null)
+  const [activeProject, setActiveProject] = useState<Project | null>(null)
+  const [activeEvent, setActiveEvent] = useState<EventItem | null>(null)
+  const [activeExperience, setActiveExperience] = useState<Experience | null>(null)
   const [profileImageOpen, setProfileImageOpen] = useState(false)
   const [galleryImage, setGalleryImage] = useState<string | null>(null)
 
@@ -32,37 +31,11 @@ function PortfolioInner() {
     }, 100)
   }
 
-  const handlePostClick = (post: BlogPost) => {
-    if (post.tags.includes("Proyecto")) {
-      const project = projects.find((p) => p.id === post.id)
-      if (project) setSelectedProjectId(project.id)
-    } else if (post.tags.includes("Evento")) {
-      const event = events.find((e) => e.id === post.id)
-      if (event) setSelectedEventId(event.id)
-    } else if (post.tags.includes("Experiencia")) {
-      const exp = experiences.find((e) => e.id === post.id)
-      if (exp) setSelectedExperienceId(exp.id)
-    }
+  const closeAll = () => {
+    setActiveProject(null)
+    setActiveEvent(null)
+    setActiveExperience(null)
   }
-
-  const closeModal = () => {
-    setSelectedProjectId(null)
-    setSelectedEventId(null)
-    setSelectedExperienceId(null)
-  }
-
-  const currentProject = useMemo(
-    () => projects.find((p) => p.id === selectedProjectId) ?? null,
-    [selectedProjectId],
-  )
-  const currentEvent = useMemo(
-    () => events.find((e) => e.id === selectedEventId) ?? null,
-    [selectedEventId],
-  )
-  const currentExperience = useMemo(
-    () => experiences.find((e) => e.id === selectedExperienceId) ?? null,
-    [selectedExperienceId],
-  )
 
   return (
     <div className="dark min-h-screen bg-black relative overflow-x-hidden">
@@ -84,26 +57,29 @@ function PortfolioInner() {
           activeSection={activeSection}
           onSectionChange={setActiveSection}
         />
-        <BlogSection
-          posts={blogPosts}
-          filter={blogFilter}
-          onFilterChange={setBlogFilter}
-          onPostClick={handlePostClick}
+        <WorkSection
+          onProjectClick={setActiveProject}
+          onExperienceClick={setActiveExperience}
+          onEventClick={setActiveEvent}
         />
       </main>
 
-      {currentProject && <ProjectModal project={currentProject} onClose={closeModal} />}
-      {currentEvent && <EventModal event={currentEvent} onClose={closeModal} />}
-      {currentExperience && (
+      {activeProject && <ProjectModal project={activeProject} onClose={closeAll} />}
+      {activeEvent && <EventModal event={activeEvent} onClose={closeAll} />}
+      {activeExperience && (
         <ExperienceModal
-          experience={currentExperience}
-          onClose={closeModal}
+          experience={activeExperience}
+          onClose={closeAll}
           onPhotoClick={setGalleryImage}
         />
       )}
 
       {profileImageOpen && (
-        <ImageLightbox src="/profile.jpeg" alt="Ramiro Sebastian Gaspar" onClose={() => setProfileImageOpen(false)} />
+        <ImageLightbox
+          src="/profile.jpeg"
+          alt="Ramiro Sebastian Gaspar"
+          onClose={() => setProfileImageOpen(false)}
+        />
       )}
       {galleryImage && <ImageLightbox src={galleryImage} onClose={() => setGalleryImage(null)} />}
     </div>

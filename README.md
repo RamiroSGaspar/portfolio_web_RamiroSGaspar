@@ -18,7 +18,7 @@ Live: <https://ramirosgaspar.vercel.app>
 - Bilingual UI (ES / EN) with persistent preference
 - Profile card with availability badge and CV download
 - Tabbed sections: About, Skills, Experience, Education, Contact
-- Blog feed with filterable Projects / Events / Experiences and detail modals
+- "Work & Activity" feed grouped by impact (Projects > Experiences > Events) with date-based ordering, filters with counts, pagination per group and detail modals
 - Animated neural-network canvas background that respects `prefers-reduced-motion`
 - Fully responsive, dark-mode first design
 
@@ -36,8 +36,9 @@ components/
     portfolio.tsx       # Main client wrapper
     profile-card.tsx
     info-tabs.tsx
-    blog-section.tsx
+    work-section.tsx    # "Work & Activity" feed with filters and pagination
     sections/           # About / Skills / Experience / Education / Contact
+    cards/              # Project / Experience / Event cards + status dot
     modals/             # Project / Event / Experience / Image lightbox
   ui/                   # shadcn/ui primitives
 
@@ -59,8 +60,11 @@ inline examples (`_*_ejemplos`) that show the expected shape of each entry.
 To add a project, event or experience:
 
 1. Add the entry to its corresponding array (`projects`, `events`, `experiences`).
-2. Add a matching item in `blogPosts` using the **same `id`** so the card opens
-   the right detail modal.
+2. Always include `dateIso` (`YYYY-MM-DD`) so it sorts correctly in the feed.
+3. For projects, only `id`, `title`, `description`, `tags` and `dateIso` are
+   required. Every other field (`technologies`, `status`, `images`, `timeline`,
+   `challenges`, `learnings`, `futureUpdates`, `updateHistory`, etc.) is
+   optional — sections render only when their data is present.
 
 Strings shown in the UI (titles, tabs, About copy) live in `lib/i18n.tsx` under
 the `es` and `en` dictionaries.

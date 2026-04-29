@@ -4,7 +4,7 @@ import { useEffect, type ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import { X } from "lucide-react"
 
-type Variant = "blue" | "purple" | "green"
+type Variant = "orange" | "blue" | "purple" | "green"
 
 type Props = {
   variant: Variant
@@ -14,6 +14,11 @@ type Props = {
 }
 
 const variantClasses: Record<Variant, { border: string; shadow: string; close: string }> = {
+  orange: {
+    border: "border-orange-500/30",
+    shadow: "shadow-[0_0_50px_rgba(251,146,60,0.25)]",
+    close: "hover:text-orange-400 hover:bg-orange-500/10",
+  },
   blue: {
     border: "border-blue-500/30",
     shadow: "shadow-[0_0_50px_rgba(59,130,246,0.2)]",
