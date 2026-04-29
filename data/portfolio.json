@@ -9,7 +9,34 @@
     "ids_unicos": "Cada item debe tener un ID único entre todos los projects/experiences/events."
   },
 
-  "projects": [],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Bunseki",
+      "description": "Plataforma educativa de análisis de datos en español. Datasets reales, ejercicios guiados y un agente de IA que asiste en Python, Excel y R.",
+      "fullDescription": "Bunseki resuelve un problema simple: los mejores recursos de data science están en inglés, y los que recién arrancan en español no tienen un punto de entrada claro, ordenado y práctico.\n\nEs una biblioteca de datasets reales organizados por nivel — cada uno con diccionario de columnas, vista previa y ejercicios. En el centro está Tomo, un agente de IA que ayuda a encontrar el dataset que necesitás y sugiere análisis y código en Python, Excel o R.\n\nConstruido para la Zero to Agent: Vercel Hackathon. No es un proyecto de hackathon que voy a archivar — es algo que quiero seguir construyendo.",
+      "tags": ["Proyecto"],
+      "dateIso": "2026-04-29",
+      "dateLabel": "Abril 2026",
+      "status": "in-progress",
+      "demoUrl": "https://bunseki-web.vercel.app/",
+      "technologies": ["Next.js", "Supabase", "Vercel AI SDK", "Groq", "Llama 3.3 70B", "Tailwind"],
+      "images": ["/images/bunseki-home.png"],
+      "features": [
+        "Biblioteca de datasets reales organizados por nivel",
+        "Diccionario de columnas, vista previa y ejercicios para cada dataset",
+        "Tomo: agente de IA que ayuda a encontrar el dataset que necesitás",
+        "Sugerencias de análisis y ejemplos de código en Python, Excel o R"
+      ],
+      "futureUpdates": [
+        "Generación de datasets a medida con IA",
+        "Sesiones persistentes con Tomo",
+        "Cuentas de usuario",
+        "Soporte para SQL y Excel como formato de práctica",
+        "Comunidad para compartir análisis por dataset"
+      ]
+    }
+  ],
 
   "_projects_ejemplos": [
     {
@@ -49,7 +76,7 @@
         { "challenge": "Desafío", "challengeDate": "Nov 2024", "solution": "Solución", "solutionDate": "Dic 2024" }
       ],
       "learnings": ["Aprendizaje 1", "Aprendizaje 2"],
-      "futureUpdates": "Próximos pasos.",
+      "futureUpdates": ["Próximo paso 1", "Próximo paso 2"],
       "updateHistory": [
         { "version": "v1.0.0", "date": "Ene 2025", "changes": ["Cambio 1"] }
       ]

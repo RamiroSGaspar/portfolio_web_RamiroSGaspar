@@ -37,7 +37,7 @@ export type Project = {
     solutionDate: string
   }[]
   learnings?: string[]
-  futureUpdates?: string
+  futureUpdates?: string | string[]
   updateHistory?: { version: string; date: string; changes: string[] }[]
 }
 

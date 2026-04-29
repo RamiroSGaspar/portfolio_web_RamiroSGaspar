@@ -40,7 +40,12 @@ export function ProjectModal({ project, onClose }: Props) {
   const hasTimeline = (project.timeline?.length ?? 0) > 0
   const hasChallenges = (project.challenges?.length ?? 0) > 0
   const hasLearnings = (project.learnings?.length ?? 0) > 0
-  const hasFuture = Boolean(project.futureUpdates?.trim())
+  const futureUpdatesList = Array.isArray(project.futureUpdates)
+    ? project.futureUpdates.filter((item) => item.trim().length > 0)
+    : project.futureUpdates?.trim()
+      ? [project.futureUpdates.trim()]
+      : []
+  const hasFuture = futureUpdatesList.length > 0
 
   return (
     <ModalShell variant="orange" onClose={onClose} maxWidthClass="max-w-5xl">
@@ -76,9 +81,15 @@ export function ProjectModal({ project, onClose }: Props) {
             </div>
           )}
 
-          <p className="text-lg text-zinc-300 leading-relaxed">
-            {project.fullDescription ?? project.description}
-          </p>
+          <div className="space-y-3 text-lg text-zinc-300 leading-relaxed">
+            {(project.fullDescription ?? project.description)
+              .split(/\n\n+/)
+              .map((paragraph, idx) => (
+                <p key={idx} className="text-pretty">
+                  {paragraph}
+                </p>
+              ))}
+          </div>
 
           {(project.githubUrl || project.demoUrl) && (
             <div className="flex flex-wrap gap-3">
@@ -301,9 +312,17 @@ export function ProjectModal({ project, onClose }: Props) {
             <Separator className="bg-orange-500/20" />
             <section className="space-y-3">
               <SectionHeading icon={Rocket} label={t("modal.project.future")} />
-              <p className="text-zinc-300 p-4 bg-orange-500/5 border border-orange-500/20 rounded-lg">
-                {project.futureUpdates}
-              </p>
+              <ul className="space-y-2 p-4 bg-orange-500/5 border border-orange-500/20 rounded-lg">
+                {futureUpdatesList.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                    <Rocket
+                      className="w-4 h-4 text-orange-400 flex-shrink-0 mt-1"
+                      aria-hidden="true"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </section>
           </>
         )}
