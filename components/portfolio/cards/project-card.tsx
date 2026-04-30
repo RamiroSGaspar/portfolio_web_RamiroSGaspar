@@ -106,7 +106,7 @@ export function ProjectCard({ project, onOpen }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-orange-400 hover:bg-orange-500/15 hover:text-orange-300 transition-colors"
                 aria-label={`${t("work.viewDemo")} - ${project.title}`}
               >
                 <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />

@@ -46,7 +46,8 @@
         "/images/bunseki-home.png",
         "/images/bunseki-home-light.png",
         "/images/bunseki-library.png",
-        "/images/bunseki-tomo.png"
+        "/images/bunseki-tomo.png",
+        "/images/bunseki-og.svg"
       ],
       "features": [
         "Biblioteca de datasets reales organizados por nivel",
