@@ -21,6 +21,12 @@ export type Project = {
   fullDescription?: string
   technologies?: string[]
   status?: ProjectStatus
+  /**
+   * Optional override for the status label. Keeps the dot color from `status`
+   * but replaces the default text (e.g. show "En constante desarrollo"
+   * instead of "En curso" for an actively-evolving project).
+   */
+  statusLabel?: string | { es: string; en: string }
   dateLabel?: string
   dateIso?: string
   startDate?: string

@@ -54,7 +54,7 @@ export function ProjectCard({ project, onOpen }: Props) {
             {t("tag.project")}
           </span>
           <div className="flex items-center gap-3 text-xs text-zinc-500">
-            <StatusDot status={project.status} />
+            <StatusDot status={project.status} customLabel={project.statusLabel} />
             {dateLabel && <span>{dateLabel}</span>}
           </div>
         </div>

@@ -5,13 +5,25 @@ import { getProjectStatusConfig, type ProjectStatus } from "@/lib/portfolio-data
 
 type Props = {
   status?: ProjectStatus
+  /**
+   * Optional override. If provided, replaces the default i18n label while
+   * keeping the dot color from `status`. Pass `{ es, en }` for bilingual.
+   */
+  customLabel?: string | { es: string; en: string }
   className?: string
 }
 
-export function StatusDot({ status, className = "" }: Props) {
-  const { t } = useLanguage()
+export function StatusDot({ status, customLabel, className = "" }: Props) {
+  const { t, lang } = useLanguage()
   const config = getProjectStatusConfig(status)
   if (!config) return null
+
+  const label =
+    typeof customLabel === "string"
+      ? customLabel
+      : customLabel
+        ? customLabel[lang]
+        : t(config.labelKey)
 
   return (
     <span
@@ -25,7 +37,7 @@ export function StatusDot({ status, className = "" }: Props) {
         )}
         <span className={`relative inline-flex h-2 w-2 rounded-full ${config.dot}`} />
       </span>
-      <span>{t(config.labelKey)}</span>
+      <span>{label}</span>
     </span>
   )
 }

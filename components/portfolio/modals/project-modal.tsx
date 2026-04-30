@@ -62,7 +62,7 @@ export function ProjectModal({ project, onClose }: Props) {
                 {translateTag(tag, t)}
               </span>
             ))}
-            <StatusDot status={project.status} />
+            <StatusDot status={project.status} customLabel={project.statusLabel} />
           </div>
 
           <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 text-pretty">

@@ -19,9 +19,13 @@
       "dateIso": "2026-04-29",
       "dateLabel": "Abril 2026",
       "status": "in-progress",
+      "statusLabel": {
+        "es": "En constante desarrollo",
+        "en": "Actively evolving"
+      },
       "demoUrl": "https://bunseki-web.vercel.app/",
       "technologies": ["Next.js", "Supabase", "Vercel AI SDK", "Groq", "Llama 3.3 70B", "Tailwind"],
-      "images": ["/images/bunseki-home.png"],
+      "images": ["/images/bunseki-og.svg"],
       "features": [
         "Biblioteca de datasets reales organizados por nivel",
         "Diccionario de columnas, vista previa y ejercicios para cada dataset",
