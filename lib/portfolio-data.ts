@@ -10,6 +10,19 @@ export type ProjectTimelineItem = {
 }
 
 /**
+ * Visual building block for a project description. Lets the modal render
+ * sectioned, scannable copy (icon + heading + body) instead of plain text.
+ * If a project provides `descriptionBlocks`, they replace the plain
+ * `fullDescription` paragraph rendering.
+ */
+export type ProjectDescriptionBlock = {
+  /** Maps to a Lucide icon. Defaults to "sparkles" if omitted. */
+  icon?: "alert" | "sparkles" | "rocket" | "lightbulb" | "target" | "flag"
+  title: string
+  body: string
+}
+
+/**
  * Project shape with most fields optional. The card and the modal render only
  * the sections that have data — load what you have, skip the rest.
  */
@@ -19,6 +32,7 @@ export type Project = {
   description: string
   tags: string[]
   fullDescription?: string
+  descriptionBlocks?: ProjectDescriptionBlock[]
   technologies?: string[]
   status?: ProjectStatus
   /**

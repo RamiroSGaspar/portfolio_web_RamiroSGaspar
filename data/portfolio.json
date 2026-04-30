@@ -15,6 +15,23 @@
       "title": "Bunseki",
       "description": "Plataforma educativa de análisis de datos en español. Datasets reales, ejercicios guiados y un agente de IA que asiste en Python, Excel y R.",
       "fullDescription": "Bunseki resuelve un problema simple: los mejores recursos de data science están en inglés, y los que recién arrancan en español no tienen un punto de entrada claro, ordenado y práctico.\n\nEs una biblioteca de datasets reales organizados por nivel — cada uno con diccionario de columnas, vista previa y ejercicios. En el centro está Tomo, un agente de IA que ayuda a encontrar el dataset que necesitás y sugiere análisis y código en Python, Excel o R.\n\nConstruido para la Zero to Agent: Vercel Hackathon. No es un proyecto de hackathon que voy a archivar — es algo que quiero seguir construyendo.",
+      "descriptionBlocks": [
+        {
+          "icon": "alert",
+          "title": "El problema",
+          "body": "Los mejores recursos de data science están en inglés. Los que recién arrancan en español no tienen un punto de entrada claro, ordenado y práctico."
+        },
+        {
+          "icon": "sparkles",
+          "title": "La solución",
+          "body": "Una biblioteca de datasets reales organizados por nivel — cada uno con diccionario de columnas, vista previa y ejercicios. En el centro está Tomo, un agente de IA que ayuda a encontrar el dataset que necesitás y sugiere análisis y código en Python, Excel o R."
+        },
+        {
+          "icon": "rocket",
+          "title": "El compromiso",
+          "body": "Construido para la Zero to Agent: Vercel Hackathon. No es un proyecto de hackathon que voy a archivar — es algo que quiero seguir construyendo."
+        }
+      ],
       "tags": ["Proyecto"],
       "dateIso": "2026-04-29",
       "dateLabel": "Abril 2026",
@@ -25,7 +42,12 @@
       },
       "demoUrl": "https://bunseki-web.vercel.app/",
       "technologies": ["Next.js", "Supabase", "Vercel AI SDK", "Groq", "Llama 3.3 70B", "Tailwind"],
-      "images": ["/images/bunseki-og.svg"],
+      "images": [
+        "/images/bunseki-home.png",
+        "/images/bunseki-home-light.png",
+        "/images/bunseki-library.png",
+        "/images/bunseki-tomo.png"
+      ],
       "features": [
         "Biblioteca de datasets reales organizados por nivel",
         "Diccionario de columnas, vista previa y ejercicios para cada dataset",

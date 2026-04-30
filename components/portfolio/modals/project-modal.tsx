@@ -10,13 +10,16 @@ import {
   Clock,
   Code,
   ExternalLink,
+  Flag,
   Github,
   History,
   ImageIcon,
   Lightbulb,
   ListChecks,
   Rocket,
+  Sparkles,
   Tag,
+  Target,
 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
 import { type Project, translateTag } from "@/lib/portfolio-data"
@@ -24,6 +27,15 @@ import { StatusDot } from "../cards/status-dot"
 import { ModalShell } from "./modal-shell"
 
 type Props = { project: Project; onClose: () => void }
+
+const blockIconMap = {
+  alert: AlertCircle,
+  sparkles: Sparkles,
+  rocket: Rocket,
+  lightbulb: Lightbulb,
+  target: Target,
+  flag: Flag,
+} as const
 
 /**
  * Flexible modal: every section is optional and only renders when its data
@@ -81,15 +93,35 @@ export function ProjectModal({ project, onClose }: Props) {
             </div>
           )}
 
-          <div className="space-y-3 text-lg text-zinc-300 leading-relaxed">
-            {(project.fullDescription ?? project.description)
-              .split(/\n\n+/)
-              .map((paragraph, idx) => (
-                <p key={idx} className="text-pretty">
-                  {paragraph}
-                </p>
-              ))}
-          </div>
+          {project.descriptionBlocks?.length ? (
+            <div className="space-y-4 pt-2">
+              {project.descriptionBlocks.map((block, idx) => {
+                const Icon = blockIconMap[block.icon ?? "sparkles"] ?? Sparkles
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-lg border-l-2 border-orange-500/50 bg-orange-500/[0.04] py-4 pl-5 pr-4"
+                  >
+                    <h4 className="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-orange-400">
+                      <Icon className="w-4 h-4" aria-hidden="true" />
+                      {block.title}
+                    </h4>
+                    <p className="text-zinc-300 leading-relaxed text-pretty">{block.body}</p>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="space-y-3 text-lg text-zinc-300 leading-relaxed">
+              {(project.fullDescription ?? project.description)
+                .split(/\n\n+/)
+                .map((paragraph, idx) => (
+                  <p key={idx} className="text-pretty">
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
+          )}
 
           {(project.githubUrl || project.demoUrl) && (
             <div className="flex flex-wrap gap-3">
