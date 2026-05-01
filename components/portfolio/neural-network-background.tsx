@@ -11,10 +11,6 @@ export function NeuralNetworkBackground() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-
     let rafId = 0
 
     const resizeCanvas = () => {
@@ -30,8 +26,8 @@ export function NeuralNetworkBackground() {
       nodes.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: reduceMotion ? 0 : (Math.random() - 0.5) * 0.5,
-        vy: reduceMotion ? 0 : (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
       })
     }
 
@@ -65,15 +61,11 @@ export function NeuralNetworkBackground() {
       }
     }
 
-    if (reduceMotion) {
+    const animate = () => {
       drawFrame()
-    } else {
-      const animate = () => {
-        drawFrame()
-        rafId = requestAnimationFrame(animate)
-      }
-      animate()
+      rafId = requestAnimationFrame(animate)
     }
+    animate()
 
     return () => {
       window.removeEventListener("resize", resizeCanvas)
