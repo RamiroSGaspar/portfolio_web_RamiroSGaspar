@@ -67,7 +67,7 @@
       "id": 2,
       "title": "UCASAL: Expectativa vs Realidad",
       "description": "Proyecto personal de análisis de datos que mide la brecha entre las expectativas previas al ingreso y la experiencia actual de los estudiantes de UCASAL en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.",
-      "fullDescription": "Proyecto personal de análisis de datos que busca responder una pregunta concreta: ¿La UCASAL cumple con las expectativas de sus alumnos?\n\nSurgió de la necesidad de validar con datos reales una percepción extendida en mi entorno, en lugar de seguir opinando sobre intuiciones. El proyecto mide la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.\n\nDiseñé y desarrollé el proyecto end-to-end: definición de la pregunta, diseño metodológico, elaboración del anteproyecto bajo normas APA (presentado y aprobado por la Decana de la Facultad de Ingeniería), construcción de la plataforma de recolección, gestión de autorizaciones institucionales, y la fase actual de recolección activa de respuestas. Las próximas fases incluyen análisis en Python, visualización en Power BI y un reporte final con metodología y hallazgos.",
+      "fullDescription": "Proyecto personal e independiente que busca responder una pregunta concreta: ¿La UCASAL cumple con las expectativas de sus alumnos? Mido la brecha entre lo que los estudiantes esperaban antes de ingresar y lo que viven hoy, en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. Al cierre del proyecto se publicarán los hallazgos, visualizaciones, documentación metodológica y la web de recolección.",
       "descriptionBlocks": [
         {
           "icon": "target",
@@ -77,17 +77,22 @@
         {
           "icon": "sparkles",
           "title": "El enfoque",
-          "body": "Mido la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria."
+          "body": "Mido la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. La metodología sigue normas APA y fue aprobada por la Decana de la Facultad de Ingeniería."
+        },
+        {
+          "icon": "lightbulb",
+          "title": "A quién sirve",
+          "body": "A los alumnos actuales, para contrastar su experiencia con la opinión general de sus pares. A la UCASAL como institución, para tener una lectura externa y honesta de los puntos a mejorar. Y sobre todo a quienes evalúan ingresar: información concreta para decidir su futuro académico con datos, no con folletos."
         },
         {
           "icon": "flag",
-          "title": "El proceso",
-          "body": "Diseñé el proyecto end-to-end: definición de la pregunta, diseño metodológico, anteproyecto bajo normas APA (presentado y aprobado por la Decana de la Facultad de Ingeniería), construcción de la plataforma de recolección y gestión de autorizaciones institucionales. Hoy estoy en fase de recolección activa de respuestas."
+          "title": "Proyecto independiente",
+          "body": "Es un proyecto personal. No estoy vinculado al equipo ni a la gestión de la UCASAL — el único contacto institucional fue para gestionar los permisos necesarios para colocar los códigos QR de la encuesta en las sedes."
         },
         {
           "icon": "rocket",
-          "title": "Próximas fases",
-          "body": "Análisis en Python, visualización en Power BI y reporte final con metodología y hallazgos."
+          "title": "Lo que viene",
+          "body": "Recolección automática de datos a través de la web ya desplegada, desarrollo de la metodología de análisis, y la distribución de códigos QR en las sedes de Salta capital. Al finalizar el proyecto, los documentos, visualizaciones, la web y todos los elementos elaborados se publicarán para acceso público."
         }
       ],
       "tags": ["Proyecto"],
@@ -95,8 +100,8 @@
       "dateLabel": "Febrero 2026",
       "status": "in-progress",
       "statusLabel": {
-        "es": "En constante desarrollo",
-        "en": "Actively evolving"
+        "es": "En desarrollo",
+        "en": "In development"
       },
       "technologies": [
         "Next.js",
@@ -108,16 +113,16 @@
         "Power BI",
         "Análisis estadístico"
       ],
+      "images": [
+        "/images/ucasal-og.svg",
+        "/images/ucasal-welcome.png",
+        "/images/ucasal-logo.png"
+      ],
       "features": [
         "Calidad académica",
         "Plataforma digital",
         "Infraestructura",
         "Vida universitaria"
-      ],
-      "futureUpdates": [
-        "Análisis cuantitativo de respuestas en Python",
-        "Visualización de hallazgos en Power BI",
-        "Reporte final con metodología y conclusiones"
       ]
     }
   ],
