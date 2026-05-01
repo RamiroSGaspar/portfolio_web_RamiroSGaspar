@@ -62,6 +62,63 @@
         "Soporte para SQL y Excel como formato de práctica",
         "Comunidad para compartir análisis por dataset"
       ]
+    },
+    {
+      "id": 2,
+      "title": "UCASAL: Expectativa vs Realidad",
+      "description": "Proyecto personal de análisis de datos que mide la brecha entre las expectativas previas al ingreso y la experiencia actual de los estudiantes de UCASAL en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.",
+      "fullDescription": "Proyecto personal de análisis de datos que busca responder una pregunta concreta: ¿La UCASAL cumple con las expectativas de sus alumnos?\n\nSurgió de la necesidad de validar con datos reales una percepción extendida en mi entorno, en lugar de seguir opinando sobre intuiciones. El proyecto mide la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.\n\nDiseñé y desarrollé el proyecto end-to-end: definición de la pregunta, diseño metodológico, elaboración del anteproyecto bajo normas APA (presentado y aprobado por la Decana de la Facultad de Ingeniería), construcción de la plataforma de recolección, gestión de autorizaciones institucionales, y la fase actual de recolección activa de respuestas. Las próximas fases incluyen análisis en Python, visualización en Power BI y un reporte final con metodología y hallazgos.",
+      "descriptionBlocks": [
+        {
+          "icon": "target",
+          "title": "La pregunta",
+          "body": "¿La UCASAL cumple con las expectativas de sus alumnos? Surgió de la necesidad de validar con datos reales una percepción extendida en mi entorno, en lugar de seguir opinando sobre intuiciones."
+        },
+        {
+          "icon": "sparkles",
+          "title": "El enfoque",
+          "body": "Mido la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria."
+        },
+        {
+          "icon": "flag",
+          "title": "El proceso",
+          "body": "Diseñé el proyecto end-to-end: definición de la pregunta, diseño metodológico, anteproyecto bajo normas APA (presentado y aprobado por la Decana de la Facultad de Ingeniería), construcción de la plataforma de recolección y gestión de autorizaciones institucionales. Hoy estoy en fase de recolección activa de respuestas."
+        },
+        {
+          "icon": "rocket",
+          "title": "Próximas fases",
+          "body": "Análisis en Python, visualización en Power BI y reporte final con metodología y hallazgos."
+        }
+      ],
+      "tags": ["Proyecto"],
+      "dateIso": "2026-02-01",
+      "dateLabel": "Febrero 2026",
+      "status": "in-progress",
+      "statusLabel": {
+        "es": "En constante desarrollo",
+        "en": "Actively evolving"
+      },
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Vercel",
+        "Python",
+        "Pandas",
+        "Power BI",
+        "Análisis estadístico"
+      ],
+      "features": [
+        "Calidad académica",
+        "Plataforma digital",
+        "Infraestructura",
+        "Vida universitaria"
+      ],
+      "futureUpdates": [
+        "Análisis cuantitativo de respuestas en Python",
+        "Visualización de hallazgos en Power BI",
+        "Reporte final con metodología y conclusiones"
+      ]
     }
   ],
 
