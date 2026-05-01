@@ -2,11 +2,19 @@ import { ImageResponse } from "next/og"
 
 export const runtime = "edge"
 
-export const alt = "Ramiro Sebastian Gaspar — Data Scientist"
-export const size = { width: 1200, height: 630 }
-export const contentType = "image/png"
+const SIZE = { width: 1200, height: 630 }
 
-export default async function OpengraphImage() {
+/**
+ * Dynamic OG image. Served as a route handler (instead of the
+ * `opengraph-image.tsx` convention) because Turbopack in Next.js 16 has known
+ * build issues with that file. See:
+ *   https://github.com/vercel/next.js/issues/91676
+ *   https://github.com/vercel/next.js/issues/87322
+ *
+ * Hit /api/og to preview. Linked from layout metadata so social previews stay
+ * in sync with the live design without ever shipping a stale JPG.
+ */
+export async function GET() {
   return new ImageResponse(
     <div
       style={{
@@ -25,7 +33,7 @@ export default async function OpengraphImage() {
         position: "relative",
       }}
     >
-      {/* subtle grid overlay so the canvas doesn't feel empty */}
+      {/* subtle grid overlay */}
       <div
         style={{
           position: "absolute",
@@ -39,7 +47,7 @@ export default async function OpengraphImage() {
         }}
       />
 
-      {/* TOP ROW — brand mark + availability badge */}
+      {/* TOP — brand mark + availability */}
       <div
         style={{
           display: "flex",
@@ -154,7 +162,7 @@ export default async function OpengraphImage() {
         </div>
       </div>
 
-      {/* BOTTOM ROW — stack pills + URL */}
+      {/* BOTTOM — stack + URL */}
       <div
         style={{
           display: "flex",
@@ -197,8 +205,6 @@ export default async function OpengraphImage() {
         </div>
       </div>
     </div>,
-    {
-      ...size,
-    },
+    SIZE,
   )
 }

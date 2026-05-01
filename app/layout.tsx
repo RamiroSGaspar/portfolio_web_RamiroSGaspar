@@ -38,12 +38,21 @@ export const metadata: Metadata = {
     siteName: "Ramiro Gaspar Portfolio",
     locale: "es_AR",
     type: "website",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Ramiro Sebastian Gaspar — Data Scientist",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
     description:
       "Análisis de datos & pensamiento crítico. Abierto a oportunidades.",
+    images: ["/api/og"],
   },
 }
 
