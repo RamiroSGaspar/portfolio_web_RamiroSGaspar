@@ -14,14 +14,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ramirosgaspar.vercel.app"),
   title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
   description:
-    "Portfolio de Ramiro Sebastian Gaspar — Data Scientist en Salta, Argentina. Análisis de datos, Python, SQL, Pandas y proyectos basados en datos reales.",
+    "Portfolio de Ramiro Sebastian Gaspar — Data Scientist en Salta, Argentina. Análisis de datos, pensamiento crítico y proyectos basados en datos reales.",
   keywords: [
     "Data Scientist",
     "Ciencia de Datos",
     "Análisis de Datos",
     "Python",
-    "SQL",
-    "Pandas",
+    "Power BI",
+    "Jupyter",
     "Salta",
     "Argentina",
     "UCASAL",
@@ -33,26 +33,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
     description:
-      "Análisis de datos & pensamiento crítico. Python, SQL, Pandas. Disponible para oportunidades interesantes.",
+      "Análisis de datos & pensamiento crítico. Abierto a oportunidades.",
     url: "https://ramirosgaspar.vercel.app",
     siteName: "Ramiro Gaspar Portfolio",
+    locale: "es_AR",
+    type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: "Ramiro Sebastian Gaspar — Data Scientist",
       },
     ],
-    locale: "es_AR",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
     description:
-      "Análisis de datos & pensamiento crítico. Python, SQL, Pandas. Disponible para oportunidades interesantes.",
-    images: ["/og-image.jpg"],
+      "Análisis de datos & pensamiento crítico. Abierto a oportunidades.",
+    images: ["/api/og"],
   },
 }
 
