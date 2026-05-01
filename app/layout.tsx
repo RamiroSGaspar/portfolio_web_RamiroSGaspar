@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/api/og",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: "Ramiro Sebastian Gaspar — Data Scientist",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: "Ramiro Sebastian Gaspar | Data Scientist Portfolio",
     description:
       "Análisis de datos & pensamiento crítico. Abierto a oportunidades.",
-    images: ["/api/og"],
+    images: ["/og.jpg"],
   },
 }
 
