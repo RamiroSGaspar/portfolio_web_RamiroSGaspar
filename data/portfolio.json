@@ -62,6 +62,68 @@
         "Soporte para SQL y Excel como formato de práctica",
         "Comunidad para compartir análisis por dataset"
       ]
+    },
+    {
+      "id": 2,
+      "title": "UCASAL: Expectativa vs Realidad",
+      "description": "Proyecto personal de análisis de datos que mide la brecha entre las expectativas previas al ingreso y la experiencia actual de los estudiantes de UCASAL en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.",
+      "fullDescription": "Proyecto personal e independiente que busca responder una pregunta concreta: ¿La UCASAL cumple con las expectativas de sus alumnos? Mido la brecha entre lo que los estudiantes esperaban antes de ingresar y lo que viven hoy, en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. Al cierre del proyecto se publicarán los hallazgos, visualizaciones, documentación metodológica y la web de recolección.",
+      "descriptionBlocks": [
+        {
+          "icon": "target",
+          "title": "La pregunta",
+          "body": "¿La UCASAL cumple con las expectativas de sus alumnos? Surgió de la necesidad de validar con datos reales una percepción extendida en mi entorno, en lugar de seguir opinando sobre intuiciones."
+        },
+        {
+          "icon": "sparkles",
+          "title": "El enfoque",
+          "body": "Mido la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. La metodología sigue normas APA y fue aprobada por la Decana de la Facultad de Ingeniería."
+        },
+        {
+          "icon": "lightbulb",
+          "title": "A quién sirve",
+          "body": "A los alumnos actuales, para contrastar su experiencia con la opinión general de sus pares. A la UCASAL como institución, para tener una lectura externa y honesta de los puntos a mejorar. Y sobre todo a quienes evalúan ingresar: información concreta para decidir su futuro académico con datos, no con folletos."
+        },
+        {
+          "icon": "flag",
+          "title": "Proyecto independiente",
+          "body": "Es un proyecto personal. No estoy vinculado al equipo ni a la gestión de la UCASAL — el único contacto institucional fue para gestionar los permisos necesarios para colocar los códigos QR de la encuesta en las sedes."
+        },
+        {
+          "icon": "rocket",
+          "title": "Lo que viene",
+          "body": "Recolección automática de datos a través de la web ya desplegada, desarrollo de la metodología de análisis, y la distribución de códigos QR en las sedes de Salta capital. Al finalizar el proyecto, los documentos, visualizaciones, la web y todos los elementos elaborados se publicarán para acceso público."
+        }
+      ],
+      "tags": ["Proyecto"],
+      "dateIso": "2026-02-01",
+      "dateLabel": "Febrero 2026",
+      "status": "in-progress",
+      "statusLabel": {
+        "es": "En desarrollo",
+        "en": "In development"
+      },
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Vercel",
+        "Python",
+        "Pandas",
+        "Power BI",
+        "Análisis estadístico"
+      ],
+      "images": [
+        "/images/ucasal-og.svg",
+        "/images/ucasal-welcome.png",
+        "/images/ucasal-logo.png"
+      ],
+      "features": [
+        "Calidad académica",
+        "Plataforma digital",
+        "Infraestructura",
+        "Vida universitaria"
+      ]
     }
   ],
 
@@ -177,8 +239,8 @@
       "tags": ["Evento"],
       "eventName": "Bitget Coffee Rave",
       "eventLogo": "/saltadev-crypto-coffee-card.jpg",
-      "eventDate": "31 Enero 2025",
-      "dateIso": "2025-01-31",
+      "eventDate": "31 Enero 2026",
+      "dateIso": "2026-01-31",
       "location": "Hotel Selina - Balcarce 460, Salta",
       "fullDescription": "Evento de networking organizado por SaltaDev, Bitget, Selina Salta y Vincles donde el café se vivió de una manera diferente. Una tarde con café, música en vivo con DJs y conversaciones sobre criptomonedas y tecnología en un ambiente único. El evento reunió a personas de diversos ámbitos: informática, criptomonedas, turismo, marketing y más, creando un espacio ideal para el networking y el intercambio de ideas.",
       "highlights": [
