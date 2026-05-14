@@ -65,34 +65,34 @@
     },
     {
       "id": 2,
-      "title": "UCASAL: Expectativa vs Realidad",
-      "description": "Proyecto personal de análisis de datos que mide la brecha entre las expectativas previas al ingreso y la experiencia actual de los estudiantes de UCASAL en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.",
-      "fullDescription": "Proyecto personal e independiente que busca responder una pregunta concreta: ¿La UCASAL cumple con las expectativas de sus alumnos? Mido la brecha entre lo que los estudiantes esperaban antes de ingresar y lo que viven hoy, en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. Al cierre del proyecto se publicarán los hallazgos, visualizaciones, documentación metodológica y la web de recolección.",
+      "title": "FI UCASAL: Expectativa vs Realidad",
+      "description": "Proyecto personal de análisis de datos que mide la brecha entre las expectativas previas al ingreso y la experiencia actual de los estudiantes de la Facultad de Ingeniería UCASAL en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria.",
+      "fullDescription": "Proyecto personal e independiente que busca responder una pregunta concreta: ¿La Facultad de Ingeniería UCASAL cumple con las expectativas de sus alumnos? Mido la brecha entre lo que los estudiantes esperaban antes de ingresar y lo que viven hoy dentro de la Facultad, en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. Al cierre del proyecto se publicarán los hallazgos, visualizaciones, documentación metodológica y la web de recolección.",
       "descriptionBlocks": [
         {
           "icon": "target",
           "title": "La pregunta",
-          "body": "¿La UCASAL cumple con las expectativas de sus alumnos? Surgió de la necesidad de validar con datos reales una percepción extendida en mi entorno, en lugar de seguir opinando sobre intuiciones."
+          "body": "¿La Facultad de Ingeniería UCASAL cumple con las expectativas de sus alumnos? Surgió de la necesidad de validar con datos reales una percepción extendida en mi entorno, en lugar de seguir opinando sobre intuiciones."
         },
         {
           "icon": "sparkles",
           "title": "El enfoque",
-          "body": "Mido la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. La metodología sigue normas APA y fue aprobada por la Decana de la Facultad de Ingeniería."
+          "body": "Mido la brecha entre lo que los alumnos esperaban antes de ingresar y lo que viven hoy en la Facultad de Ingeniería, segmentado en cuatro dimensiones: calidad académica, plataforma digital, infraestructura y vida universitaria. La metodología fue revisada y aprobada por la Decana de la Facultad de Ingeniería."
         },
         {
           "icon": "lightbulb",
           "title": "A quién sirve",
-          "body": "A los alumnos actuales, para contrastar su experiencia con la opinión general de sus pares. A la UCASAL como institución, para tener una lectura externa y honesta de los puntos a mejorar. Y sobre todo a quienes evalúan ingresar: información concreta para decidir su futuro académico con datos, no con folletos."
+          "body": "A los alumnos actuales de la Facultad de Ingeniería UCASAL, para contrastar su experiencia con la opinión general de sus pares. Y de manera particular a quienes evalúan ingresar a alguna de sus carreras: información concreta para decidir su futuro académico con datos, no con folletos."
         },
         {
           "icon": "flag",
           "title": "Proyecto independiente",
-          "body": "Es un proyecto personal. No estoy vinculado al equipo ni a la gestión de la UCASAL — el único contacto institucional fue para gestionar los permisos necesarios para colocar los códigos QR de la encuesta en las sedes."
+          "body": "Es un proyecto personal. No estoy vinculado al equipo ni a la gestión de la Facultad de Ingeniería UCASAL — el contacto institucional se limitó a la validación metodológica con la Decana y a los permisos necesarios para distribuir los códigos QR de la encuesta dentro de la Facultad."
         },
         {
           "icon": "rocket",
-          "title": "Lo que viene",
-          "body": "Recolección automática de datos a través de la web ya desplegada, desarrollo de la metodología de análisis, y la distribución de códigos QR en las sedes de Salta capital. Al finalizar el proyecto, los documentos, visualizaciones, la web y todos los elementos elaborados se publicarán para acceso público."
+          "title": "Etapa actual",
+          "body": "Difusión activa de la encuesta: códigos QR distribuidos en zonas de la Facultad de Ingeniería para captar respuestas de alumnos presenciales, y circulación digital de la encuesta en grupos de las distintas carreras. Las respuestas se reciben de forma automatizada y, en paralelo, se diseña la metodología de análisis que permitirá procesar los datos y responder la pregunta central."
         }
       ],
       "tags": ["Proyecto"],
@@ -115,8 +115,7 @@
       ],
       "images": [
         "/images/ucasal-og.svg",
-        "/images/ucasal-welcome.png",
-        "/images/ucasal-logo.png"
+        "/images/fi-ucasal-linkedin.png"
       ],
       "features": [
         "Calidad académica",
