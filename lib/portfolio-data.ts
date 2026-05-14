@@ -1,12 +1,37 @@
 import data from "@/data/portfolio.json"
+import type { Language } from "@/lib/i18n"
 
 export type ProjectStatus = "planning" | "in-progress" | "completed" | "archived"
 
+/**
+ * Any user-facing string in the portfolio data may be either a plain string
+ * (same in both languages, e.g. proper nouns, dates that already work in both
+ * locales) or a `{ es, en }` object. The `localize()` helper resolves both
+ * shapes against the active language. Plain strings are kept for backwards
+ * compatibility and to keep the JSON terse when a value doesn't need to be
+ * translated.
+ */
+export type LocalizedString = string | { es: string; en: string }
+
+export function localize(value: LocalizedString | undefined | null, lang: Language): string {
+  if (value == null) return ""
+  if (typeof value === "string") return value
+  return value[lang] ?? value.es ?? ""
+}
+
+export function localizeList(
+  values: LocalizedString[] | undefined,
+  lang: Language,
+): string[] {
+  if (!values) return []
+  return values.map((v) => localize(v, lang))
+}
+
 export type ProjectTimelineItem = {
-  phase: string
-  description: string
+  phase: LocalizedString
+  description: LocalizedString
   status: "completed" | "in-progress" | "pending"
-  date: string
+  date: LocalizedString
 }
 
 /**
@@ -18,8 +43,8 @@ export type ProjectTimelineItem = {
 export type ProjectDescriptionBlock = {
   /** Maps to a Lucide icon. Defaults to "sparkles" if omitted. */
   icon?: "alert" | "sparkles" | "rocket" | "lightbulb" | "target" | "flag"
-  title: string
-  body: string
+  title: LocalizedString
+  body: LocalizedString
 }
 
 /**
@@ -28,12 +53,12 @@ export type ProjectDescriptionBlock = {
  */
 export type Project = {
   id: number
-  title: string
-  description: string
+  title: LocalizedString
+  description: LocalizedString
   tags: string[]
-  fullDescription?: string
+  fullDescription?: LocalizedString
   descriptionBlocks?: ProjectDescriptionBlock[]
-  technologies?: string[]
+  technologies?: LocalizedString[]
   status?: ProjectStatus
   /**
    * Optional override for the status label. Keeps the dot color from `status`
@@ -41,60 +66,61 @@ export type Project = {
    * instead of "En curso" for an actively-evolving project).
    */
   statusLabel?: string | { es: string; en: string }
-  dateLabel?: string
+  dateLabel?: LocalizedString
   dateIso?: string
-  startDate?: string
-  endDate?: string | null
+  startDate?: LocalizedString
+  endDate?: LocalizedString | null
   githubUrl?: string | null
   demoUrl?: string | null
   images?: string[]
-  features?: string[]
+  features?: LocalizedString[]
   timeline?: ProjectTimelineItem[]
   challenges?: {
-    challenge: string
-    challengeDate: string
-    solution: string
-    solutionDate: string
+    challenge: LocalizedString
+    challengeDate: LocalizedString
+    solution: LocalizedString
+    solutionDate: LocalizedString
   }[]
-  learnings?: string[]
-  futureUpdates?: string | string[]
-  updateHistory?: { version: string; date: string; changes: string[] }[]
+  learnings?: LocalizedString[]
+  futureUpdates?: LocalizedString | LocalizedString[]
+  updateHistory?: { version: string; date: LocalizedString; changes: LocalizedString[] }[]
 }
 
 export type EventItem = {
   id: number
-  title: string
+  title: LocalizedString
   tags: string[]
-  eventName: string
+  eventName: LocalizedString
   eventLogo: string
-  eventDate: string
+  eventDate: LocalizedString
   dateIso?: string
-  location: string
-  fullDescription: string
-  highlights: string[]
+  location: LocalizedString
+  fullDescription: LocalizedString
+  highlights: LocalizedString[]
   photos: string[]
   socialPosts: { platform: string; url: string; preview: string }[]
-  learnings: string
-  connections: string
+  learnings: LocalizedString
+  connections: LocalizedString
 }
 
 export type Experience = {
   id: number
-  title: string
+  title: LocalizedString
+  /** Brand / company name — usually stays the same across languages. */
   company: string
-  type: string
-  location: string
-  workMode?: string
-  startDate: string
-  endDate: string
+  type: LocalizedString
+  location: LocalizedString
+  workMode?: LocalizedString
+  startDate: LocalizedString
+  endDate: LocalizedString
   dateIso?: string
-  duration: string
+  duration: LocalizedString
   image: string
-  description: string
-  shortDescription?: string
-  responsibilities: string[]
-  achievements: string[]
-  skills: string[]
+  description: LocalizedString
+  shortDescription?: LocalizedString
+  responsibilities: LocalizedString[]
+  achievements: LocalizedString[]
+  skills: LocalizedString[]
   gallery?: string[]
 }
 

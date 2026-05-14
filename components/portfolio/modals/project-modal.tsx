@@ -22,7 +22,7 @@ import {
   Target,
 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
-import { type Project, translateTag } from "@/lib/portfolio-data"
+import { localize, type Project, translateTag } from "@/lib/portfolio-data"
 import { StatusDot } from "../cards/status-dot"
 import { ModalShell } from "./modal-shell"
 
@@ -42,9 +42,15 @@ const blockIconMap = {
  * is present in the project. Load what you have, skip the rest.
  */
 export function ProjectModal({ project, onClose }: Props) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
-  const dateLabel = project.dateLabel ?? project.startDate ?? null
+  const title = localize(project.title, lang)
+  const description = localize(project.description, lang)
+  const fullDescription = localize(project.fullDescription, lang)
+  const rawDate = project.dateLabel ?? project.startDate ?? null
+  const dateLabel = rawDate ? localize(rawDate, lang) : null
+  const endDate = project.endDate ? localize(project.endDate, lang) : null
+
   const hasImages = (project.images?.length ?? 0) > 0
   const hasStack = (project.technologies?.length ?? 0) > 0
   const hasFeatures = (project.features?.length ?? 0) > 0
@@ -52,11 +58,15 @@ export function ProjectModal({ project, onClose }: Props) {
   const hasTimeline = (project.timeline?.length ?? 0) > 0
   const hasChallenges = (project.challenges?.length ?? 0) > 0
   const hasLearnings = (project.learnings?.length ?? 0) > 0
+
   const futureUpdatesList = Array.isArray(project.futureUpdates)
-    ? project.futureUpdates.filter((item) => item.trim().length > 0)
-    : project.futureUpdates?.trim()
-      ? [project.futureUpdates.trim()]
-      : []
+    ? project.futureUpdates
+        .map((item) => localize(item, lang))
+        .filter((item) => item.trim().length > 0)
+    : (() => {
+        const single = localize(project.futureUpdates ?? null, lang).trim()
+        return single ? [single] : []
+      })()
   const hasFuture = futureUpdatesList.length > 0
 
   return (
@@ -77,26 +87,20 @@ export function ProjectModal({ project, onClose }: Props) {
             <StatusDot status={project.status} customLabel={project.statusLabel} />
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 text-pretty">
-            {project.title}
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 text-pretty">{title}</h2>
 
           {dateLabel && (
             <div className="flex flex-wrap gap-4 text-sm text-zinc-400">
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" aria-hidden="true" />
                 {dateLabel}
-                {project.endDate && project.endDate !== dateLabel && (
-                  <span> — {project.endDate}</span>
-                )}
+                {endDate && endDate !== dateLabel && <span> — {endDate}</span>}
               </span>
             </div>
           )}
 
-          {project.description && (
-            <p className="text-lg text-zinc-300 leading-relaxed text-pretty">
-              {project.description}
-            </p>
+          {description && (
+            <p className="text-lg text-zinc-300 leading-relaxed text-pretty">{description}</p>
           )}
 
           {project.descriptionBlocks?.length ? (
@@ -110,16 +114,18 @@ export function ProjectModal({ project, onClose }: Props) {
                   >
                     <h4 className="flex items-center gap-2 mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-orange-400">
                       <Icon className="w-4 h-4" aria-hidden="true" />
-                      {block.title}
+                      {localize(block.title, lang)}
                     </h4>
-                    <p className="text-zinc-300 leading-relaxed text-pretty">{block.body}</p>
+                    <p className="text-zinc-300 leading-relaxed text-pretty">
+                      {localize(block.body, lang)}
+                    </p>
                   </div>
                 )
               })}
             </div>
-          ) : project.fullDescription && project.fullDescription !== project.description ? (
+          ) : fullDescription && fullDescription !== description ? (
             <div className="space-y-3 text-base text-zinc-300 leading-relaxed">
-              {project.fullDescription.split(/\n\n+/).map((paragraph, idx) => (
+              {fullDescription.split(/\n\n+/).map((paragraph, idx) => (
                 <p key={idx} className="text-pretty">
                   {paragraph}
                 </p>
@@ -166,7 +172,7 @@ export function ProjectModal({ project, onClose }: Props) {
                   <img
                     key={idx}
                     src={img || "/placeholder.svg"}
-                    alt={`${project.title} screenshot ${idx + 1}`}
+                    alt={`${title} screenshot ${idx + 1}`}
                     className="w-full rounded-lg border border-orange-500/20 hover:border-orange-400/40 transition-colors"
                   />
                 ))}
@@ -181,14 +187,17 @@ export function ProjectModal({ project, onClose }: Props) {
             <section className="space-y-3">
               <SectionHeading icon={Code} label={t("modal.project.stack")} />
               <div className="flex flex-wrap gap-2">
-                {project.technologies!.map((tech) => (
-                  <span
-                    key={tech}
-                    className="inline-flex items-center px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-sm font-medium text-orange-400 hover:bg-orange-500/20 transition-colors"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {project.technologies!.map((tech, idx) => {
+                  const techLabel = localize(tech, lang)
+                  return (
+                    <span
+                      key={`${techLabel}-${idx}`}
+                      className="inline-flex items-center px-3 py-1.5 bg-orange-500/10 border border-orange-500/30 rounded-lg text-sm font-medium text-orange-400 hover:bg-orange-500/20 transition-colors"
+                    >
+                      {techLabel}
+                    </span>
+                  )
+                })}
               </div>
             </section>
           </>
@@ -206,7 +215,7 @@ export function ProjectModal({ project, onClose }: Props) {
                       className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
-                    <span>{feature}</span>
+                    <span>{localize(feature, lang)}</span>
                   </li>
                 ))}
               </ul>
@@ -227,7 +236,7 @@ export function ProjectModal({ project, onClose }: Props) {
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-orange-400">{update.version}</span>
-                      <span className="text-sm text-zinc-500">{update.date}</span>
+                      <span className="text-sm text-zinc-500">{localize(update.date, lang)}</span>
                     </div>
                     <ul className="space-y-1">
                       {update.changes.map((change, changeIdx) => (
@@ -236,7 +245,7 @@ export function ProjectModal({ project, onClose }: Props) {
                           className="flex items-start gap-2 text-sm text-zinc-300"
                         >
                           <span className="text-orange-400">•</span>
-                          {change}
+                          {localize(change, lang)}
                         </li>
                       ))}
                     </ul>
@@ -266,10 +275,12 @@ export function ProjectModal({ project, onClose }: Props) {
                     </div>
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between gap-2">
-                        <h4 className="font-semibold text-zinc-100">{item.phase}</h4>
-                        <span className="text-xs text-zinc-500">{item.date}</span>
+                        <h4 className="font-semibold text-zinc-100">
+                          {localize(item.phase, lang)}
+                        </h4>
+                        <span className="text-xs text-zinc-500">{localize(item.date, lang)}</span>
                       </div>
-                      <p className="text-sm text-zinc-400">{item.description}</p>
+                      <p className="text-sm text-zinc-400">{localize(item.description, lang)}</p>
                     </div>
                   </div>
                 ))}
@@ -295,10 +306,10 @@ export function ProjectModal({ project, onClose }: Props) {
                           className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"
                           aria-hidden="true"
                         />
-                        {item.challenge}
+                        {localize(item.challenge, lang)}
                       </p>
                       <span className="text-xs text-zinc-500 whitespace-nowrap">
-                        {item.challengeDate}
+                        {localize(item.challengeDate, lang)}
                       </span>
                     </div>
                     <div className="flex items-start justify-between gap-2">
@@ -307,10 +318,10 @@ export function ProjectModal({ project, onClose }: Props) {
                           className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5"
                           aria-hidden="true"
                         />
-                        {item.solution}
+                        {localize(item.solution, lang)}
                       </p>
                       <span className="text-xs text-zinc-500 whitespace-nowrap">
-                        {item.solutionDate}
+                        {localize(item.solutionDate, lang)}
                       </span>
                     </div>
                   </div>
@@ -335,7 +346,7 @@ export function ProjectModal({ project, onClose }: Props) {
                       className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
-                    <span>{learning}</span>
+                    <span>{localize(learning, lang)}</span>
                   </li>
                 ))}
               </ul>

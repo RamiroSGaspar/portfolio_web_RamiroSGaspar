@@ -3,7 +3,7 @@
 import type React from "react"
 import { ArrowUpRight, ExternalLink, Github, ImageIcon } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
-import type { Project } from "@/lib/portfolio-data"
+import { localize, type Project } from "@/lib/portfolio-data"
 import { StatusDot } from "./status-dot"
 
 type Props = {
@@ -27,9 +27,13 @@ type Props = {
  *   [ ─────────── footer ───────]   ← always pinned to bottom (mt-auto)
  */
 export function ProjectCard({ project, onOpen }: Props) {
-  const { t } = useLanguage()
-  const dateLabel = project.dateLabel ?? project.startDate ?? ""
-  const stack = project.technologies?.slice(0, 4) ?? []
+  const { t, lang } = useLanguage()
+  const title = localize(project.title, lang)
+  const description = localize(project.description, lang)
+  const rawDate = project.dateLabel ?? project.startDate ?? null
+  const dateLabel = rawDate ? localize(rawDate, lang) : ""
+  const stack = (project.technologies ?? []).slice(0, 4).map((tech) => localize(tech, lang))
+  const totalTech = project.technologies?.length ?? 0
 
   const handleClick = () => onOpen(project)
   const handleKey = (e: React.KeyboardEvent) => {
@@ -76,11 +80,11 @@ export function ProjectCard({ project, onOpen }: Props) {
         )}
 
         <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-orange-300 transition-colors leading-snug text-pretty line-clamp-2 min-h-[3.25rem]">
-          {project.title}
+          {title}
         </h3>
 
         <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2 min-h-[2.5rem]">
-          {project.description}
+          {description}
         </p>
 
         {/* Stack: reserve 1-row height even when empty for grid alignment. */}
@@ -93,9 +97,9 @@ export function ProjectCard({ project, onOpen }: Props) {
               {tech}
             </span>
           ))}
-          {(project.technologies?.length ?? 0) > stack.length && (
+          {totalTech > stack.length && (
             <span className="text-[11px] text-zinc-500 px-1 py-0.5">
-              +{(project.technologies?.length ?? 0) - stack.length}
+              +{totalTech - stack.length}
             </span>
           )}
         </div>
@@ -110,7 +114,7 @@ export function ProjectCard({ project, onOpen }: Props) {
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700/60 bg-zinc-800/40 px-2.5 py-1 text-xs font-semibold text-zinc-300 hover:border-zinc-600 hover:bg-zinc-800 hover:text-zinc-100 transition-colors"
-                aria-label={`${t("work.viewGithub")} - ${project.title}`}
+                aria-label={`${t("work.viewGithub")} - ${title}`}
               >
                 <Github className="w-3.5 h-3.5" aria-hidden="true" />
                 {t("work.viewGithub")}
@@ -123,7 +127,7 @@ export function ProjectCard({ project, onOpen }: Props) {
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 rounded-md border border-orange-500/40 bg-orange-500/10 px-2.5 py-1 text-xs font-semibold text-orange-300 hover:border-orange-400/60 hover:bg-orange-500/20 hover:text-orange-200 transition-colors"
-                aria-label={`${t("work.viewDemo")} - ${project.title}`}
+                aria-label={`${t("work.viewDemo")} - ${title}`}
               >
                 <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                 {t("work.viewDemo")}

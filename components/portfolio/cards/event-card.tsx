@@ -2,7 +2,7 @@
 
 import { Calendar, ChevronRight, MapPin } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
-import type { EventItem } from "@/lib/portfolio-data"
+import { localize, type EventItem } from "@/lib/portfolio-data"
 
 type Props = {
   event: EventItem
@@ -14,7 +14,10 @@ type Props = {
  * Title + date + location, nothing more.
  */
 export function EventCard({ event, onOpen }: Props) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const eventName = localize(event.eventName, lang)
+  const eventDate = localize(event.eventDate, lang)
+  const location = localize(event.location, lang)
 
   const handleClick = () => onOpen(event)
   const handleKey = (e: React.KeyboardEvent) => {
@@ -47,16 +50,16 @@ export function EventCard({ event, onOpen }: Props) {
           </span>
         </div>
         <h3 className="text-sm font-medium text-zinc-200 group-hover:text-purple-300 transition-colors truncate">
-          {event.eventName}
+          {eventName}
         </h3>
         <div className="flex items-center gap-3 text-[11px] text-zinc-500 mt-0.5">
           <span className="inline-flex items-center gap-1">
             <Calendar className="w-3 h-3" aria-hidden="true" />
-            {event.eventDate}
+            {eventDate}
           </span>
           <span className="inline-flex items-center gap-1 truncate">
             <MapPin className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
-            <span className="truncate">{event.location}</span>
+            <span className="truncate">{location}</span>
           </span>
         </div>
       </div>

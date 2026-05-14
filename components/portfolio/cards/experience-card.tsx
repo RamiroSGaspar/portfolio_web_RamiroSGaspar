@@ -2,7 +2,7 @@
 
 import { ArrowRight, Briefcase, Calendar } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
-import type { Experience } from "@/lib/portfolio-data"
+import { localize, type Experience } from "@/lib/portfolio-data"
 
 type Props = {
   experience: Experience
@@ -14,11 +14,18 @@ type Props = {
  * Smart Brevity: role · company + duration + 1-line lead.
  */
 export function ExperienceCard({ experience, onOpen }: Props) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const title = localize(experience.title, lang)
+  const company = experience.company
+  const startDate = localize(experience.startDate, lang)
+  const endDate = localize(experience.endDate, lang)
+  const duration = localize(experience.duration, lang)
+  const short = localize(experience.shortDescription, lang)
+  const description = localize(experience.description, lang)
   const lead =
-    experience.shortDescription ??
-    experience.description.split(". ").slice(0, 1).join(". ").replace(/\.+$/, "") + "."
-  const dateRange = `${experience.startDate} — ${experience.endDate}`
+    short ||
+    description.split(". ").slice(0, 1).join(". ").replace(/\.+$/, "") + "."
+  const dateRange = `${startDate} — ${endDate}`
 
   const handleClick = () => onOpen(experience)
   const handleKey = (e: React.KeyboardEvent) => {
@@ -40,7 +47,7 @@ export function ExperienceCard({ experience, onOpen }: Props) {
         <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-950">
           <img
             src={experience.image || "/placeholder.svg"}
-            alt={experience.company}
+            alt={company}
             className="w-full h-full object-cover"
           />
         </div>
@@ -56,13 +63,13 @@ export function ExperienceCard({ experience, onOpen }: Props) {
             <Calendar className="w-3 h-3" aria-hidden="true" />
             {dateRange}
             <span className="text-zinc-600">·</span>
-            <span>{experience.duration}</span>
+            <span>{duration}</span>
           </span>
         </div>
 
         <h3 className="text-base font-semibold text-zinc-100 group-hover:text-green-300 transition-colors leading-snug text-pretty">
-          {experience.title}
-          <span className="text-zinc-500 font-normal"> · {experience.company}</span>
+          {title}
+          <span className="text-zinc-500 font-normal"> · {company}</span>
         </h3>
 
         <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">{lead}</p>

@@ -3,7 +3,7 @@
 import { Separator } from "@/components/ui/separator"
 import { Award, Briefcase, Calendar, CheckCircle2, ImageIcon, MapPin, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
-import type { Experience } from "@/lib/portfolio-data"
+import { localize, type Experience } from "@/lib/portfolio-data"
 import { ModalShell } from "./modal-shell"
 
 type Props = {
@@ -13,7 +13,14 @@ type Props = {
 }
 
 export function ExperienceModal({ experience, onClose, onPhotoClick }: Props) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const title = localize(experience.title, lang)
+  const type = localize(experience.type, lang)
+  const location = localize(experience.location, lang)
+  const startDate = localize(experience.startDate, lang)
+  const endDate = localize(experience.endDate, lang)
+  const duration = localize(experience.duration, lang)
+  const description = localize(experience.description, lang)
 
   return (
     <ModalShell variant="green" onClose={onClose}>
@@ -28,19 +35,19 @@ export function ExperienceModal({ experience, onClose, onPhotoClick }: Props) {
             <div className="flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium border border-green-500/40 bg-green-500/10 text-green-400">
                 <Briefcase className="w-3 h-3" aria-hidden="true" />
-                {experience.type}
+                {type}
               </span>
             </div>
-            <h2 className="text-3xl font-bold text-zinc-100 text-pretty">{experience.title}</h2>
+            <h2 className="text-3xl font-bold text-zinc-100 text-pretty">{title}</h2>
             <div className="space-y-1 text-zinc-400">
               <p className="text-lg font-medium text-zinc-300">{experience.company}</p>
               <p className="flex items-center gap-2 text-sm">
                 <MapPin className="w-4 h-4" aria-hidden="true" />
-                {experience.location}
+                {location}
               </p>
               <p className="flex items-center gap-2 text-sm">
                 <Calendar className="w-4 h-4" aria-hidden="true" />
-                {experience.startDate} - {experience.endDate} · {experience.duration}
+                {startDate} - {endDate} · {duration}
               </p>
             </div>
           </div>
@@ -50,7 +57,7 @@ export function ExperienceModal({ experience, onClose, onPhotoClick }: Props) {
 
         <section className="space-y-3">
           <h3 className="text-xl font-semibold text-zinc-100">{t("modal.exp.description")}</h3>
-          <p className="text-zinc-300 leading-relaxed">{experience.description}</p>
+          <p className="text-zinc-300 leading-relaxed">{description}</p>
         </section>
 
         <section className="space-y-3">
@@ -64,7 +71,7 @@ export function ExperienceModal({ experience, onClose, onPhotoClick }: Props) {
                 <span className="text-green-400 mt-1" aria-hidden="true">
                   •
                 </span>
-                <span>{resp}</span>
+                <span>{localize(resp, lang)}</span>
               </li>
             ))}
           </ul>
@@ -83,7 +90,7 @@ export function ExperienceModal({ experience, onClose, onPhotoClick }: Props) {
                   className="flex items-start gap-2 text-zinc-300 p-3 bg-green-500/5 border border-green-500/20 rounded-lg"
                 >
                   <Award className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  <span>{achievement}</span>
+                  <span>{localize(achievement, lang)}</span>
                 </li>
               ))}
             </ul>
@@ -93,14 +100,17 @@ export function ExperienceModal({ experience, onClose, onPhotoClick }: Props) {
         <section className="space-y-3">
           <h3 className="text-xl font-semibold text-zinc-100">{t("modal.exp.skills")}</h3>
           <div className="flex flex-wrap gap-2">
-            {experience.skills.map((skill) => (
-              <span
-                key={skill}
-                className="px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-lg text-sm font-medium text-green-400"
-              >
-                {skill}
-              </span>
-            ))}
+            {experience.skills.map((skill, idx) => {
+              const skillLabel = localize(skill, lang)
+              return (
+                <span
+                  key={`${skillLabel}-${idx}`}
+                  className="px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-lg text-sm font-medium text-green-400"
+                >
+                  {skillLabel}
+                </span>
+              )
+            })}
           </div>
         </section>
 
