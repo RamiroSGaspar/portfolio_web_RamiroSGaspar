@@ -93,6 +93,12 @@ export function ProjectModal({ project, onClose }: Props) {
             </div>
           )}
 
+          {project.description && (
+            <p className="text-lg text-zinc-300 leading-relaxed text-pretty">
+              {project.description}
+            </p>
+          )}
+
           {project.descriptionBlocks?.length ? (
             <div className="space-y-4 pt-2">
               {project.descriptionBlocks.map((block, idx) => {
@@ -111,17 +117,15 @@ export function ProjectModal({ project, onClose }: Props) {
                 )
               })}
             </div>
-          ) : (
-            <div className="space-y-3 text-lg text-zinc-300 leading-relaxed">
-              {(project.fullDescription ?? project.description)
-                .split(/\n\n+/)
-                .map((paragraph, idx) => (
-                  <p key={idx} className="text-pretty">
-                    {paragraph}
-                  </p>
-                ))}
+          ) : project.fullDescription && project.fullDescription !== project.description ? (
+            <div className="space-y-3 text-base text-zinc-300 leading-relaxed">
+              {project.fullDescription.split(/\n\n+/).map((paragraph, idx) => (
+                <p key={idx} className="text-pretty">
+                  {paragraph}
+                </p>
+              ))}
             </div>
-          )}
+          ) : null}
 
           {(project.githubUrl || project.demoUrl) && (
             <div className="flex flex-wrap gap-3">
